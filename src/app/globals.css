@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/*
+ * Paramarine Task Force — design tokens.
+ * Mirrors Billet's dark/tactical palette so the crossover to the portal is
+ * seamless. Raw values live in :root; @theme inline maps them into Tailwind's
+ * token namespaces so utilities like `bg-surface`, `text-ink-muted`,
+ * `border-edge`, `text-accent`, and `font-display` are generated.
+ */
+:root {
+  --bg: #0a0b0d;
+  --surface: #101215;
+  --raised: #16181c;
+  --edge: #23262b;
+  --edge-bright: #383c44;
+
+  --ink: #e4e6e9;
+  --ink-muted: #9aa1aa;
+  --ink-faint: #7f858e;
+
+  --accent: #ffb000; /* signature amber */
+  --ok: #4cc26e;
+  --opfor: #ff5a48;
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-edge: var(--edge);
+  --color-edge-bright: var(--edge-bright);
+
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+
+  --color-accent: var(--accent);
+  --color-ok: var(--ok);
+  --color-opfor: var(--opfor);
+
+  /* Fonts are wired to next/font CSS variables set on <html> in layout.tsx. */
+  --font-display: var(--font-chakra), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: #000;
+}
+
+/*
+ * Uppercase mono micro-label — Billet's signature "readout" label style.
+ * Use via the `.micro-label` class on small eyebrow/section labels.
+ */
+.micro-label {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+}
+
+/*
+ * Faint tactical grid — adds depth to large dark sections without gradients
+ * or imagery. Pair with a fade mask so it dissolves into the background.
+ */
+.bg-grid {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--edge) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--edge) 55%, transparent) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 90% 80% at 30% 20%, black 30%, transparent 75%);
+}
+
+/* Display headings: Chakra Petch reads best slightly tight, not tracked out. */
+.heading-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
