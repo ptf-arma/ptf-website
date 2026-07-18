@@ -8,6 +8,8 @@ import { billet } from "@/lib/config";
  * sends the portal cookie because site and portal live on *.paramarines.net.
  * One fetch per page load (module-level promise shared by all components).
  */
+export type BilletMemberStatus = "member" | "applicant" | "discharged" | "none";
+
 export type BilletSession =
   | { signedIn: false }
   | {
@@ -15,19 +17,22 @@ export type BilletSession =
       member: {
         name: string;
         avatarUrl: string | null;
-        /**
-         * Active member of this unit (vs. applicant/prospect account).
-         * Not yet shipped by the API — absent means "assume member".
-         */
-        isMember?: boolean;
-        status?: string;
-        rankAbbr?: string | null;
+        /** True only for active personnel of this unit. */
+        isMember: boolean;
+        status: BilletMemberStatus;
+        /** Set for members. */
+        rankAbbr: string | null;
       };
     };
 
-/** Treat flag-less sessions as members until the API ships isMember. */
+/** Active personnel of this unit — the Enlist CTA is pointless for them. */
 export function isUnitMember(session: BilletSession | null): boolean {
-  return session?.signedIn === true && session.member.isMember !== false;
+  return session?.signedIn === true && session.member.isMember === true;
+}
+
+/** Mid-application: nudge them to finish rather than start over. */
+export function isApplicant(session: BilletSession | null): boolean {
+  return session?.signedIn === true && session.member.status === "applicant";
 }
 
 let sessionPromise: Promise<BilletSession> | null = null;

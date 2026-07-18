@@ -1,13 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { billet, links } from "@/lib/config";
 import { getStats } from "@/lib/billet";
 import { getDiscordCounts, inviteCodeFromUrl } from "@/lib/discord";
-import { ButtonLink } from "@/components/ui/button";
 import { SectionLabel } from "@/components/ui/section-label";
 import { LocalTime } from "@/components/local-time";
 import { VideoCard } from "@/components/video-card";
 import { HeroMeta } from "@/components/hero-meta";
+import { HeroCta } from "@/components/hero-cta";
 import { RosterSection } from "@/components/roster";
 import { UnitSection } from "@/components/unit-section";
 import { RolesSection } from "@/components/roles-section";
@@ -72,14 +71,7 @@ export default async function Home() {
             into a modern Arma 3 milsim. Ten years of operations, our own
             modpack, and a community that shows up week after week.
           </p>
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <ButtonLink href={billet.applyUrl} variant="primary" size="lg">
-              Enlist Now
-            </ButtonLink>
-            <ButtonLink href={links.discord} variant="secondary" size="lg">
-              Join our Discord
-            </ButtonLink>
-          </div>
+          <HeroCta />
           <HeroMeta
             members={discord?.members ?? null}
             online={discord?.online ?? null}
