@@ -7,7 +7,7 @@ import { HeaderActions } from "@/components/header-actions";
 const nav = [
   { label: "The Unit", href: "/#unit" },
   { label: "Roles", href: "/#roles" },
-  { label: "Roster", href: "/#roster" },
+  { label: "ORBAT", href: "/#roster" },
   { label: "Media", href: "/#media" },
   { label: "Ranks", href: "/progression" },
   { label: "Join", href: "/join" },

@@ -13,44 +13,39 @@ const roles: Role[] = [
   {
     designation: "0311",
     name: "Rifleman",
-    description:
-      "Infantry at the core of every squad — the standard billet for new Marines.",
+    description: "The infantry core of every squad. Where new Marines start.",
     status: "Available",
   },
   {
     designation: "0311",
     name: "Designated Marksman",
-    description:
-      "Extended-range rifle support inside the squad, built for precision under pressure.",
+    description: "Longer-range rifle support inside the squad.",
     status: "Available · Requires Scout Sniper Course",
   },
   {
     designation: "",
     name: "Hospital Corpsman",
-    description:
-      "Attached to a squad to administer medical aid in the field.",
+    description: "Attached to a squad. Keeps the wounded in the fight.",
     status: "Waitlist · Requires Combat Life Saver",
   },
   {
     designation: "1834",
     name: "ACV Crewman",
-    description:
-      "Crew an ACV with 3rd Platoon, running armor in support of the infantry.",
+    description: "Crew an amphibious combat vehicle with 3rd Platoon.",
     status: "Available · Selective",
   },
   {
     designation: "7503/7505",
     name: "Rotary/Fixed-Wing Pilot",
-    description:
-      "Fly rotary or fixed-wing airframes with our Marine Aircraft Group.",
+    description: "Fly transport and close air support for MAG-36.",
     status: "Available · 2nd Lt requires a flight test",
   },
   {
     designation: "0372",
-    name: "Paramarine Special Operator",
+    name: "Marine Special Operator",
     description:
-      "A secondary role earned by attending the PSO selection event.",
-    status: "Highly selective",
+      "MSO. A second role on top of your billet, with its own recon operations on Thursdays. Anyone in the unit can attend selection.",
+    status: "Highly selective · Open tryouts",
   },
 ];
 
@@ -94,8 +89,8 @@ export function RolesSection() {
           What you can be
         </h2>
         <p className="mt-4 max-w-2xl text-ink-muted">
-          Every Marine starts as an 0311 Rifleman — everything below is a
-          progression path you can qualify into, not a barrier to entry.
+          Everyone starts as an 0311 Rifleman. The rest are qualifications you
+          earn once you&apos;re in.
         </p>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -106,8 +101,7 @@ export function RolesSection() {
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
           <p className="text-sm text-ink-muted">
-            The school pipeline runs from recruit training to JTAC
-            certification — specialize as far as you want.
+            Courses run Saturdays, from recruit training up to JTAC.
           </p>
           <ButtonLink href={billet.applyUrl} variant="secondary" size="md">
             Apply now

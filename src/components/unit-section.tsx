@@ -27,51 +27,47 @@ export function UnitSection() {
         <div className="mt-10 grid gap-10 md:grid-cols-[1.4fr_1fr] md:gap-12">
           <div className="max-w-xl space-y-4 text-ink-muted">
             <p>
-              The Paramarines were a specialized breed of Marines who fought
-              in WW2, phased out before the war&apos;s end. We asked
-              &ldquo;what if&rdquo; and carried that amphibious/airborne
-              legacy into a fictional modern setting, backed by a
-              fictionalized Marine Aircraft Group 36.
+              The Paramarines were a real WW2 outfit: Marines trained to jump
+              into the South Pacific, disbanded in 1944 before they ever made a
+              combat jump. We took the idea and gave it a modern setting,
+              flying under a fictional Marine Aircraft Group 36.
             </p>
             <p>
-              Ten years on, PTF stands among the most historic and
-              well-known units in Arma 3. Very few units last a decade —
-              fewer still do it well. That longevity comes from structured
-              training, real progression tracked in our personnel system,
-              and squads that actually show up, week after week.
+              We started in 2016 and we&apos;re still here, which is rare in
+              this hobby. Units usually fold when the founders burn out or the
+              schedule slips. Ours held because the structure is real: you get
+              trained, you get promoted, and there are enough people who show
+              up that the op happens whether or not any one person makes it.
             </p>
             <p>
-              It also comes from craft and camaraderie. We field a
-              sophisticated{" "}
+              Between ops it&apos;s a lot less formal. We run a{" "}
               <a
                 href={links.modpack}
                 className="text-ink underline decoration-edge-bright underline-offset-4 hover:decoration-ink"
               >
-                in-house modpack
-              </a>{" "}
-              tuned for our campaigns, and when the op is over the unit
-              doesn&apos;t log off — we game together across other titles in
-              the downtime.
+                custom modpack
+              </a>
+              , argue about loadouts, and play whatever else is on sale that
+              week.
             </p>
 
-            {/* Concrete differentiators — verifiable, not boilerplate. */}
             <ul className="space-y-3 border-t border-edge pt-4">
               {[
                 [
                   "Our own modpack",
-                  "“Paramarine Milsim Core” on the Steam Workshop — armor, aviation, boats, equipment, and custom sound, one-click subscribe.",
+                  "“Paramarine Milsim Core” on the Workshop. Armor, aircraft, boats, gear, sound. One subscribe and you're set.",
                 ],
                 [
                   "An organic air wing",
-                  "MAG-36 flies our rotary and fixed-wing support — CAS and air assaults flown by unit pilots, not AI.",
+                  "MAG-36 pilots fly the transport and the CAS. Those are members in the cockpit.",
                 ],
                 [
-                  "Real progression",
-                  "Ranks, a 17-course school pipeline, and awards — all tracked in our personnel system, not a spreadsheet.",
+                  "Records that stick",
+                  "Rank, courses, and awards live in our personnel system. Your file follows you.",
                 ],
                 [
                   "A film crew",
-                  "Our operations become cinematic films — see the media section below.",
+                  "Ops get cut into films. A few are below.",
                 ],
               ].map(([title, body]) => (
                 <li key={title} className="flex gap-3">
@@ -93,8 +89,8 @@ export function UnitSection() {
               <dl className="divide-y divide-edge">
                 <Readout label="Founded" value="2016" />
                 <Readout label="Celebrating" value="10 YEARS" />
-                <Readout label="Weekly ops" value="SAT + SUN · 8PM ET" />
-                <Readout label="Off-duty" value="GAME NIGHTS" />
+                <Readout label="Main op" value="SUN · 8PM ET" />
+                <Readout label="Also running" value="TUE · THU · SAT" />
               </dl>
             </div>
             <figure className="overflow-hidden rounded-sm border border-edge bg-surface">
@@ -107,7 +103,7 @@ export function UnitSection() {
                 className="w-full object-cover"
               />
               <figcaption className="micro-label border-t border-edge px-4 py-2.5">
-                We are the Paramarines
+                Formation, 2021
               </figcaption>
             </figure>
           </div>

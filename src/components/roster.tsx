@@ -152,8 +152,8 @@ export async function RosterSection() {
               Order of battle
             </h2>
             <p className="mt-4 max-w-2xl text-ink-muted">
-              The task force&apos;s combat structure, live from the personnel
-              system.
+              Combat structure, live from the personnel system. Staff sections
+              are kept off the public chart.
             </p>
           </div>
           <dl className="flex gap-6">
@@ -202,8 +202,8 @@ export async function RosterSection() {
         {openBillets > 0 ? (
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
             <p className="text-sm text-ink-muted">
-              <span className="font-mono text-ink">{openBillets}</span> open
-              billets across the task force — pick where you fit.
+              <span className="font-mono text-ink">{openBillets}</span> billets
+              open across the task force.
             </p>
             <ButtonLink href={billet.applyUrl} variant="primary" size="md">
               Enlist Now

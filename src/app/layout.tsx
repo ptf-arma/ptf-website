@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Saira_Condensed, JetBrains_Mono, Barlow } from "next/font/google";
 import "./globals.css";
 import { SITE_URL, links } from "@/lib/config";
+import { schedule } from "@/lib/schedule";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -22,36 +23,20 @@ const jsonLd = {
         "A serious, fun, and immersive Arma 3 milsim unit — rapid-deployment Marines with weekly operations and structured training.",
       sameAs: [links.discord, links.steam, links.arma3units, links.patreon],
     },
-    {
+    ...schedule.map((slot) => ({
       "@type": "Event",
-      name: "PTF Field Training Exercise (FTX)",
-      description:
-        "Weekly Arma 3 field training — drills, qualifications, and course work with the Paramarine Task Force.",
+      name: `PTF ${slot.label} (${slot.day})`,
+      description: slot.description,
       organizer: { "@id": `${SITE_URL}/#org` },
       eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
       location: { "@type": "VirtualLocation", url: SITE_URL },
       eventSchedule: {
         "@type": "Schedule",
-        byDay: "https://schema.org/Saturday",
+        byDay: slot.schemaDay,
         startTime: "20:00:00-05:00",
         repeatFrequency: "P1W",
       },
-    },
-    {
-      "@type": "Event",
-      name: "PTF Main Operation",
-      description:
-        "The weekly main event — a full-scale Arma 3 milsim operation across the Paramarine Task Force.",
-      organizer: { "@id": `${SITE_URL}/#org` },
-      eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
-      location: { "@type": "VirtualLocation", url: SITE_URL },
-      eventSchedule: {
-        "@type": "Schedule",
-        byDay: "https://schema.org/Sunday",
-        startTime: "20:00:00-05:00",
-        repeatFrequency: "P1W",
-      },
-    },
+    })),
   ],
 };
 
@@ -82,7 +67,7 @@ const barlow = Barlow({
 const title = "Paramarine Task Force — Arma 3 Milsim Unit";
 // SERP-safe length (~155 chars), leads with the 10-year proof point.
 const description =
-  "10 years of serious, fun Arma 3 milsim. Rapid-deployment Marines with our own air wing, weekly ops, and real rank progression. Enlist today.";
+  "10 years of serious, fun Arma 3 milsim. Rapid-deployment Marines with our own air wing. Main operation Sundays 8PM ET, training through the week. Enlist today.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

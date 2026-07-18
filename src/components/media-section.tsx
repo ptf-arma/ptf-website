@@ -63,7 +63,7 @@ export function MediaSection() {
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionLabel>Media</SectionLabel>
         <h2 className="heading-display mt-3 text-3xl text-ink sm:text-4xl">
-          See us in the field
+          In the field
         </h2>
 
         {/* Screenshots: one feature-wide + two standard */}

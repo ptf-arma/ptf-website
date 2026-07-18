@@ -73,9 +73,9 @@ export default async function ProgressionPage() {
             Ranks, schools, and awards
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
-            Progression here is real: promotion requirements, course
-            qualifications, and decorations are tracked in our personnel
-            system. This page reads straight from it.
+            Promotions have requirements — time in grade, points, courses
+            completed. Everything below is pulled live from the personnel
+            system, so it&apos;s current.
           </p>
         </div>
       </section>

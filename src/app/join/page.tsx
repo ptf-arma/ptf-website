@@ -9,7 +9,7 @@ import { LocalTime } from "@/components/local-time";
 export const metadata: Metadata = {
   title: "How to Join",
   description:
-    "How to join the Paramarine Task Force, a 10-year Arma 3 milsim unit: what you need, how the application works, and what your first weeks look like.",
+    "How to join the Paramarine Task Force, a 10-year Arma 3 milsim unit: what you need, how the application works, and what your first weeks look like. Main op Sundays 8PM ET.",
   alternates: { canonical: "/join" },
   openGraph: {
     title: "How to Join the Paramarine Task Force",
@@ -24,22 +24,22 @@ const steps = [
   {
     n: "01",
     title: "Submit your application",
-    body: "About five minutes on our personnel portal (Billet). You'll create a profile — it becomes your service record, tracking your rank, courses, and awards from day one.",
+    body: "Five minutes on the personnel portal. The profile you create becomes your service record — rank, courses, and awards all hang off it.",
   },
   {
     n: "02",
     title: "Meet a recruiter on Discord",
-    body: "Join our Discord and say hello in #find-a-recruiter. A recruiter walks you through the unit, answers questions, and gets you set up with the modpack. No appointment needed.",
+    body: "Post in #find-a-recruiter. Someone will walk you through the unit, answer questions, and get the modpack installed. No appointment needed.",
   },
   {
     n: "03",
     title: "Paramarine Recruit Training",
-    body: "PRT teaches you everything — movement, comms, formations — no prior milsim experience expected. Most recruits complete it around a weekend schedule.",
+    body: "PRT covers movement, comms, and formations. Nobody expects you to arrive knowing this — that's what the course is for.",
   },
   {
     n: "04",
     title: "Your first operation",
-    body: "Slot into a rifle squad for the Sunday main op. From there, the 17-course school pipeline is open: marksmanship, armor, aviation, medical, JTAC.",
+    body: "You'll slot into a rifle squad for the Sunday op. After that, Saturday courses open up: marksmanship, armor, aviation, medical, JTAC.",
   },
 ];
 
@@ -48,35 +48,43 @@ const steps = [
 const faqs = [
   {
     q: "Do I need milsim experience?",
-    a: "No. Every Marine starts with Paramarine Recruit Training (PRT), which teaches movement, communications, and how our operations run. Plenty of members joined with zero milsim background.",
+    a: "No. Recruit training covers movement, communications, and how our ops run. A lot of the unit arrived having never done this before.",
   },
   {
     q: "What do I need to play?",
-    a: "Arma 3 on PC, a working microphone, and our modpack — the “Paramarine Milsim Core” collection on the Steam Workshop, which installs with one click. We use Discord and TeamSpeak for voice.",
+    a: "Arma 3 on PC, a microphone, and our modpack — “Paramarine Milsim Core” on the Steam Workshop, which installs in one click. Voice is on Discord and TeamSpeak.",
   },
   {
     q: "When does the unit play?",
-    a: "Field Training Exercises on Saturdays and the Main Operation on Sundays, both at 8PM Eastern. Members attend what they can — the main op is the weekly centerpiece.",
+    a: "Sunday 8PM Eastern is the main operation and the one to build your week around. Field training runs Tuesdays, specialized courses Saturdays, and MSO recon ops Thursdays — all 8PM Eastern.",
+  },
+  {
+    q: "Do I have to attend everything?",
+    a: "No. Sunday is the operation everyone turns out for. Tuesday and Saturday are there when you want to train or qualify for something new.",
   },
   {
     q: "I'm not in North America — can I still join?",
-    a: "If Saturday and Sunday 8PM Eastern works in your timezone, absolutely. We have members outside North America; check what that time is for you locally before applying.",
+    a: "Yes, as long as 8PM Eastern lands somewhere you can play. We have members outside North America. Work out what that time is locally before you apply.",
   },
   {
     q: "What role do I start in?",
-    a: "Everyone starts as an 0311 Rifleman in a rifle squad. Specializations — designated marksman, corpsman, armor crew, pilot, special operations — are progression paths you qualify into through the school pipeline.",
+    a: "0311 Rifleman, in a rifle squad. Marksman, corpsman, armor crew, pilot, and MSO all come later, through courses and selection.",
   },
   {
-    q: "Is there real rank progression?",
-    a: "Yes. Ranks, course completions, and awards are tracked in our personnel system with formal promotion requirements — your service record is real, not a forum title.",
+    q: "What is MSO?",
+    a: "Marine Special Operator — a second role on top of your normal billet, running its own recon operations on Thursdays. Selection is demanding and the standard is high, but anyone in the unit can try out.",
   },
   {
-    q: "How serious is “milsim” here?",
-    a: "Serious enough to run a real operation — briefings, chain of command, radio discipline — and relaxed enough to enjoy it. We've kept that balance for ten years, and we play other games together between ops.",
+    q: "Is the rank structure real?",
+    a: "Yes. Promotions have requirements: time in grade, points, and course completions, all tracked in the personnel system. See the ranks page for the exact thresholds.",
+  },
+  {
+    q: "How strict is it?",
+    a: "Chain of command, briefings, and radio discipline during the op. Outside of it, it's a group of people who have been playing games together for ten years.",
   },
   {
     q: "What happens right after I apply?",
-    a: "A recruiter picks up your application, reaches out on Discord, and schedules you into recruit training. The fastest path is applying and then saying hello in #find-a-recruiter right away.",
+    a: "A recruiter picks up your application and reaches out on Discord to schedule recruit training. Posting in #find-a-recruiter right after you apply speeds it up.",
   },
 ];
 
@@ -118,8 +126,8 @@ export default async function JoinPage() {
             How to join the task force
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
-            From application to your first operation in four steps — here&apos;s
-            exactly what to expect.
+            Four steps from application to your first operation. Usually a week
+            or two, depending on when training runs.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <ButtonLink href={billet.applyUrl} variant="primary" size="lg">
@@ -153,8 +161,9 @@ export default async function JoinPage() {
             ))}
           </ol>
           <p className="mt-6 font-mono text-xs text-ink-faint">
-            Ops run SAT + SUN · 8PM ET{" "}
-            <LocalTime weekday={0} hourEt={20} className="text-ink-faint" />
+            Main op SUN · 8PM ET{" "}
+            <LocalTime weekday={0} hourEt={20} className="text-ink-faint" /> ·
+            FTX TUE · Recon THU (MSO) · Courses SAT
           </p>
         </div>
       </section>
@@ -191,7 +200,7 @@ export default async function JoinPage() {
 
           <div className="mt-12 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
             <p className="text-sm text-ink-muted">
-              Ready? Applications take about five minutes.
+              Applications take about five minutes.
             </p>
             <div className="flex gap-3">
               <ButtonLink href={billet.applyUrl} variant="primary" size="md">

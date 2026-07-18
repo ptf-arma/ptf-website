@@ -66,10 +66,10 @@ export default async function Home() {
             <span className="text-accent">Serious, fun, and immersive.</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
-            The Paramarines were a specialized breed of WW2 Marines. We ask
-            &ldquo;what if&rdquo; — and drop that airborne/amphibious legacy
-            into a modern Arma 3 milsim. Ten years of operations, our own
-            modpack, and a community that shows up week after week.
+            The Paramarines were a WW2 airborne Marine outfit, disbanded before
+            the war ended. We took the concept and put it in a modern setting:
+            rapid-deployment Marines with our own air wing. Ten years running,
+            and we still fill a Sunday op.
           </p>
           <HeroCta />
           <HeroMeta
@@ -80,8 +80,8 @@ export default async function Home() {
           {/* How joining works — three steps, no mystery. */}
           <ol className="mt-12 grid max-w-2xl gap-4 border-t border-edge pt-6 sm:grid-cols-3">
             {[
-              ["01", "Apply", "Five minutes on our personnel portal."],
-              ["02", "Meet a recruiter", "Say hi in #find-a-recruiter on Discord."],
+              ["01", "Apply", "Five minutes on the personnel portal."],
+              ["02", "Meet a recruiter", "Find us in #find-a-recruiter."],
               ["03", "Train & deploy", "Recruit training, then your first op."],
             ].map(([n, title, body]) => (
               <li key={n}>
@@ -98,29 +98,26 @@ export default async function Home() {
               href="/join"
               className="text-ink-muted underline decoration-edge-bright underline-offset-4 hover:text-ink"
             >
-              Everything you need to know before applying →
+              What to expect before you apply →
             </Link>
           </p>
 
-          {/* Ops-cadence readout strip */}
-          <dl className="mt-12 flex max-w-2xl flex-wrap gap-x-10 gap-y-4 border-t border-edge pt-6">
+          {/* Weekly schedule readout */}
+          <dl className="mt-12 flex max-w-2xl flex-wrap gap-x-8 gap-y-4 border-t border-edge pt-6">
             <div>
-              <dt className="micro-label">Field training</dt>
-              <dd className="mt-1 font-mono text-sm text-ink">SAT · 8PM ET</dd>
-              <dd className="font-mono text-xs text-ink-faint">
-                <LocalTime weekday={6} hourEt={20} />
-              </dd>
-            </div>
-            <div>
-              <dt className="micro-label">Main operation</dt>
+              <dt className="micro-label">Main op</dt>
               <dd className="mt-1 font-mono text-sm text-ink">SUN · 8PM ET</dd>
               <dd className="font-mono text-xs text-ink-faint">
                 <LocalTime weekday={0} hourEt={20} />
               </dd>
             </div>
             <div>
-              <dt className="micro-label">Voice</dt>
-              <dd className="mt-1 font-mono text-sm text-ink">DISCORD + TS3</dd>
+              <dt className="micro-label">Field training</dt>
+              <dd className="mt-1 font-mono text-sm text-ink">TUE · 8PM ET</dd>
+            </div>
+            <div>
+              <dt className="micro-label">Schools</dt>
+              <dd className="mt-1 font-mono text-sm text-ink">SAT · 8PM ET</dd>
             </div>
             {stats ? (
               <div>
