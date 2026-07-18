@@ -27,7 +27,7 @@ export const schedule: ScheduleEntry[] = [
     time: "8PM ET",
     schemaDay: "https://schema.org/Tuesday",
     description:
-      "Field Training Exercise. Drills and rehearsals with your squad.",
+      "Field Training Exercise. Drills and rehearsal with your squad or platoon.",
   },
   {
     key: "recon",
