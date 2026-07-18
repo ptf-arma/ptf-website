@@ -15,11 +15,11 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:px-6 md:flex-row md:items-center md:justify-between">
         <div>
           <Image
-            src="/brand/ptf-logo-horizontal-reversed.svg"
+            src="/brand/ptf-logo-horizontal-reversed-800w.png"
             alt="Paramarine Task Force"
             width={800}
-            height={200}
-            className="h-8 w-auto"
+            height={203}
+            className="h-9 w-auto"
           />
           <p className="mt-3 max-w-md text-sm text-ink-muted">
             A serious, fun, and immersive Arma 3 milsim unit. TeamSpeak:{" "}
