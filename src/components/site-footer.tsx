@@ -37,6 +37,9 @@ export function SiteFooter() {
               {item.label}
             </a>
           ))}
+          <a href="/milsim-guide" className="micro-label hover:text-ink">
+            Milsim Guide
+          </a>
           <a href="/progression" className="micro-label hover:text-ink">
             Ranks &amp; Awards
           </a>

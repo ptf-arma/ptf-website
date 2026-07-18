@@ -93,6 +93,10 @@ export function RolesSection() {
         <h2 className="heading-display mt-3 text-3xl text-ink sm:text-4xl">
           What you can be
         </h2>
+        <p className="mt-4 max-w-2xl text-ink-muted">
+          Every Marine starts as an 0311 Rifleman — everything below is a
+          progression path you can qualify into, not a barrier to entry.
+        </p>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {roles.map((role) => (
@@ -102,8 +106,8 @@ export function RolesSection() {
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
           <p className="text-sm text-ink-muted">
-            Every Marine starts with recruit training. From there, specialize
-            as far as you want — marksmanship, armor, aviation, medical, JTAC.
+            The school pipeline runs from recruit training to JTAC
+            certification — specialize as far as you want.
           </p>
           <ButtonLink href={billet.applyUrl} variant="secondary" size="md">
             Apply now

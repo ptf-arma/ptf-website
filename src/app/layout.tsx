@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Saira_Condensed, JetBrains_Mono, Barlow } from "next/font/google";
 import "./globals.css";
 import { SITE_URL, links } from "@/lib/config";
@@ -142,6 +143,7 @@ export default function RootLayout({
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <Analytics />
       </body>
     </html>
   );
