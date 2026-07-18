@@ -54,6 +54,13 @@ const roles: Role[] = [
   },
 ];
 
+/* Status dot: available = field blue, waitlist = amber, selection = outline. */
+function statusDot(status: string) {
+  if (status.toLowerCase().includes("waitlist")) return "bg-opfor";
+  if (status.toLowerCase().includes("highly")) return "border border-ink-faint/60";
+  return "bg-ok";
+}
+
 function RoleCard({ role }: { role: Role }) {
   return (
     <div className="rounded-sm border border-edge bg-surface p-5">
@@ -64,7 +71,13 @@ function RoleCard({ role }: { role: Role }) {
         {role.name}
       </h3>
       <p className="mt-2 text-sm text-ink-muted">{role.description}</p>
-      <p className="micro-label mt-4">{role.status}</p>
+      <p className="micro-label mt-4 inline-flex items-center gap-1.5">
+        <span
+          aria-hidden
+          className={`h-1.5 w-1.5 rounded-full ${statusDot(role.status)}`}
+        />
+        {role.status}
+      </p>
     </div>
   );
 }
@@ -77,7 +90,7 @@ export function RolesSection() {
     <section id="roles" className="border-t border-edge">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionLabel>Roles</SectionLabel>
-        <h2 className="heading-display mt-3 text-2xl text-ink sm:text-3xl">
+        <h2 className="heading-display mt-3 text-3xl text-ink sm:text-4xl">
           What you can be
         </h2>
 
@@ -87,7 +100,7 @@ export function RolesSection() {
           ))}
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
           <p className="text-sm text-ink-muted">
             Every Marine starts with recruit training. From there, specialize
             as far as you want — marksmanship, armor, aviation, medical, JTAC.

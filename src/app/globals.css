@@ -15,15 +15,20 @@
   --ptf-gunmetal: #0c1420;
   --ptf-amber: #f0a81e;
 
-  --bg: #0a111c; /* gunmetal, deepened — the site should feel like night ops */
-  --surface: #0e1930; /* navy stepped well toward gunmetal for card surfaces */
-  --raised: #14264a;
-  --edge: rgb(255 255 255 / 0.08);
-  --edge-bright: rgb(255 255 255 / 0.2);
+  /*
+   * Neutral night palette. The earlier navy surfaces washed the whole page
+   * blue — brand blue now lives only in details (ticks, filled markers),
+   * surfaces stay desaturated gunmetal.
+   */
+  --bg: #0b0d12;
+  --surface: #10131a;
+  --raised: #161a23;
+  --edge: rgb(255 255 255 / 0.07);
+  --edge-bright: rgb(255 255 255 / 0.18);
 
-  --ink: #e6eaf2;
-  --ink-muted: #8fa0bc;
-  --ink-faint: var(--ptf-steel);
+  --ink: #e7e9ed;
+  --ink-muted: #9aa3b0;
+  --ink-faint: #6f7683;
 
   --accent: var(--ptf-scarlet);
   --ok: var(--ptf-blue); /* "filled/positive" reads brand-blue, not green */

@@ -16,12 +16,12 @@ function CadenceCard({
 }) {
   return (
     <div className="overflow-hidden rounded-sm border border-edge bg-surface">
-      <div className="flex items-center justify-between gap-3 border-b border-edge bg-raised px-5 py-3">
+      <div className="flex items-center justify-between gap-3 border-b border-edge bg-raised px-4 py-2.5">
         <span className="micro-label">{label}</span>
         <span className="font-mono text-sm text-ink">{time}</span>
       </div>
-      <div className="px-5 py-4">
-        <p className="font-display text-lg font-semibold text-ink">{day}</p>
+      <div className="px-4 py-4">
+        <h3 className="font-display text-base font-semibold text-ink">{day}</h3>
         <p className="mt-2 text-sm text-ink-muted">{description}</p>
       </div>
     </div>
@@ -36,7 +36,7 @@ export function OpsSection() {
     <section id="ops" className="border-t border-edge">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionLabel>Operations</SectionLabel>
-        <h2 className="heading-display mt-3 text-2xl text-ink sm:text-3xl">
+        <h2 className="heading-display mt-3 text-3xl text-ink sm:text-4xl">
           How we operate
         </h2>
 
@@ -55,6 +55,8 @@ export function OpsSection() {
           />
         </div>
 
+        {/* border-edge-bright is deliberate: this closing band is the one
+            emphasized card on the page. */}
         <div className="relative mt-14 overflow-hidden rounded-sm border border-edge-bright bg-surface px-6 py-12 text-center sm:px-12">
           <Image
             src="/media/out-of-fallujah.jpg"

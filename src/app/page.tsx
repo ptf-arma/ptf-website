@@ -29,15 +29,14 @@ export default function Home() {
           aria-hidden
           className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-bg to-transparent"
         />
-        <div aria-hidden className="bg-grid absolute inset-0" />
         <div className="relative mx-auto max-w-6xl px-4 pb-20 pt-24 sm:px-6 sm:pt-28">
           <SectionLabel>Arma 3 · Milsim · Est. 2016</SectionLabel>
-          <h1 className="heading-display mt-5 max-w-2xl text-4xl leading-[1.08] text-ink sm:text-5xl">
+          <h1 className="heading-display mt-5 max-w-2xl text-5xl leading-[1.05] text-ink sm:text-6xl">
             Rapid-deployment Marines.
             <br />
             <span className="text-accent">Serious, fun, and immersive.</span>
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
             The Paramarines were a specialized breed of WW2 Marines. We ask
             &ldquo;what if&rdquo; — and drop that airborne/amphibious legacy into
             a modern Arma 3 milsim with weekly operations, structured training,

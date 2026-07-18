@@ -19,7 +19,7 @@ export function UnitSection() {
     <section id="unit" className="border-t border-edge">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionLabel>The Unit</SectionLabel>
-        <h2 className="heading-display mt-3 text-2xl text-ink sm:text-3xl">
+        <h2 className="heading-display mt-3 text-3xl text-ink sm:text-4xl">
           Who we are
         </h2>
 
@@ -49,10 +49,10 @@ export function UnitSection() {
 
           <div className="space-y-4">
             <div className="h-fit overflow-hidden rounded-sm border border-edge bg-surface">
-              <div className="border-b border-edge bg-raised px-4 py-3">
+              <div className="border-b border-edge bg-raised px-4 py-2.5">
                 <span className="micro-label">Unit facts</span>
               </div>
-              <dl className="divide-y divide-edge/60">
+              <dl className="divide-y divide-edge">
                 <Readout label="Founded" value="2016" />
                 <Readout label="Relaunched" value="2025" />
                 <Readout label="Weekly ops" value="SAT + SUN · 8PM ET" />

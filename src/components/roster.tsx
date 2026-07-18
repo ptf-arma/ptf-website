@@ -63,32 +63,56 @@ function SlotRow({ slot }: { slot: BilletSlot }) {
   );
 }
 
-/** A card for one ORBAT element (and its children, nested). */
+/**
+ * A card for one ORBAT element (and its children, nested).
+ * Only depth 0 gets full card chrome; nested elements render as plain
+ * indented blocks so the tree doesn't stack box-in-box-in-box.
+ */
 function ElementCard({ element, depth = 0 }: { element: BilletElement; depth?: number }) {
-  return (
-    <div className={depth > 0 ? "mt-3 ml-4 border-l border-edge pl-4" : ""}>
-      <div className="break-inside-avoid overflow-hidden rounded-sm border border-edge bg-surface">
-        <div className="flex items-center justify-between gap-3 border-b border-edge bg-raised px-4 py-2.5">
-          <div className="flex min-w-0 items-center gap-2.5">
-            <h3 className="truncate font-display text-base font-semibold tracking-wide text-ink">
-              {element.name}
-            </h3>
-            {element.callsign ? (
-              <span className="micro-label">{element.callsign}</span>
-            ) : null}
-          </div>
-          <span className="shrink-0 font-mono text-xs text-ink-faint">
-            {element.filled}/{element.total}
-          </span>
-        </div>
-        {element.billets.length > 0 ? (
-          <ul className="divide-y divide-edge/60">
-            {element.billets.map((slot, i) => (
-              <SlotRow key={`${slot.title}-${i}`} slot={slot} />
-            ))}
-          </ul>
+  const header = (
+    <div
+      className={
+        depth === 0
+          ? "flex items-center justify-between gap-3 border-b border-edge bg-raised px-4 py-2.5"
+          : "flex items-center justify-between gap-3 border-b border-edge px-4 py-2"
+      }
+    >
+      <div className="flex min-w-0 items-center gap-2.5">
+        <h3 className="truncate font-display text-base font-semibold text-ink">
+          {element.name}
+        </h3>
+        {element.callsign ? (
+          <span className="micro-label">{element.callsign}</span>
         ) : null}
       </div>
+      <span className="shrink-0 font-mono text-xs text-ink-faint">
+        {element.filled}/{element.total}
+      </span>
+    </div>
+  );
+
+  const body = (
+    <>
+      {header}
+      {element.billets.length > 0 ? (
+        <ul className="divide-y divide-edge">
+          {element.billets.map((slot, i) => (
+            <SlotRow key={`${slot.title}-${i}`} slot={slot} />
+          ))}
+        </ul>
+      ) : null}
+    </>
+  );
+
+  return (
+    <div className={depth > 0 ? "mt-3 ml-4 border-l border-edge pl-3" : ""}>
+      {depth === 0 ? (
+        <div className="break-inside-avoid overflow-hidden rounded-sm border border-edge bg-surface">
+          {body}
+        </div>
+      ) : (
+        <div className="break-inside-avoid">{body}</div>
+      )}
       {element.children.map((child) => (
         <ElementCard key={child.id} element={child} depth={depth + 1} />
       ))}
@@ -108,7 +132,7 @@ export async function RosterSection() {
       <section id="roster" className="border-t border-edge">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionLabel>Live ORBAT</SectionLabel>
-          <h2 className="heading-display mt-3 text-2xl text-ink sm:text-3xl">
+          <h2 className="heading-display mt-3 text-3xl text-ink sm:text-4xl">
             The roster
           </h2>
           <p className="mt-4 max-w-2xl text-ink-muted">
@@ -132,7 +156,7 @@ export async function RosterSection() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <SectionLabel>Live ORBAT</SectionLabel>
-            <h2 className="heading-display mt-3 text-2xl text-ink sm:text-3xl">
+            <h2 className="heading-display mt-3 text-3xl text-ink sm:text-4xl">
               The roster
             </h2>
             <p className="mt-4 max-w-2xl text-ink-muted">
@@ -159,11 +183,11 @@ export async function RosterSection() {
             <dl className="flex gap-6">
               <div>
                 <dt className="micro-label">Active</dt>
-                <dd className="font-mono text-2xl text-ink">{roster.unit.strength}</dd>
+                <dd className="font-mono text-xl text-ink">{roster.unit.strength}</dd>
               </div>
               <div>
                 <dt className="micro-label">Open billets</dt>
-                <dd className="font-mono text-2xl text-ink">{openBillets}</dd>
+                <dd className="font-mono text-xl text-ink">{openBillets}</dd>
               </div>
             </dl>
           </div>
@@ -181,7 +205,7 @@ export async function RosterSection() {
         {/* The one conversion point for the whole roster — a single strip
             instead of a hundred red links. */}
         {openBillets > 0 ? (
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-surface px-5 py-4">
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
             <p className="text-sm text-ink-muted">
               <span className="font-mono text-ink">{openBillets}</span> open
               billets across the task force — pick where you fit.
@@ -191,7 +215,7 @@ export async function RosterSection() {
             </ButtonLink>
           </div>
         ) : null}
-        <p className="micro-label mt-6">
+        <p className="mt-6 font-mono text-xs text-ink-faint">
           Synced from Billet · updates every 5 minutes ·{" "}
           <a href={billet.base} className="hover:text-ink">
             full portal →

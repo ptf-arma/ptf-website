@@ -32,12 +32,12 @@ export function SiteFooter() {
             <a
               key={item.href}
               href={item.href}
-              className="micro-label hover:text-accent"
+              className="micro-label hover:text-ink"
             >
               {item.label}
             </a>
           ))}
-          <a href={billet.applyUrl} className="micro-label hover:text-accent">
+          <a href={billet.applyUrl} className="micro-label hover:text-ink">
             Enlist
           </a>
         </nav>

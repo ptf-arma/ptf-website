@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-/** Billet-style uppercase mono eyebrow label with an amber tick. */
+/** Uppercase mono eyebrow label with a field-blue tick. */
 export function SectionLabel({ children }: { children: ReactNode }) {
   return (
     <div className="flex items-center gap-2">
