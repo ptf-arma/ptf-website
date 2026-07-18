@@ -7,6 +7,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { SectionLabel } from "@/components/ui/section-label";
 import { LocalTime } from "@/components/local-time";
 import { VideoCard } from "@/components/video-card";
+import { HeroMeta } from "@/components/hero-meta";
 import { RosterSection } from "@/components/roster";
 import { UnitSection } from "@/components/unit-section";
 import { RolesSection } from "@/components/roles-section";
@@ -79,18 +80,10 @@ export default async function Home() {
               Join our Discord
             </ButtonLink>
           </div>
-          <p className="mt-4 text-sm text-ink-muted">
-            {discord ? (
-              <>
-                <span className="font-mono text-ink">{discord.members}</span>{" "}
-                on Discord ·{" "}
-                <span className="font-mono text-ink">{discord.online}</span>{" "}
-                online now ·{" "}
-              </>
-            ) : null}
-            no application needed to say hi in{" "}
-            <span className="text-ink">#find-a-recruiter</span>
-          </p>
+          <HeroMeta
+            members={discord?.members ?? null}
+            online={discord?.online ?? null}
+          />
 
           {/* How joining works — three steps, no mystery. */}
           <ol className="mt-12 grid max-w-2xl gap-4 border-t border-edge pt-6 sm:grid-cols-3">

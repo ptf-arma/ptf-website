@@ -3,6 +3,7 @@ import Link from "next/link";
 import { billet } from "@/lib/config";
 import { ButtonLink } from "@/components/ui/button";
 import { MobileNav } from "@/components/mobile-nav";
+import { SessionChip } from "@/components/session-chip";
 
 const nav = [
   { label: "The Unit", href: "/#unit" },
@@ -43,14 +44,8 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-3">
-          <ButtonLink
-            href={billet.loginUrl}
-            variant="ghost"
-            size="md"
-            className="hidden sm:inline-flex"
-          >
-            Log In
-          </ButtonLink>
+          {/* Log In ⇄ signed-in member chip, live from the Billet session. */}
+          <SessionChip className="hidden sm:inline-flex" />
           <ButtonLink href={billet.applyUrl} variant="primary" size="md">
             Enlist
           </ButtonLink>
