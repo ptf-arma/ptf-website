@@ -56,7 +56,8 @@ export default async function Home() {
           aria-hidden
           className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-bg to-transparent"
         />
-        <div className="relative mx-auto max-w-6xl px-4 pb-20 pt-24 sm:px-6 sm:pt-28">
+        <div className="relative mx-auto grid max-w-6xl gap-12 px-4 pb-20 pt-24 sm:px-6 sm:pt-28 lg:grid-cols-[1fr_minmax(0,24rem)] lg:gap-16">
+          <div>
           <SectionLabel>Arma 3 · Milsim · 10 Years Strong</SectionLabel>
           <h1 className="heading-display mt-5 max-w-2xl text-5xl leading-[1.05] text-ink sm:text-6xl">
             Rapid-deployment Marines.
@@ -150,6 +151,42 @@ export default async function Home() {
               </div>
             ) : null}
           </dl>
+          </div>
+
+          {/* The classic, front and center for the anniversary. */}
+          <div className="lg:self-center">
+            <p className="micro-label">
+              From the archives · <span className="text-opfor">the classic</span>
+            </p>
+            <a
+              href="https://www.youtube.com/watch?v=O-5Mq7MldqI"
+              className="group mt-3 block overflow-hidden rounded-sm border border-edge bg-surface transition-colors hover:border-edge-bright"
+            >
+              <div className="relative">
+                <Image
+                  src="https://i.ytimg.com/vi/O-5Mq7MldqI/maxresdefault.jpg"
+                  alt="We are the Paramarines — Deployment (unit film)"
+                  width={1280}
+                  height={720}
+                  sizes="(min-width: 1024px) 24rem, 100vw"
+                  className="aspect-video w-full object-cover"
+                />
+                <span
+                  aria-hidden
+                  className="absolute inset-0 grid place-items-center bg-bg/25 transition-colors group-hover:bg-bg/10"
+                >
+                  <span className="grid h-14 w-14 place-items-center rounded-full border border-edge-bright bg-bg/80 pl-1 font-display text-xl text-ink">
+                    ▶
+                  </span>
+                </span>
+              </div>
+              <div className="border-t border-edge px-4 py-2.5">
+                <span className="font-display text-sm font-semibold text-ink">
+                  We are the Paramarines — Deployment
+                </span>
+              </div>
+            </a>
+          </div>
         </div>
       </section>
 
