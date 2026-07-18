@@ -114,6 +114,73 @@ body::before {
   mask-image: radial-gradient(ellipse 90% 80% at 30% 20%, black 30%, transparent 75%);
 }
 
+/*
+ * ORBAT org-chart connectors. Markup: nested <ul>/<li>, each li = box +
+ * optional <ul> of subordinates. Lines come from borders on pseudo-elements
+ * (the classic CSS org-chart recipe), colored with the edge token.
+ */
+.orbat-tree,
+.orbat-tree ul {
+  display: flex;
+  justify-content: center;
+}
+.orbat-tree ul {
+  position: relative;
+  padding-top: 1.25rem;
+}
+/* stub dropping from the parent box */
+.orbat-tree ul::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 1.25rem;
+  border-left: 1px solid var(--edge-bright);
+}
+.orbat-tree li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 1.25rem 0.375rem 0;
+}
+/* horizontal rail + per-child stub */
+.orbat-tree li::before,
+.orbat-tree li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 50%;
+  height: 1.25rem;
+  border-top: 1px solid var(--edge-bright);
+}
+.orbat-tree li::after {
+  right: auto;
+  left: 50%;
+  border-left: 1px solid var(--edge-bright);
+}
+.orbat-tree li:only-child::before,
+.orbat-tree li:only-child::after {
+  display: none;
+}
+.orbat-tree li:first-child::before,
+.orbat-tree li:last-child::after {
+  border: 0 none;
+}
+.orbat-tree li:last-child::before {
+  border-right: 1px solid var(--edge-bright);
+}
+/* the root li has no incoming lines */
+.orbat-tree > li {
+  padding-top: 0;
+}
+.orbat-tree > li::before,
+.orbat-tree > li::after {
+  display: none;
+}
+
 /* Display headings: Saira Condensed carries weight without shouting. */
 .heading-display {
   font-family: var(--font-display);

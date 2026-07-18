@@ -5,161 +5,82 @@ import {
   getRoster,
   type BilletElement,
   type BilletMember,
-  type BilletSlot,
 } from "@/lib/billet";
 import { SectionLabel } from "@/components/ui/section-label";
 import { ButtonLink } from "@/components/ui/button";
 
-/** One slot row inside an expanded element. */
-function SlotRow({ slot }: { slot: BilletSlot }) {
-  if (slot.closed) {
-    return (
-      <li className="flex items-center justify-between gap-3 px-4 py-2 opacity-40">
-        <span className="text-sm text-ink-faint">{slot.title}</span>
-        <span className="micro-label">Closed</span>
-      </li>
-    );
-  }
+/** Senior filled billet in an element (billets are listed leader-first). */
+function leaderOf(element: BilletElement): BilletMember | null {
+  const b = element.billets.find((slot) => slot.filled && slot.member);
+  return b?.member ?? null;
+}
 
-  const open = slot.vacant;
+/** One box in the org chart. */
+function ChartBox({
+  element,
+  hiddenChildren,
+}: {
+  element: BilletElement;
+  hiddenChildren: number;
+}) {
+  const leader = leaderOf(element);
+  const empty = element.filled === 0;
   return (
-    <li className="flex items-center justify-between gap-3 px-4 py-2">
-      <span className="flex min-w-0 items-center gap-2.5">
-        <span
-          aria-hidden
-          className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-            open ? "border border-ink-faint/60" : "bg-ok"
-          }`}
-        />
-        <span className={`truncate text-sm ${open ? "text-ink-faint" : "text-ink"}`}>
-          {slot.title}
-        </span>
-        {slot.callsign ? (
-          <span className="micro-label hidden sm:inline">{slot.callsign}</span>
+    <div className="w-40 rounded-sm border border-edge bg-surface px-3 py-2 text-left">
+      <p className="truncate font-display text-sm font-semibold text-ink">
+        {element.name}
+      </p>
+      {element.callsign ? (
+        <p className="micro-label mt-0.5">{element.callsign}</p>
+      ) : null}
+      {leader ? (
+        <p className="mt-1 truncate font-mono text-xs text-ink-muted">
+          {leader.rankAbbr ? `${leader.rankAbbr} ` : ""}
+          {leader.name}
+        </p>
+      ) : null}
+      <p
+        className={`mt-1 font-mono text-xs ${empty ? "text-ink-faint" : "text-ink-muted"}`}
+      >
+        {element.filled}/{element.total}
+        {hiddenChildren > 0 ? (
+          <span className="text-ink-faint"> · +{hiddenChildren} teams</span>
         ) : null}
-      </span>
+      </p>
+    </div>
+  );
+}
 
-      {slot.member ? (
-        <span className="flex shrink-0 items-center gap-2">
-          {slot.member.rankInsigniaUrl ? (
-            <img
-              src={slot.member.rankInsigniaUrl}
-              alt=""
-              className="h-4 w-4 object-contain"
-              loading="lazy"
-            />
-          ) : slot.member.rankAbbr ? (
-            <span className="micro-label text-ink-faint">{slot.member.rankAbbr}</span>
-          ) : null}
-          <span className="font-mono text-sm text-ink">{slot.member.name}</span>
-        </span>
-      ) : open ? (
-        <span className="micro-label shrink-0">Open</span>
-      ) : (
-        <span className="micro-label shrink-0">Filled</span>
-      )}
+/**
+ * Recursive chart node. Depth 3 (fire teams) is summarized inside the parent
+ * box instead of drawn — keeps the chart readable at platoon strength.
+ */
+function ChartNode({ element, depth }: { element: BilletElement; depth: number }) {
+  // Children render at depth+1; anything past depth 2 (fire teams) is
+  // summarized in its parent box instead of drawn.
+  const showChildren = element.children.length > 0 && depth < 2;
+  return (
+    <li>
+      <ChartBox
+        element={element}
+        hiddenChildren={showChildren ? 0 : element.children.length}
+      />
+      {showChildren ? (
+        <ul>
+          {element.children.map((child) => (
+            <ChartNode key={child.id} element={child} depth={depth + 1} />
+          ))}
+        </ul>
+      ) : null}
     </li>
   );
 }
 
-/** Thin manning bar: filled portion in field blue. */
-function FillBar({ filled, total }: { filled: number; total: number }) {
-  const pct = total > 0 ? Math.round((filled / total) * 100) : 0;
-  return (
-    <span className="hidden h-1 w-16 overflow-hidden rounded-full bg-edge sm:block">
-      <span className="block h-full bg-ok" style={{ width: `${pct}%` }} />
-    </span>
-  );
-}
-
 /**
- * One ORBAT element as a collapsible block (native <details> — no JS).
- * Collapsed rows are uniform, so the section reads as a tidy manning table
- * instead of a wall of mostly-empty slot lists.
- */
-function ElementBlock({ element, depth = 0 }: { element: BilletElement; depth?: number }) {
-  const hasContent = element.billets.length > 0 || element.children.length > 0;
-
-  const summaryInner = (
-    <>
-      <span className="flex min-w-0 items-center gap-2.5">
-        <span
-          aria-hidden
-          className="text-[10px] text-ink-faint transition-transform group-open:rotate-90"
-        >
-          ▶
-        </span>
-        <span
-          className={`truncate font-display font-semibold text-ink ${
-            depth === 0 ? "text-base" : "text-sm"
-          }`}
-        >
-          {element.name}
-        </span>
-        {element.callsign ? (
-          <span className="micro-label hidden sm:inline">{element.callsign}</span>
-        ) : null}
-      </span>
-      <span className="flex shrink-0 items-center gap-3">
-        <FillBar filled={element.filled} total={element.total} />
-        <span className="font-mono text-xs text-ink-faint">
-          {element.filled}/{element.total}
-        </span>
-      </span>
-    </>
-  );
-
-  if (!hasContent) {
-    return (
-      <div className="flex items-center justify-between gap-3 px-4 py-2.5">
-        {summaryInner}
-      </div>
-    );
-  }
-
-  return (
-    <details className={`group ${depth === 0 ? "" : "border-t border-edge"}`}>
-      <summary className="flex cursor-pointer select-none list-none items-center justify-between gap-3 px-4 py-2.5 transition-colors hover:bg-raised/70 [&::-webkit-details-marker]:hidden">
-        {summaryInner}
-      </summary>
-      <div className="border-t border-edge">
-        {element.billets.length > 0 ? (
-          <ul className="divide-y divide-edge">
-            {element.billets.map((slot, i) => (
-              <SlotRow key={`${slot.title}-${i}`} slot={slot} />
-            ))}
-          </ul>
-        ) : null}
-        {element.children.length > 0 ? (
-          <div className="ml-4 border-l border-edge">
-            {element.children.map((child) => (
-              <ElementBlock key={child.id} element={child} depth={depth + 1} />
-            ))}
-          </div>
-        ) : null}
-      </div>
-    </details>
-  );
-}
-
-/** Collect unique members across the tree (first billet title wins). */
-function collectMembers(
-  elements: BilletElement[],
-  seen = new Map<string, { member: BilletMember; title: string }>(),
-) {
-  for (const el of elements) {
-    for (const b of el.billets) {
-      if (b.member && !seen.has(b.member.name)) {
-        seen.set(b.member.name, { member: b.member, title: b.title });
-      }
-    }
-    collectMembers(el.children, seen);
-  }
-  return seen;
-}
-
-/**
- * The live ORBAT section. Server component: fetches from Billet with ISR.
+ * The live ORBAT section, rendered as a military-style org chart (pure CSS,
+ * no JS). Reporting lines come from Billet's element nesting: the deeper the
+ * elements are nested in Billet, the deeper this chart draws — restructure
+ * there and this follows automatically.
  * Degrades to a static portal link when the API is unavailable or private.
  */
 export async function RosterSection() {
@@ -193,7 +114,6 @@ export async function RosterSection() {
     (el) => !/^S\d+\b/.test(el.name.trim()),
   );
   const openBillets = countOpenBillets(combatElements);
-  const members = [...collectMembers(combatElements).values()];
 
   return (
     <section id="roster" className="border-t border-edge">
@@ -202,74 +122,54 @@ export async function RosterSection() {
           <div>
             <SectionLabel>Live ORBAT</SectionLabel>
             <h2 className="heading-display mt-3 text-3xl text-ink sm:text-4xl">
-              The roster
+              Order of battle
             </h2>
             <p className="mt-4 max-w-2xl text-ink-muted">
-              Our live order of battle, straight from the personnel system —
-              expand an element to see its billets.
+              The task force&apos;s combat structure, live from the personnel
+              system.
             </p>
           </div>
-          <div className="flex items-center gap-4">
-            {roster.unit.crestUrl ? (
-              <img
-                src={roster.unit.crestUrl}
-                alt={`${roster.unit.name} crest`}
-                className="h-14 w-14 object-contain"
-              />
-            ) : null}
-            <dl className="flex gap-6">
-              <div>
-                <dt className="micro-label">Active</dt>
-                <dd className="font-mono text-xl text-ink">{roster.unit.strength}</dd>
-              </div>
-              <div>
-                <dt className="micro-label">Open billets</dt>
-                <dd className="font-mono text-xl text-ink">{openBillets}</dd>
-              </div>
-            </dl>
-          </div>
+          <dl className="flex gap-6">
+            <div>
+              <dt className="micro-label">Active</dt>
+              <dd className="font-mono text-xl text-ink">{roster.unit.strength}</dd>
+            </div>
+            <div>
+              <dt className="micro-label">Open billets</dt>
+              <dd className="font-mono text-xl text-ink">{openBillets}</dd>
+            </div>
+          </dl>
         </div>
 
-        {/* The people, up front — the structure below is collapsed by default. */}
-        {members.length > 0 ? (
-          <div className="mt-10">
-            <p className="micro-label">Leadership</p>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {members.map(({ member, title }) => (
-                <li
-                  key={member.name}
-                  className="flex items-center gap-2 rounded-sm border border-edge bg-surface px-3 py-1.5"
-                >
-                  {member.rankInsigniaUrl ? (
-                    <img
-                      src={member.rankInsigniaUrl}
-                      alt=""
-                      className="h-4 w-4 object-contain"
-                      loading="lazy"
-                    />
-                  ) : member.rankAbbr ? (
-                    <span className="micro-label">{member.rankAbbr}</span>
-                  ) : null}
-                  <span className="font-mono text-sm text-ink">{member.name}</span>
-                  <span className="hidden text-xs text-ink-faint sm:inline">
-                    {title}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-
-        {/* Uniform collapsed rows → a manning table, not a wall of slots. */}
-        <div className="mt-8 grid items-start gap-4 md:grid-cols-2">
-          {combatElements.map((el) => (
-            <div
-              key={el.id}
-              className="overflow-hidden rounded-sm border border-edge bg-surface"
-            >
-              <ElementBlock element={el} />
-            </div>
-          ))}
+        {/* Org chart. w-max + overflow lets wide echelons scroll sideways. */}
+        <div className="mt-10 overflow-x-auto pb-2">
+          <ul className="orbat-tree mx-auto w-max min-w-full">
+            <li>
+              {/* Unit-level root box */}
+              <div className="flex w-44 items-center gap-3 rounded-sm border border-edge-bright bg-raised px-3 py-2.5">
+                {roster.unit.crestUrl ? (
+                  <img
+                    src={roster.unit.crestUrl}
+                    alt=""
+                    className="h-9 w-9 shrink-0 object-contain"
+                  />
+                ) : null}
+                <div className="min-w-0">
+                  <p className="truncate font-display text-sm font-semibold text-ink">
+                    {roster.unit.tag ?? roster.unit.name}
+                  </p>
+                  <p className="micro-label mt-0.5">
+                    {roster.unit.strength} active
+                  </p>
+                </div>
+              </div>
+              <ul>
+                {combatElements.map((el) => (
+                  <ChartNode key={el.id} element={el} depth={1} />
+                ))}
+              </ul>
+            </li>
+          </ul>
         </div>
 
         {openBillets > 0 ? (
@@ -284,7 +184,8 @@ export async function RosterSection() {
           </div>
         ) : null}
         <p className="mt-6 font-mono text-xs text-ink-faint">
-          Synced from Billet · updates every 5 minutes ·{" "}
+          Synced from Billet · updates every 5 minutes · billet-level detail on
+          the{" "}
           <a href={billet.base} className="hover:text-ink">
             full portal →
           </a>
