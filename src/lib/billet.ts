@@ -59,8 +59,50 @@ export type StatsResponse = {
   };
   strength: number;
   opsConducted: number;
+  /** Operations in the trailing 30 days. */
+  ops30d: number;
   lastOpAt: string | null;
   establishedAt: string;
+  recruitingOpen: boolean;
+  discordInviteUrl: string | null;
+  /** Unit-configured facts (Billet Settings); all nullable until filled. */
+  keyFacts: {
+    opSchedule: string | null;
+    region: string | null;
+    realismLevel: string | null;
+    ageRequirement: string | null;
+  };
+};
+
+export type BilletRank = {
+  id: string;
+  name: string;
+  abbr: string | null;
+  insigniaUrl: string | null;
+  order: number;
+  requirements: {
+    timeInGradeDays?: number;
+    pointsRequired?: number;
+    qualifications?: string[];
+  } | null;
+};
+
+export type RanksResponse = {
+  unit: StatsResponse["unit"];
+  tracks: { name: string; ranks: BilletRank[] }[];
+};
+
+export type BilletAward = {
+  id: string;
+  name: string;
+  abbr: string | null;
+  imageUrl: string | null;
+  description: string | null;
+};
+
+export type AwardsResponse = {
+  unit: StatsResponse["unit"];
+  awards: BilletAward[];
 };
 
 // The API sets s-maxage=300; match it with ISR so the roster is at most 5 min stale.
@@ -107,6 +149,37 @@ export async function getStats(): Promise<StatsResponse | null> {
   return {
     ...data,
     unit: { ...data.unit, crestUrl: billetImage(data.unit.crestUrl) },
+  };
+}
+
+export async function getRanks(): Promise<RanksResponse | null> {
+  const data = await fetchJson<RanksResponse>(
+    `${billet.base}/api/v1/units/${billet.slug}/ranks`,
+  );
+  if (!data) return null;
+  return {
+    ...data,
+    tracks: data.tracks.map((t) => ({
+      ...t,
+      ranks: t.ranks.map((r) => ({
+        ...r,
+        insigniaUrl: billetImage(r.insigniaUrl),
+      })),
+    })),
+  };
+}
+
+export async function getAwards(): Promise<AwardsResponse | null> {
+  const data = await fetchJson<AwardsResponse>(
+    `${billet.base}/api/v1/units/${billet.slug}/awards`,
+  );
+  if (!data) return null;
+  return {
+    ...data,
+    awards: data.awards.map((a) => ({
+      ...a,
+      imageUrl: billetImage(a.imageUrl),
+    })),
   };
 }
 

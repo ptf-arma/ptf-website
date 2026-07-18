@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { billet, links, SITE_URL } from "@/lib/config";
+import { getStats } from "@/lib/billet";
 import { ButtonLink } from "@/components/ui/button";
 import { SectionLabel } from "@/components/ui/section-label";
 import { LocalTime } from "@/components/local-time";
@@ -89,7 +90,21 @@ const faqJsonLd = {
   })),
 };
 
-export default function JoinPage() {
+export default async function JoinPage() {
+  // Unit-configured key facts (schedule, region, realism, age) come from
+  // Billet Settings; the block below renders only for facts that are set.
+  const stats = await getStats();
+  const keyFacts: [string, string][] = stats
+    ? (
+        [
+          ["Schedule", stats.keyFacts.opSchedule],
+          ["Region", stats.keyFacts.region],
+          ["Realism level", stats.keyFacts.realismLevel],
+          ["Age requirement", stats.keyFacts.ageRequirement],
+        ] as [string, string | null][]
+      ).filter((f): f is [string, string] => f[1] !== null)
+    : [];
+
   return (
     <>
       <script
@@ -150,6 +165,16 @@ export default function JoinPage() {
           <h2 className="heading-display mt-3 text-3xl text-ink sm:text-4xl">
             Before you apply
           </h2>
+          {keyFacts.length > 0 ? (
+            <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-3 rounded-sm border border-edge bg-surface px-5 py-4">
+              {keyFacts.map(([label, value]) => (
+                <div key={label}>
+                  <dt className="micro-label">{label}</dt>
+                  <dd className="mt-1 font-mono text-sm text-ink">{value}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {faqs.map((f) => (
               <div

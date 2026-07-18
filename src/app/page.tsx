@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { billet, links } from "@/lib/config";
-import { getDiscordCounts } from "@/lib/discord";
+import { getStats } from "@/lib/billet";
+import { getDiscordCounts, inviteCodeFromUrl } from "@/lib/discord";
 import { ButtonLink } from "@/components/ui/button";
 import { SectionLabel } from "@/components/ui/section-label";
 import { LocalTime } from "@/components/local-time";
@@ -12,7 +13,12 @@ import { MediaSection } from "@/components/media-section";
 import { OpsSection } from "@/components/ops-section";
 
 export default async function Home() {
-  const discord = await getDiscordCounts();
+  // Invite code comes from Billet config when set, so rotating the Discord
+  // invite in Billet keeps the live member counts working.
+  const stats = await getStats();
+  const discord = await getDiscordCounts(
+    inviteCodeFromUrl(stats?.discordInviteUrl),
+  );
 
   return (
     <>
@@ -116,6 +122,20 @@ export default async function Home() {
               <dt className="micro-label">Voice</dt>
               <dd className="mt-1 font-mono text-sm text-ink">DISCORD + TS3</dd>
             </div>
+            {stats ? (
+              <div>
+                <dt className="micro-label">Recruiting</dt>
+                <dd className="mt-1 flex items-center gap-1.5 font-mono text-sm text-ink">
+                  <span
+                    aria-hidden
+                    className={`h-1.5 w-1.5 rounded-full ${
+                      stats.recruitingOpen ? "bg-ok" : "border border-ink-faint/60"
+                    }`}
+                  />
+                  {stats.recruitingOpen ? "OPEN" : "CLOSED"}
+                </dd>
+              </div>
+            ) : null}
           </dl>
         </div>
       </section>

@@ -8,7 +8,8 @@ const nav = [
   { label: "Roles", href: "/#roles" },
   { label: "Roster", href: "/#roster" },
   { label: "Media", href: "/#media" },
-  { label: "How to Join", href: "/join" },
+  { label: "Ranks", href: "/progression" },
+  { label: "Join", href: "/join" },
 ];
 
 export function SiteHeader() {

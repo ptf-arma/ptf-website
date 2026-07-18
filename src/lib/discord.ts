@@ -5,12 +5,22 @@
  */
 export type DiscordCounts = { members: number; online: number };
 
-const INVITE_CODE = "paramarines";
+const FALLBACK_INVITE_CODE = "paramarines";
 
-export async function getDiscordCounts(): Promise<DiscordCounts | null> {
+/** Pull the invite code out of a discord.gg / discord.com invite URL. */
+export function inviteCodeFromUrl(url: string | null | undefined): string | null {
+  if (!url) return null;
+  const m = url.match(/(?:discord\.gg|discord\.com\/invite)\/([\w-]+)/i);
+  return m ? m[1] : null;
+}
+
+export async function getDiscordCounts(
+  inviteCode: string | null = null,
+): Promise<DiscordCounts | null> {
   try {
+    const code = inviteCode ?? FALLBACK_INVITE_CODE;
     const res = await fetch(
-      `https://discord.com/api/v9/invites/${INVITE_CODE}?with_counts=true`,
+      `https://discord.com/api/v9/invites/${code}?with_counts=true`,
       { next: { revalidate: 3600 } },
     );
     if (!res.ok) return null;

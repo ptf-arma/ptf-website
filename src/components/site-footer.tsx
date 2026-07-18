@@ -37,6 +37,9 @@ export function SiteFooter() {
               {item.label}
             </a>
           ))}
+          <a href="/progression" className="micro-label hover:text-ink">
+            Ranks &amp; Awards
+          </a>
           <a href="/join" className="micro-label hover:text-ink">
             How to Join
           </a>
