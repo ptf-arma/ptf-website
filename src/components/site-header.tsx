@@ -4,10 +4,11 @@ import { billet } from "@/lib/config";
 import { ButtonLink } from "@/components/ui/button";
 
 const nav = [
-  { label: "The Unit", href: "#unit" },
-  { label: "Roles", href: "#roles" },
-  { label: "Roster", href: "#roster" },
-  { label: "Operations", href: "#ops" },
+  { label: "The Unit", href: "/#unit" },
+  { label: "Roles", href: "/#roles" },
+  { label: "Roster", href: "/#roster" },
+  { label: "Media", href: "/#media" },
+  { label: "How to Join", href: "/join" },
 ];
 
 export function SiteHeader() {

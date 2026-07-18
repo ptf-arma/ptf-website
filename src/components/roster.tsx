@@ -32,7 +32,7 @@ function ChartBox({
         {element.patchUrl ? (
           <img
             src={element.patchUrl}
-            alt=""
+            alt={`${element.name} patch`}
             className="h-4 w-4 shrink-0 object-contain"
             loading="lazy"
           />

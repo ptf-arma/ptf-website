@@ -1,24 +1,32 @@
 import Image from "next/image";
+import Link from "next/link";
 import { billet, links } from "@/lib/config";
+import { getDiscordCounts } from "@/lib/discord";
 import { ButtonLink } from "@/components/ui/button";
 import { SectionLabel } from "@/components/ui/section-label";
+import { LocalTime } from "@/components/local-time";
 import { RosterSection } from "@/components/roster";
 import { UnitSection } from "@/components/unit-section";
 import { RolesSection } from "@/components/roles-section";
+import { MediaSection } from "@/components/media-section";
 import { OpsSection } from "@/components/ops-section";
 
-export default function Home() {
+export default async function Home() {
+  const discord = await getDiscordCounts();
+
   return (
     <>
       {/* Hero — the primary conversion path. */}
       <section className="relative overflow-hidden">
-        {/* Salvaged op screenshot, heavily darkened so the readout text owns the frame. */}
+        {/* Salvaged op screenshot, heavily darkened so the readout text owns
+            the frame. Cap the requested width on small screens — this is the
+            LCP image and it renders at 40% opacity anyway. */}
         <Image
           src="/media/church-holdup.jpg"
           alt=""
           fill
           priority
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, 1920px"
           className="object-cover object-[50%_30%] opacity-40"
         />
         <div
@@ -50,16 +58,59 @@ export default function Home() {
               Join our Discord
             </ButtonLink>
           </div>
+          <p className="mt-4 text-sm text-ink-muted">
+            {discord ? (
+              <>
+                <span className="font-mono text-ink">{discord.members}</span>{" "}
+                on Discord ·{" "}
+                <span className="font-mono text-ink">{discord.online}</span>{" "}
+                online now ·{" "}
+              </>
+            ) : null}
+            no application needed to say hi in{" "}
+            <span className="text-ink">#find-a-recruiter</span>
+          </p>
+
+          {/* How joining works — three steps, no mystery. */}
+          <ol className="mt-12 grid max-w-2xl gap-4 border-t border-edge pt-6 sm:grid-cols-3">
+            {[
+              ["01", "Apply", "Five minutes on our personnel portal."],
+              ["02", "Meet a recruiter", "Say hi in #find-a-recruiter on Discord."],
+              ["03", "Train & deploy", "Recruit training, then your first op."],
+            ].map(([n, title, body]) => (
+              <li key={n}>
+                <span className="micro-label">{n}</span>
+                <p className="mt-1 font-display text-base font-semibold text-ink">
+                  {title}
+                </p>
+                <p className="mt-0.5 text-sm text-ink-muted">{body}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-4 text-sm">
+            <Link
+              href="/join"
+              className="text-ink-muted underline decoration-edge-bright underline-offset-4 hover:text-ink"
+            >
+              Everything you need to know before applying →
+            </Link>
+          </p>
 
           {/* Ops-cadence readout strip */}
-          <dl className="mt-14 flex max-w-xl flex-wrap gap-x-10 gap-y-4 border-t border-edge pt-6">
+          <dl className="mt-12 flex max-w-2xl flex-wrap gap-x-10 gap-y-4 border-t border-edge pt-6">
             <div>
               <dt className="micro-label">Field training</dt>
               <dd className="mt-1 font-mono text-sm text-ink">SAT · 8PM ET</dd>
+              <dd className="font-mono text-xs text-ink-faint">
+                <LocalTime weekday={6} hourEt={20} />
+              </dd>
             </div>
             <div>
               <dt className="micro-label">Main operation</dt>
               <dd className="mt-1 font-mono text-sm text-ink">SUN · 8PM ET</dd>
+              <dd className="font-mono text-xs text-ink-faint">
+                <LocalTime weekday={0} hourEt={20} />
+              </dd>
             </div>
             <div>
               <dt className="micro-label">Voice</dt>
@@ -72,6 +123,7 @@ export default function Home() {
       <UnitSection />
       <RolesSection />
       <RosterSection />
+      <MediaSection />
       <OpsSection />
     </>
   );

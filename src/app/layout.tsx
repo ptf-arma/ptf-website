@@ -5,18 +5,53 @@ import { SITE_URL, links } from "@/lib/config";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
-// Organization schema for search engines (milsim-unit discovery).
+// Structured data: Organization + the two recurring weekly events.
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Paramarine Task Force",
-  alternateName: "Paramarines",
-  url: SITE_URL,
-  logo: `${SITE_URL}/brand/ptf-emblem-326w.png`,
-  foundingDate: "2016",
-  description:
-    "A serious, fun, and immersive Arma 3 milsim unit — rapid-deployment Marines with weekly operations and structured training.",
-  sameAs: [links.discord, links.steam, links.arma3units, links.patreon],
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#org`,
+      name: "Paramarine Task Force",
+      alternateName: "Paramarines",
+      url: SITE_URL,
+      logo: `${SITE_URL}/brand/ptf-emblem-326w.png`,
+      foundingDate: "2016",
+      description:
+        "A serious, fun, and immersive Arma 3 milsim unit — rapid-deployment Marines with weekly operations and structured training.",
+      sameAs: [links.discord, links.steam, links.arma3units, links.patreon],
+    },
+    {
+      "@type": "Event",
+      name: "PTF Field Training Exercise (FTX)",
+      description:
+        "Weekly Arma 3 field training — drills, qualifications, and course work with the Paramarine Task Force.",
+      organizer: { "@id": `${SITE_URL}/#org` },
+      eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+      location: { "@type": "VirtualLocation", url: SITE_URL },
+      eventSchedule: {
+        "@type": "Schedule",
+        byDay: "https://schema.org/Saturday",
+        startTime: "20:00:00-05:00",
+        repeatFrequency: "P1W",
+      },
+    },
+    {
+      "@type": "Event",
+      name: "PTF Main Operation",
+      description:
+        "The weekly main event — a full-scale Arma 3 milsim operation across the Paramarine Task Force.",
+      organizer: { "@id": `${SITE_URL}/#org` },
+      eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+      location: { "@type": "VirtualLocation", url: SITE_URL },
+      eventSchedule: {
+        "@type": "Schedule",
+        byDay: "https://schema.org/Sunday",
+        startTime: "20:00:00-05:00",
+        repeatFrequency: "P1W",
+      },
+    },
+  ],
 };
 
 // Display / headings — brand kit: Saira Condensed.
@@ -44,8 +79,9 @@ const barlow = Barlow({
 });
 
 const title = "Paramarine Task Force — Arma 3 Milsim Unit";
+// SERP-safe length (~155 chars), leads with the 10-year proof point.
 const description =
-  "A serious, fun, and immersive Arma 3 milsim unit. WW2 Paramarines reimagined in a modern setting — rapid-deployment Marines with air support. Weekly operations, structured training, real camaraderie. Enlist today.";
+  "10 years of serious, fun Arma 3 milsim. Rapid-deployment Marines with our own air wing, weekly ops, and real rank progression. Enlist today.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

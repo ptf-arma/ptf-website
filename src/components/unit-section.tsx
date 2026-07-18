@@ -53,6 +53,36 @@ export function UnitSection() {
               doesn&apos;t log off — we game together across other titles in
               the downtime.
             </p>
+
+            {/* Concrete differentiators — verifiable, not boilerplate. */}
+            <ul className="space-y-3 border-t border-edge pt-4">
+              {[
+                [
+                  "Our own modpack",
+                  "“Paramarine Milsim Core” on the Steam Workshop — armor, aviation, boats, equipment, and custom sound, one-click subscribe.",
+                ],
+                [
+                  "An organic air wing",
+                  "MAG-36 flies our rotary and fixed-wing support — CAS and air assaults flown by unit pilots, not AI.",
+                ],
+                [
+                  "Real progression",
+                  "Ranks, a 17-course school pipeline, and awards — all tracked in our personnel system, not a spreadsheet.",
+                ],
+                [
+                  "A film crew",
+                  "Our operations become cinematic films — see the media section below.",
+                ],
+              ].map(([title, body]) => (
+                <li key={title} className="flex gap-3">
+                  <span aria-hidden className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ok" />
+                  <p className="text-sm">
+                    <span className="font-display font-semibold text-ink">{title}.</span>{" "}
+                    <span className="text-ink-muted">{body}</span>
+                  </p>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="space-y-4">

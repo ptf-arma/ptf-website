@@ -37,6 +37,9 @@ export function SiteFooter() {
               {item.label}
             </a>
           ))}
+          <a href="/join" className="micro-label hover:text-ink">
+            How to Join
+          </a>
           <a href={billet.applyUrl} className="micro-label hover:text-ink">
             Enlist
           </a>

@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
         hostname: "billet.paramarines.net",
         pathname: "/api/img/**",
       },
+      // YouTube thumbnails for the unit-film cards in the media section.
+      { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
     ],
   },
 };
