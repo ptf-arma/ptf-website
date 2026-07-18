@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/section-label";
+import { VideoCard } from "@/components/video-card";
 
 /**
  * "Media" — proof of life: op screenshots + the unit's cinematic films.
@@ -20,19 +21,9 @@ const films = [
   },
 ];
 
-/* The early years — resurfaced classics. (The classic film itself sits in
-   the hero for the anniversary.) */
+/* The early years — resurfaced classics. (The classic film plus two more
+   stills live in the hero for the anniversary.) */
 const archiveShots = [
-  {
-    src: "/media/archive-inspection.jpg",
-    alt: "A Major inspecting a formation of Marines in MARPAT at a desert firebase",
-    caption: "Pre-op inspection",
-  },
-  {
-    src: "/media/archive-rainbow.jpg",
-    alt: "A Huey coming in to land on a carrier deck beneath a rainbow",
-    caption: "Returning to the boat",
-  },
   {
     src: "/media/archive-airlift.jpg",
     alt: "Marines seated down the cargo bay of a strategic airlifter",
@@ -99,39 +90,16 @@ export function MediaSection() {
           ))}
         </div>
 
-        {/* Unit films */}
+        {/* Unit films — click to play in place. */}
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {films.map((film) => (
-            <a
+            <VideoCard
               key={film.id}
-              href={`https://www.youtube.com/watch?v=${film.id}`}
-              className="group overflow-hidden rounded-sm border border-edge bg-surface transition-colors hover:border-edge-bright"
-            >
-              <div className="relative">
-                <Image
-                  src={`https://i.ytimg.com/vi/${film.id}/hqdefault.jpg`}
-                  alt={`${film.title} — ${film.kind}`}
-                  width={480}
-                  height={360}
-                  sizes="(min-width: 640px) 50vw, 100vw"
-                  className="aspect-video w-full object-cover"
-                />
-                <span
-                  aria-hidden
-                  className="absolute inset-0 grid place-items-center bg-bg/30 transition-colors group-hover:bg-bg/10"
-                >
-                  <span className="grid h-12 w-12 place-items-center rounded-full border border-edge-bright bg-bg/80 pl-1 font-display text-lg text-ink">
-                    ▶
-                  </span>
-                </span>
-              </div>
-              <div className="flex items-center justify-between gap-3 border-t border-edge px-4 py-2.5">
-                <span className="font-display text-sm font-semibold text-ink">
-                  {film.title}
-                </span>
-                <span className="micro-label shrink-0">{film.kind}</span>
-              </div>
-            </a>
+              id={film.id}
+              title={film.title}
+              chip={film.kind}
+              sizes="(min-width: 640px) 50vw, 100vw"
+            />
           ))}
         </div>
 
@@ -140,7 +108,7 @@ export function MediaSection() {
           <p className="micro-label">
             From the archives · <span className="text-opfor">the early years</span>
           </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {archiveShots.map((shot) => (
               <figure
                 key={shot.src}

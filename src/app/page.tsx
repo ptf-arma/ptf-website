@@ -6,6 +6,7 @@ import { getDiscordCounts, inviteCodeFromUrl } from "@/lib/discord";
 import { ButtonLink } from "@/components/ui/button";
 import { SectionLabel } from "@/components/ui/section-label";
 import { LocalTime } from "@/components/local-time";
+import { VideoCard } from "@/components/video-card";
 import { RosterSection } from "@/components/roster";
 import { UnitSection } from "@/components/unit-section";
 import { RolesSection } from "@/components/roles-section";
@@ -153,39 +154,39 @@ export default async function Home() {
           </dl>
           </div>
 
-          {/* The classic, front and center for the anniversary. */}
+          {/* The classic, front and center for the anniversary — with two
+              archive stills so the column reads as a decade scrapbook. */}
           <div className="lg:self-center">
             <p className="micro-label">
               From the archives · <span className="text-opfor">the classic</span>
             </p>
-            <a
-              href="https://www.youtube.com/watch?v=O-5Mq7MldqI"
-              className="group mt-3 block overflow-hidden rounded-sm border border-edge bg-surface transition-colors hover:border-edge-bright"
-            >
-              <div className="relative">
-                <Image
-                  src="https://i.ytimg.com/vi/O-5Mq7MldqI/maxresdefault.jpg"
-                  alt="We are the Paramarines — Deployment (unit film)"
-                  width={1280}
-                  height={720}
-                  sizes="(min-width: 1024px) 24rem, 100vw"
-                  className="aspect-video w-full object-cover"
-                />
-                <span
-                  aria-hidden
-                  className="absolute inset-0 grid place-items-center bg-bg/25 transition-colors group-hover:bg-bg/10"
-                >
-                  <span className="grid h-14 w-14 place-items-center rounded-full border border-edge-bright bg-bg/80 pl-1 font-display text-xl text-ink">
-                    ▶
-                  </span>
-                </span>
-              </div>
-              <div className="border-t border-edge px-4 py-2.5">
-                <span className="font-display text-sm font-semibold text-ink">
-                  We are the Paramarines — Deployment
-                </span>
-              </div>
-            </a>
+            <div className="mt-3">
+              <VideoCard
+                id="O-5Mq7MldqI"
+                title="We are the Paramarines — Deployment"
+                thumbQuality="maxresdefault"
+                sizes="(min-width: 1024px) 24rem, 100vw"
+                priority
+              />
+            </div>
+            <div className="mt-3 grid grid-cols-2 gap-3">
+              <Image
+                src="/media/archive-inspection.jpg"
+                alt="A Major inspecting a formation of Marines at a desert firebase, 2017"
+                width={1366}
+                height={768}
+                sizes="(min-width: 1024px) 12rem, 50vw"
+                className="aspect-video w-full rounded-sm border border-edge object-cover"
+              />
+              <Image
+                src="/media/archive-rainbow.jpg"
+                alt="A Huey landing on a carrier deck beneath a rainbow, 2017"
+                width={1600}
+                height={900}
+                sizes="(min-width: 1024px) 12rem, 50vw"
+                className="aspect-video w-full rounded-sm border border-edge object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
