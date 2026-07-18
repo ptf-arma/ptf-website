@@ -27,7 +27,7 @@ function ChartBox({
   const leader = leaderOf(element);
   const empty = element.filled === 0;
   return (
-    <div className="w-44 rounded-sm border border-edge bg-surface px-3 py-2 text-left">
+    <div className="w-40 rounded-sm border border-edge bg-surface px-3 py-2 text-left">
       <p className="flex items-center gap-1.5 truncate font-display text-sm font-semibold text-ink">
         {element.patchUrl ? (
           <img
@@ -85,9 +85,9 @@ function ChartBox({
 function ChartNode({ element, depth }: { element: BilletElement; depth: number }) {
   const boxChildren = element.children.filter((c) => c.children.length > 0);
   const foldedChildren = element.children.filter((c) => c.children.length === 0);
-  // Horizontal through the platoon row (HQ → Company/MAG → platoons);
-  // squads and below stack vertically under their platoon.
-  const vertical = depth >= 3;
+  // Fully horizontal through squads; vertical stacking only kicks in for
+  // echelons deeper than the current structure uses (future-proofing).
+  const vertical = depth >= 4;
   return (
     <li>
       <ChartBox element={element} folded={foldedChildren} />
