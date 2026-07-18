@@ -64,7 +64,7 @@ function RoleCard({ role }: { role: Role }) {
         {role.name}
       </h3>
       <p className="mt-2 text-sm text-ink-muted">{role.description}</p>
-      <p className="micro-label mt-4 !text-accent">{role.status}</p>
+      <p className="micro-label mt-4">{role.status}</p>
     </div>
   );
 }

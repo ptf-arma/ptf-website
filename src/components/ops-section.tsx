@@ -18,7 +18,7 @@ function CadenceCard({
     <div className="overflow-hidden rounded-sm border border-edge bg-surface">
       <div className="flex items-center justify-between gap-3 border-b border-edge bg-raised px-5 py-3">
         <span className="micro-label">{label}</span>
-        <span className="font-mono text-sm text-accent">{time}</span>
+        <span className="font-mono text-sm text-ink">{time}</span>
       </div>
       <div className="px-5 py-4">
         <p className="font-display text-lg font-semibold text-ink">{day}</p>

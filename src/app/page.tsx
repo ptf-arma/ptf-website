@@ -19,7 +19,7 @@ export default function Home() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[50%_30%] opacity-50"
+          className="object-cover object-[50%_30%] opacity-40"
         />
         <div
           aria-hidden
@@ -35,7 +35,7 @@ export default function Home() {
           <h1 className="heading-display mt-5 max-w-2xl text-4xl leading-[1.08] text-ink sm:text-5xl">
             Rapid-deployment Marines.
             <br />
-            <span className="text-accent">Serious, immersive, relentless.</span>
+            <span className="text-accent">Serious, fun, and immersive.</span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">
             The Paramarines were a specialized breed of WW2 Marines. We ask

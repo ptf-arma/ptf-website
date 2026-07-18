@@ -15,11 +15,11 @@
   --ptf-gunmetal: #0c1420;
   --ptf-amber: #f0a81e;
 
-  --bg: var(--ptf-gunmetal);
-  --surface: #10203c; /* navy stepped toward gunmetal for card surfaces */
-  --raised: #1b3665;
-  --edge: rgb(255 255 255 / 0.12);
-  --edge-bright: rgb(255 255 255 / 0.28);
+  --bg: #0a111c; /* gunmetal, deepened — the site should feel like night ops */
+  --surface: #0e1930; /* navy stepped well toward gunmetal for card surfaces */
+  --raised: #14264a;
+  --edge: rgb(255 255 255 / 0.08);
+  --edge-bright: rgb(255 255 255 / 0.2);
 
   --ink: #e6eaf2;
   --ink-muted: #8fa0bc;
@@ -53,11 +53,31 @@
   --font-body: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
 }
 
-body {
+/*
+ * MARPAT woodland texture (the unit's Billet background), rendered as a
+ * near-subliminal fixed texture under everything: html carries the solid
+ * colour, the ::before layer tiles the swatch heavily darkened. It should
+ * read as fabric grain, not wallpaper.
+ */
+html {
   background: var(--bg);
+}
+body {
+  background: transparent;
   color: var(--ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url("/media/marpat.jpg");
+  background-size: 380px;
+  opacity: 0.045;
+  filter: saturate(0.5) brightness(0.8);
 }
 
 ::selection {
