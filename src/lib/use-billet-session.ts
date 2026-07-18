@@ -10,7 +10,25 @@ import { billet } from "@/lib/config";
  */
 export type BilletSession =
   | { signedIn: false }
-  | { signedIn: true; member: { name: string; avatarUrl: string | null } };
+  | {
+      signedIn: true;
+      member: {
+        name: string;
+        avatarUrl: string | null;
+        /**
+         * Active member of this unit (vs. applicant/prospect account).
+         * Not yet shipped by the API — absent means "assume member".
+         */
+        isMember?: boolean;
+        status?: string;
+        rankAbbr?: string | null;
+      };
+    };
+
+/** Treat flag-less sessions as members until the API ships isMember. */
+export function isUnitMember(session: BilletSession | null): boolean {
+  return session?.signedIn === true && session.member.isMember !== false;
+}
 
 let sessionPromise: Promise<BilletSession> | null = null;
 

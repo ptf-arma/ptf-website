@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { billet } from "@/lib/config";
-import { ButtonLink } from "@/components/ui/button";
 import { MobileNav } from "@/components/mobile-nav";
-import { SessionChip } from "@/components/session-chip";
+import { HeaderActions } from "@/components/header-actions";
 
 const nav = [
   { label: "The Unit", href: "/#unit" },
@@ -44,11 +43,9 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-3">
-          {/* Log In ⇄ signed-in member chip, live from the Billet session. */}
-          <SessionChip className="hidden sm:inline-flex" />
-          <ButtonLink href={billet.applyUrl} variant="primary" size="md">
-            Enlist
-          </ButtonLink>
+          {/* Log In + Enlist ⇄ member chip, live from the Billet session.
+              Members don't get an Enlist button — they're already in. */}
+          <HeaderActions />
           <MobileNav items={[...nav, { label: "Log In", href: billet.loginUrl }]} />
         </div>
       </div>
