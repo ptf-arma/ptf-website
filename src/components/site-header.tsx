@@ -14,17 +14,17 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-edge bg-bg/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-3">
+        {/* Official horizontal-reversed lockup (brand standards: use the
+            supplied SVG on dark backgrounds; never re-typeset the wordmark). */}
+        <Link href="/" className="flex items-center">
           <Image
-            src="/media/patch.png"
-            alt=""
-            width={32}
-            height={32}
-            className="h-8 w-8 object-contain"
+            src="/brand/ptf-logo-horizontal-reversed.svg"
+            alt="Paramarine Task Force"
+            width={800}
+            height={200}
+            priority
+            className="h-9 w-auto"
           />
-          <span className="font-display font-bold tracking-wide text-ink">
-            PARAMARINE TASK FORCE
-          </span>
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">

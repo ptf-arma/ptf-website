@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Chakra_Petch, IBM_Plex_Mono, Inter } from "next/font/google";
+import { Saira_Condensed, JetBrains_Mono, Barlow } from "next/font/google";
 import "./globals.css";
 import { SITE_URL, links } from "@/lib/config";
 import { SiteHeader } from "@/components/site-header";
@@ -12,33 +12,34 @@ const jsonLd = {
   name: "Paramarine Task Force",
   alternateName: "Paramarines",
   url: SITE_URL,
-  logo: `${SITE_URL}/media/patch.png`,
+  logo: `${SITE_URL}/brand/ptf-emblem-326w.png`,
   foundingDate: "2016",
   description:
     "A serious, fun, and immersive Arma 3 milsim unit — rapid-deployment Marines with weekly operations and structured training.",
   sameAs: [links.discord, links.steam, links.arma3units, links.patreon],
 };
 
-// Display / headings.
-const chakra = Chakra_Petch({
+// Display / headings — brand kit: Saira Condensed.
+const saira = Saira_Condensed({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
-  variable: "--font-chakra",
+  variable: "--font-saira",
   display: "swap",
 });
 
-// Labels, numbers, "readout" bits.
-const plexMono = IBM_Plex_Mono({
+// Labels, numbers, "readout" bits — brand kit: JetBrains Mono.
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  variable: "--font-plex-mono",
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
-// Body copy.
-const inter = Inter({
+// Body copy — brand kit: Barlow.
+const barlow = Barlow({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600"],
+  variable: "--font-barlow",
   display: "swap",
 });
 
@@ -90,7 +91,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${chakra.variable} ${plexMono.variable} ${inter.variable} h-full antialiased`}
+      className={`${saira.variable} ${jetbrains.variable} ${barlow.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg text-ink">
         <script

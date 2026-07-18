@@ -10,7 +10,7 @@ const base =
   "focus-visible:outline-accent disabled:opacity-50";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-accent text-black hover:bg-accent/90",
+  primary: "bg-accent text-white hover:bg-accent/90",
   secondary:
     "border border-edge-bright text-ink hover:border-accent hover:text-accent bg-transparent",
   ghost: "text-ink-muted hover:text-ink bg-transparent",

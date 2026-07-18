@@ -1,26 +1,33 @@
 @import "tailwindcss";
 
 /*
- * Paramarine Task Force — design tokens.
- * Mirrors Billet's dark/tactical palette so the crossover to the portal is
- * seamless. Raw values live in :root; @theme inline maps them into Tailwind's
- * token namespaces so utilities like `bg-surface`, `text-ink-muted`,
- * `border-edge`, `text-accent`, and `font-display` are generated.
+ * Paramarine Task Force — design tokens, from the PTF brand kit (v1.1).
+ * Dark theme built on the kit's own dark roles: gunmetal page, navy surfaces,
+ * scarlet accent. Utility names are stable; only values follow the brand.
  */
 :root {
-  --bg: #0a0b0d;
-  --surface: #101215;
-  --raised: #16181c;
-  --edge: #23262b;
-  --edge-bright: #383c44;
+  /* Brand core (do not restyle — the patch wins) */
+  --ptf-scarlet: #e03127;
+  --ptf-blue: #2c5496;
+  --ptf-navy: #132a52;
+  --ptf-bone: #f4f5f7;
+  --ptf-steel: #7c8899;
+  --ptf-gunmetal: #0c1420;
+  --ptf-amber: #f0a81e;
 
-  --ink: #e4e6e9;
-  --ink-muted: #9aa1aa;
-  --ink-faint: #7f858e;
+  --bg: var(--ptf-gunmetal);
+  --surface: #10203c; /* navy stepped toward gunmetal for card surfaces */
+  --raised: #1b3665;
+  --edge: rgb(255 255 255 / 0.12);
+  --edge-bright: rgb(255 255 255 / 0.28);
 
-  --accent: #ffb000; /* signature amber */
-  --ok: #4cc26e;
-  --opfor: #ff5a48;
+  --ink: #e6eaf2;
+  --ink-muted: #8fa0bc;
+  --ink-faint: var(--ptf-steel);
+
+  --accent: var(--ptf-scarlet);
+  --ok: var(--ptf-blue); /* "filled/positive" reads brand-blue, not green */
+  --opfor: var(--ptf-amber);
 
   color-scheme: dark;
 }
@@ -41,9 +48,9 @@
   --color-opfor: var(--opfor);
 
   /* Fonts are wired to next/font CSS variables set on <html> in layout.tsx. */
-  --font-display: var(--font-chakra), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
-  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-saira), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-body: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
@@ -55,7 +62,7 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: #000;
+  color: #fff;
 }
 
 /*
@@ -82,10 +89,10 @@ body {
   mask-image: radial-gradient(ellipse 90% 80% at 30% 20%, black 30%, transparent 75%);
 }
 
-/* Display headings: Chakra Petch reads best slightly tight, not tracked out. */
+/* Display headings: Saira Condensed carries weight without shouting. */
 .heading-display {
   font-family: var(--font-display);
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
   text-wrap: balance;
 }
