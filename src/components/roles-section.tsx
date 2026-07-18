@@ -89,8 +89,8 @@ export function RolesSection() {
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
           <p className="text-sm text-ink-muted">
-            Every Marine starts with PRT. From there, a 17-course pipeline
-            carries you from recruit training to JTAC certification.
+            Every Marine starts with recruit training. From there, specialize
+            as far as you want — marksmanship, armor, aviation, medical, JTAC.
           </p>
           <ButtonLink href={billet.applyUrl} variant="secondary" size="md">
             Apply now

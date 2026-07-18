@@ -70,7 +70,7 @@ function ElementCard({ element, depth = 0 }: { element: BilletElement; depth?: n
 
   return (
     <div className={depth > 0 ? "mt-3 ml-4 border-l border-edge pl-4" : ""}>
-      <div className="overflow-hidden rounded-sm border border-edge bg-surface">
+      <div className="break-inside-avoid overflow-hidden rounded-sm border border-edge bg-surface">
         <div className="flex items-center justify-between gap-3 border-b border-edge bg-raised px-4 py-3">
           <div className="flex min-w-0 items-center gap-2.5">
             <h3 className="truncate font-display text-sm font-semibold tracking-wide text-ink">
@@ -177,9 +177,12 @@ export async function RosterSection() {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
+        {/* CSS columns instead of grid: balances wildly different tree heights. */}
+        <div className="mt-10 md:columns-2 md:gap-4">
           {roster.elements.map((el) => (
-            <ElementCard key={el.id} element={el} />
+            <div key={el.id} className="mb-4">
+              <ElementCard element={el} />
+            </div>
           ))}
         </div>
 

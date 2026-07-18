@@ -56,7 +56,6 @@ export function UnitSection() {
                 <Readout label="Founded" value="2016" />
                 <Readout label="Relaunched" value="2025" />
                 <Readout label="Weekly ops" value="SAT + SUN · 8PM ET" />
-                <Readout label="Peak strength" value="50+ members" />
               </dl>
             </div>
             <figure className="overflow-hidden rounded-sm border border-edge bg-surface">

@@ -14,12 +14,12 @@ export default function Home() {
       <section className="relative overflow-hidden">
         {/* Salvaged op screenshot, heavily darkened so the readout text owns the frame. */}
         <Image
-          src="/media/op-scenic.jpg"
+          src="/media/church-holdup.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[75%_center] opacity-35"
+          className="object-cover object-[50%_30%] opacity-50"
         />
         <div
           aria-hidden
