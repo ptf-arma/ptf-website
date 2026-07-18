@@ -115,21 +115,31 @@ body::before {
 }
 
 /*
- * ORBAT org-chart connectors. Markup: nested <ul>/<li>, each li = box +
- * optional <ul> of subordinates. Lines come from borders on pseudo-elements
- * (the classic CSS org-chart recipe), colored with the edge token.
+ * ORBAT org-chart connectors.
+ * Structural lists carry explicit classes — ul.branch (horizontal tier) and
+ * ul.vtree (vertical stack) — and all connector styling is scoped to them
+ * with direct-child selectors, so lists INSIDE chart boxes (folded
+ * sub-element rows) are never affected.
  */
-.orbat-tree,
-.orbat-tree ul {
+.orbat-tree {
   display: flex;
   justify-content: center;
 }
-.orbat-tree ul {
+.orbat-tree > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- horizontal tier --- */
+.orbat-tree ul.branch {
+  display: flex;
+  justify-content: center;
   position: relative;
   padding-top: 1.25rem;
 }
 /* stub dropping from the parent box */
-.orbat-tree ul::before {
+.orbat-tree ul.branch::before {
   content: "";
   position: absolute;
   top: 0;
@@ -138,7 +148,7 @@ body::before {
   height: 1.25rem;
   border-left: 1px solid var(--edge-bright);
 }
-.orbat-tree li {
+.orbat-tree .branch > li {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -146,8 +156,8 @@ body::before {
   padding: 1.25rem 0.375rem 0;
 }
 /* horizontal rail + per-child stub */
-.orbat-tree li::before,
-.orbat-tree li::after {
+.orbat-tree .branch > li::before,
+.orbat-tree .branch > li::after {
   content: "";
   position: absolute;
   top: 0;
@@ -156,76 +166,55 @@ body::before {
   height: 1.25rem;
   border-top: 1px solid var(--edge-bright);
 }
-.orbat-tree li::after {
+.orbat-tree .branch > li::after {
   right: auto;
   left: 50%;
   border-left: 1px solid var(--edge-bright);
 }
-.orbat-tree li:only-child::before,
-.orbat-tree li:only-child::after {
+.orbat-tree .branch > li:only-child::before,
+.orbat-tree .branch > li:only-child::after {
   display: none;
 }
-.orbat-tree li:first-child::before,
-.orbat-tree li:last-child::after {
+.orbat-tree .branch > li:first-child::before,
+.orbat-tree .branch > li:last-child::after {
   border: 0 none;
 }
-.orbat-tree li:last-child::before {
+.orbat-tree .branch > li:last-child::before {
   border-right: 1px solid var(--edge-bright);
 }
-/* the root li has no incoming lines */
-.orbat-tree > li {
-  padding-top: 0;
-}
-.orbat-tree > li::before,
-.orbat-tree > li::after {
-  display: none;
-}
 
-/*
- * Vertical stack mode (military-style): below the top echelons, subordinate
- * boxes stack vertically with a left spine and elbow connectors — like a US
- * ORBAT chart — instead of fanning out horizontally.
- */
+/* --- vertical stack (US ORBAT style) --- */
 .orbat-tree ul.vtree {
   display: block;
-  padding: 0.25rem 0 0 0;
+  padding: 0.375rem 0 0 0;
+  position: relative;
 }
-.orbat-tree ul.vtree::before {
-  display: none; /* no horizontal-mode parent stub */
-}
-.orbat-tree .vtree li {
+.orbat-tree .vtree > li {
   display: block;
+  position: relative;
   padding: 0.625rem 0 0 1.25rem;
 }
-.orbat-tree .vtree li::before,
-.orbat-tree .vtree li:first-child::before,
-.orbat-tree .vtree li:only-child::before {
+/* left spine */
+.orbat-tree .vtree > li::before {
   content: "";
-  display: block;
   position: absolute;
   left: 0.5rem;
-  right: auto;
   top: 0;
   width: 0;
   height: 100%;
-  border: 0 none;
   border-left: 1px solid var(--edge-bright);
 }
-.orbat-tree .vtree li:last-child::before {
+.orbat-tree .vtree > li:last-child::before {
   height: 1.625rem; /* stop the spine at the last elbow */
 }
-.orbat-tree .vtree li::after,
-.orbat-tree .vtree li:last-child::after,
-.orbat-tree .vtree li:only-child::after {
+/* elbow into each box */
+.orbat-tree .vtree > li::after {
   content: "";
-  display: block;
   position: absolute;
   left: 0.5rem;
-  right: auto;
   top: 1.625rem;
   width: 0.75rem;
   height: 0;
-  border: 0 none;
   border-top: 1px solid var(--edge-bright);
 }
 

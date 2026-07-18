@@ -90,7 +90,7 @@ function ChartNode({ element, depth }: { element: BilletElement; depth: number }
     <li>
       <ChartBox element={element} folded={foldedChildren} />
       {boxChildren.length > 0 ? (
-        <ul className={vertical ? "vtree" : undefined}>
+        <ul className={vertical ? "vtree" : "branch"}>
           {boxChildren.map((child) => (
             <ChartNode key={child.id} element={child} depth={depth + 1} />
           ))}
@@ -188,7 +188,7 @@ export async function RosterSection() {
                   </p>
                 </div>
               </div>
-              <ul>
+              <ul className="branch">
                 {combatElements.map((el) => (
                   <ChartNode key={el.id} element={el} depth={1} />
                 ))}
