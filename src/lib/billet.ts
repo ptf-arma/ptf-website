@@ -28,6 +28,12 @@ export type BilletElement = {
   callsign: string | null;
   filled: number;
   total: number;
+  patchUrl: string | null;
+  /**
+   * Reporting line. Billet keeps this even for elements that are NOT nested
+   * in the ORBAT tree — top-level siblings can still point at their parent.
+   */
+  reportsToElementId: string | null;
   billets: BilletSlot[];
   children: BilletElement[];
 };
@@ -84,6 +90,7 @@ export async function getRoster(): Promise<RosterResponse | null> {
 function rewriteElementImages(el: BilletElement): BilletElement {
   return {
     ...el,
+    patchUrl: billetImage(el.patchUrl),
     billets: el.billets.map((b) => ({
       ...b,
       member: b.member
@@ -101,6 +108,72 @@ export async function getStats(): Promise<StatsResponse | null> {
     ...data,
     unit: { ...data.unit, crestUrl: billetImage(data.unit.crestUrl) },
   };
+}
+
+/**
+ * Re-parent top-level elements along their reporting lines.
+ *
+ * The API's `children` nesting only captures elements nested in Billet's
+ * ORBAT tree; `reportsToElementId` carries the reporting line even for
+ * top-level siblings. This merges the two: any root whose reportsToElementId
+ * resolves to another element is adopted as that element's child, and the
+ * adopted subtree's counts roll up into every ancestor so a parent box
+ * reflects its whole command (the API's filled/total only cover nested
+ * descendants).
+ */
+export function buildReportingTree(roots: BilletElement[]): BilletElement[] {
+  const clone = (el: BilletElement): BilletElement => ({
+    ...el,
+    billets: [...el.billets],
+    children: el.children.map(clone),
+  });
+  const forest = roots.map(clone);
+
+  const byId = new Map<string, BilletElement>();
+  const parentOf = new Map<string, BilletElement>();
+  const index = (el: BilletElement, parent: BilletElement | null) => {
+    byId.set(el.id, el);
+    if (parent) parentOf.set(el.id, parent);
+    el.children.forEach((c) => index(c, el));
+  };
+  forest.forEach((r) => index(r, null));
+
+  // Snapshot API counts before any mutation so roll-ups are order-independent
+  // (an adopted parent must contribute its own API counts, not inflated ones).
+  const apiCounts = new Map<string, { filled: number; total: number }>();
+  for (const [id, el] of byId) {
+    apiCounts.set(id, { filled: el.filled, total: el.total });
+  }
+
+  const remaining: BilletElement[] = [];
+  const adoptedRoots: BilletElement[] = [];
+  for (const root of forest) {
+    const target = root.reportsToElementId
+      ? byId.get(root.reportsToElementId)
+      : undefined;
+    if (target && target !== root) {
+      target.children.push(root);
+      parentOf.set(root.id, target);
+      adoptedRoots.push(root);
+    } else {
+      remaining.push(root);
+    }
+  }
+
+  // Roll each adopted subtree's API counts into its (new) ancestors.
+  for (const root of adoptedRoots) {
+    const counts = apiCounts.get(root.id)!;
+    let ancestor = parentOf.get(root.id);
+    let hops = 0;
+    while (ancestor && hops < 100) {
+      ancestor.filled += counts.filled;
+      ancestor.total += counts.total;
+      ancestor = parentOf.get(ancestor.id);
+      hops += 1; // cycle guard — malformed data must not hang the build
+    }
+  }
+
+  return remaining;
 }
 
 /** Count open (vacant, not deliberately closed) billets across the tree. */

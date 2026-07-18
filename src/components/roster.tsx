@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { billet } from "@/lib/config";
 import {
+  buildReportingTree,
   countOpenBillets,
   getRoster,
   type BilletElement,
@@ -27,7 +28,15 @@ function ChartBox({
   const empty = element.filled === 0;
   return (
     <div className="w-40 rounded-sm border border-edge bg-surface px-3 py-2 text-left">
-      <p className="truncate font-display text-sm font-semibold text-ink">
+      <p className="flex items-center gap-1.5 truncate font-display text-sm font-semibold text-ink">
+        {element.patchUrl ? (
+          <img
+            src={element.patchUrl}
+            alt=""
+            className="h-4 w-4 shrink-0 object-contain"
+            loading="lazy"
+          />
+        ) : null}
         {element.name}
       </p>
       {element.callsign ? (
@@ -56,9 +65,10 @@ function ChartBox({
  * box instead of drawn — keeps the chart readable at platoon strength.
  */
 function ChartNode({ element, depth }: { element: BilletElement; depth: number }) {
-  // Children render at depth+1; anything past depth 2 (fire teams) is
-  // summarized in its parent box instead of drawn.
-  const showChildren = element.children.length > 0 && depth < 2;
+  // Children render at depth+1. With reporting lines the tree runs
+  // HQ(1) → Company(2) → Platoon(3) → Squad(4) → fire teams(5); squads are
+  // the smallest drawn echelon, teams get summarized in their parent box.
+  const showChildren = element.children.length > 0 && depth < 4;
   return (
     <li>
       <ChartBox
@@ -109,9 +119,10 @@ export async function RosterSection() {
 
   // The unit keeps a separate Staff Roster (S-sections: S1 Personnel, S3
   // Operations, ...) alongside the Combat Roster. The public ORBAT shows
-  // combat only — filter any top-level "S<number>-..." element out.
-  const combatElements = roster.elements.filter(
-    (el) => !/^S\d+\b/.test(el.name.trim()),
+  // combat only — filter any top-level "S<number>-..." element out, then
+  // re-parent the rest along their reporting lines into the real hierarchy.
+  const combatElements = buildReportingTree(
+    roster.elements.filter((el) => !/^S\d+\b/.test(el.name.trim())),
   );
   const openBillets = countOpenBillets(combatElements);
 
