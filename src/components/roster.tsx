@@ -85,7 +85,9 @@ function ChartBox({
 function ChartNode({ element, depth }: { element: BilletElement; depth: number }) {
   const boxChildren = element.children.filter((c) => c.children.length > 0);
   const foldedChildren = element.children.filter((c) => c.children.length === 0);
-  const vertical = depth >= 2; // children of depth-2+ boxes stack vertically
+  // Horizontal through the platoon row (HQ → Company/MAG → platoons);
+  // squads and below stack vertically under their platoon.
+  const vertical = depth >= 3;
   return (
     <li>
       <ChartBox element={element} folded={foldedChildren} />
