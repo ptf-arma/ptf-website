@@ -22,6 +22,19 @@ export default async function Home() {
 
   return (
     <>
+      {/* Anniversary band — a decade deserves a little shine. */}
+      <div className="border-b border-edge bg-surface/70">
+        <p className="mx-auto flex max-w-6xl items-center justify-center gap-3 px-4 py-2.5 text-center font-display text-sm font-semibold uppercase tracking-[0.14em]">
+          <span aria-hidden className="text-opfor">
+            ★
+          </span>
+          <span className="anniv-text">Celebrating ten years · 2016–2026</span>
+          <span aria-hidden className="text-opfor">
+            ★
+          </span>
+        </p>
+      </div>
+
       {/* Hero — the primary conversion path. */}
       <section className="relative overflow-hidden">
         {/* Salvaged op screenshot, heavily darkened so the readout text owns

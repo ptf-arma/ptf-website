@@ -218,6 +218,39 @@ body::before {
   border-top: 1px solid var(--edge-bright);
 }
 
+/*
+ * 10-year anniversary banner: brand utility amber with a slow specular sheen
+ * sweeping through the text. Static gold for reduced-motion users.
+ */
+@keyframes anniv-sheen {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+.anniv-text {
+  background: linear-gradient(
+    100deg,
+    var(--ptf-amber) 42%,
+    #fbe3ae 50%,
+    var(--ptf-amber) 58%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: anniv-sheen 5s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .anniv-text {
+    animation: none;
+    background: none;
+    color: var(--ptf-amber);
+  }
+}
+
 /* Display headings: Saira Condensed carries weight without shouting. */
 .heading-display {
   font-family: var(--font-display);

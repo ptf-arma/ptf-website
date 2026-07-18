@@ -20,6 +20,36 @@ const films = [
   },
 ];
 
+/* The early years — resurfaced classics. */
+const archiveFilm = {
+  id: "O-5Mq7MldqI",
+  title: "We are the Paramarines — Deployment",
+  kind: "The classic",
+};
+
+const archiveShots = [
+  {
+    src: "/media/archive-inspection.jpg",
+    alt: "A Major inspecting a formation of Marines in MARPAT at a desert firebase",
+    caption: "Pre-op inspection",
+  },
+  {
+    src: "/media/archive-rainbow.jpg",
+    alt: "A Huey coming in to land on a carrier deck beneath a rainbow",
+    caption: "Returning to the boat",
+  },
+  {
+    src: "/media/archive-airlift.jpg",
+    alt: "Marines seated down the cargo bay of a strategic airlifter",
+    caption: "Strategic airlift",
+  },
+  {
+    src: "/media/archive-convoy.jpg",
+    alt: "Marines riding in an open truck bed as an attack helicopter passes overhead",
+    caption: "Convoy escort",
+  },
+];
+
 const shots = [
   {
     src: "/media/halo-jump.jpg",
@@ -108,6 +138,64 @@ export function MediaSection() {
               </div>
             </a>
           ))}
+        </div>
+
+        {/* From the archives — ten years leaves a trail. */}
+        <div className="mt-14 border-t border-edge pt-10">
+          <p className="micro-label">
+            From the archives · <span className="text-opfor">the early years</span>
+          </p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <a
+              href={`https://www.youtube.com/watch?v=${archiveFilm.id}`}
+              className="group overflow-hidden rounded-sm border border-edge bg-surface transition-colors hover:border-edge-bright"
+            >
+              <div className="relative">
+                <Image
+                  src={`https://i.ytimg.com/vi/${archiveFilm.id}/hqdefault.jpg`}
+                  alt={`${archiveFilm.title} — unit film`}
+                  width={480}
+                  height={360}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="aspect-video w-full object-cover"
+                />
+                <span
+                  aria-hidden
+                  className="absolute inset-0 grid place-items-center bg-bg/30 transition-colors group-hover:bg-bg/10"
+                >
+                  <span className="grid h-12 w-12 place-items-center rounded-full border border-edge-bright bg-bg/80 pl-1 font-display text-lg text-ink">
+                    ▶
+                  </span>
+                </span>
+              </div>
+              <div className="flex items-center justify-between gap-3 border-t border-edge px-4 py-2.5">
+                <span className="font-display text-sm font-semibold text-ink">
+                  {archiveFilm.title}
+                </span>
+                <span className="micro-label shrink-0 !text-opfor">
+                  {archiveFilm.kind}
+                </span>
+              </div>
+            </a>
+            {archiveShots.map((shot) => (
+              <figure
+                key={shot.src}
+                className="overflow-hidden rounded-sm border border-edge bg-surface"
+              >
+                <Image
+                  src={shot.src}
+                  alt={shot.alt}
+                  width={1600}
+                  height={900}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="aspect-video w-full object-cover"
+                />
+                <figcaption className="micro-label border-t border-edge px-4 py-2.5">
+                  {shot.caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
 
         <p className="mt-6 font-mono text-xs text-ink-faint">
