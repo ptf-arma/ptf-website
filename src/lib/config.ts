@@ -9,7 +9,7 @@
 const stripTrailingSlash = (s: string) => s.replace(/\/+$/, "");
 
 export const BILLET_BASE = stripTrailingSlash(
-  process.env.NEXT_PUBLIC_BILLET_BASE ?? "https://ptf.billet.gg",
+  process.env.NEXT_PUBLIC_BILLET_BASE ?? "https://billet.paramarines.net",
 );
 
 export const BILLET_SLUG = process.env.NEXT_PUBLIC_BILLET_SLUG ?? "ptf";
@@ -23,7 +23,9 @@ export const billet = {
   base: BILLET_BASE,
   slug: BILLET_SLUG,
   applyUrl: `${BILLET_BASE}/apply`,
-  loginUrl: `${BILLET_BASE}/login`,
+  // Billet has no /login route on unit portals yet (404) — send members to
+  // the portal root, which offers sign-in. Restore a direct path when one ships.
+  loginUrl: `${BILLET_BASE}/`,
   rosterApi: `${BILLET_BASE}/api/v1/units/${BILLET_SLUG}/roster`,
   statsApi: `${BILLET_BASE}/api/v1/units/${BILLET_SLUG}/stats`,
 } as const;
