@@ -4,16 +4,17 @@ import {
   countOpenBillets,
   getRoster,
   type BilletElement,
+  type BilletMember,
   type BilletSlot,
 } from "@/lib/billet";
 import { SectionLabel } from "@/components/ui/section-label";
 import { ButtonLink } from "@/components/ui/button";
 
-/** One slot row inside an element card. */
+/** One slot row inside an expanded element. */
 function SlotRow({ slot }: { slot: BilletSlot }) {
   if (slot.closed) {
     return (
-      <li className="flex items-center justify-between gap-3 px-4 py-2.5 opacity-40">
+      <li className="flex items-center justify-between gap-3 px-4 py-2 opacity-40">
         <span className="text-sm text-ink-faint">{slot.title}</span>
         <span className="micro-label">Closed</span>
       </li>
@@ -30,9 +31,7 @@ function SlotRow({ slot }: { slot: BilletSlot }) {
             open ? "border border-ink-faint/60" : "bg-ok"
           }`}
         />
-        <span
-          className={`truncate text-sm ${open ? "text-ink-faint" : "text-ink"}`}
-        >
+        <span className={`truncate text-sm ${open ? "text-ink-faint" : "text-ink"}`}>
           {slot.title}
         </span>
         {slot.callsign ? (
@@ -63,61 +62,100 @@ function SlotRow({ slot }: { slot: BilletSlot }) {
   );
 }
 
-/**
- * A card for one ORBAT element (and its children, nested).
- * Only depth 0 gets full card chrome; nested elements render as plain
- * indented blocks so the tree doesn't stack box-in-box-in-box.
- */
-function ElementCard({ element, depth = 0 }: { element: BilletElement; depth?: number }) {
-  const header = (
-    <div
-      className={
-        depth === 0
-          ? "flex items-center justify-between gap-3 border-b border-edge bg-raised px-4 py-2.5"
-          : "flex items-center justify-between gap-3 border-b border-edge px-4 py-2"
-      }
-    >
-      <div className="flex min-w-0 items-center gap-2.5">
-        <h3 className="truncate font-display text-base font-semibold text-ink">
-          {element.name}
-        </h3>
-        {element.callsign ? (
-          <span className="micro-label">{element.callsign}</span>
-        ) : null}
-      </div>
-      <span className="shrink-0 font-mono text-xs text-ink-faint">
-        {element.filled}/{element.total}
-      </span>
-    </div>
+/** Thin manning bar: filled portion in field blue. */
+function FillBar({ filled, total }: { filled: number; total: number }) {
+  const pct = total > 0 ? Math.round((filled / total) * 100) : 0;
+  return (
+    <span className="hidden h-1 w-16 overflow-hidden rounded-full bg-edge sm:block">
+      <span className="block h-full bg-ok" style={{ width: `${pct}%` }} />
+    </span>
   );
+}
 
-  const body = (
+/**
+ * One ORBAT element as a collapsible block (native <details> — no JS).
+ * Collapsed rows are uniform, so the section reads as a tidy manning table
+ * instead of a wall of mostly-empty slot lists.
+ */
+function ElementBlock({ element, depth = 0 }: { element: BilletElement; depth?: number }) {
+  const hasContent = element.billets.length > 0 || element.children.length > 0;
+
+  const summaryInner = (
     <>
-      {header}
-      {element.billets.length > 0 ? (
-        <ul className="divide-y divide-edge">
-          {element.billets.map((slot, i) => (
-            <SlotRow key={`${slot.title}-${i}`} slot={slot} />
-          ))}
-        </ul>
-      ) : null}
+      <span className="flex min-w-0 items-center gap-2.5">
+        <span
+          aria-hidden
+          className="text-[10px] text-ink-faint transition-transform group-open:rotate-90"
+        >
+          ▶
+        </span>
+        <span
+          className={`truncate font-display font-semibold text-ink ${
+            depth === 0 ? "text-base" : "text-sm"
+          }`}
+        >
+          {element.name}
+        </span>
+        {element.callsign ? (
+          <span className="micro-label hidden sm:inline">{element.callsign}</span>
+        ) : null}
+      </span>
+      <span className="flex shrink-0 items-center gap-3">
+        <FillBar filled={element.filled} total={element.total} />
+        <span className="font-mono text-xs text-ink-faint">
+          {element.filled}/{element.total}
+        </span>
+      </span>
     </>
   );
 
+  if (!hasContent) {
+    return (
+      <div className="flex items-center justify-between gap-3 px-4 py-2.5">
+        {summaryInner}
+      </div>
+    );
+  }
+
   return (
-    <div className={depth > 0 ? "mt-3 ml-4 border-l border-edge pl-3" : ""}>
-      {depth === 0 ? (
-        <div className="break-inside-avoid overflow-hidden rounded-sm border border-edge bg-surface">
-          {body}
-        </div>
-      ) : (
-        <div className="break-inside-avoid">{body}</div>
-      )}
-      {element.children.map((child) => (
-        <ElementCard key={child.id} element={child} depth={depth + 1} />
-      ))}
-    </div>
+    <details className={`group ${depth === 0 ? "" : "border-t border-edge"}`}>
+      <summary className="flex cursor-pointer select-none list-none items-center justify-between gap-3 px-4 py-2.5 transition-colors hover:bg-raised/70 [&::-webkit-details-marker]:hidden">
+        {summaryInner}
+      </summary>
+      <div className="border-t border-edge">
+        {element.billets.length > 0 ? (
+          <ul className="divide-y divide-edge">
+            {element.billets.map((slot, i) => (
+              <SlotRow key={`${slot.title}-${i}`} slot={slot} />
+            ))}
+          </ul>
+        ) : null}
+        {element.children.length > 0 ? (
+          <div className="ml-4 border-l border-edge">
+            {element.children.map((child) => (
+              <ElementBlock key={child.id} element={child} depth={depth + 1} />
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </details>
   );
+}
+
+/** Collect unique members across the tree (first billet title wins). */
+function collectMembers(
+  elements: BilletElement[],
+  seen = new Map<string, { member: BilletMember; title: string }>(),
+) {
+  for (const el of elements) {
+    for (const b of el.billets) {
+      if (b.member && !seen.has(b.member.name)) {
+        seen.set(b.member.name, { member: b.member, title: b.title });
+      }
+    }
+    collectMembers(el.children, seen);
+  }
+  return seen;
 }
 
 /**
@@ -149,6 +187,7 @@ export async function RosterSection() {
   }
 
   const openBillets = countOpenBillets(roster.elements);
+  const members = [...collectMembers(roster.elements).values()];
 
   return (
     <section id="roster" className="border-t border-edge">
@@ -160,16 +199,8 @@ export async function RosterSection() {
               The roster
             </h2>
             <p className="mt-4 max-w-2xl text-ink-muted">
-              Our live order of battle, straight from the personnel system.
-              {openBillets > 0 ? (
-                <>
-                  {" "}
-                  <span className="text-ink">
-                    {openBillets} billets are open right now
-                  </span>{" "}
-                  — one of them could be yours.
-                </>
-              ) : null}
+              Our live order of battle, straight from the personnel system —
+              expand an element to see its billets.
             </p>
           </div>
           <div className="flex items-center gap-4">
@@ -193,17 +224,48 @@ export async function RosterSection() {
           </div>
         </div>
 
-        {/* CSS columns instead of grid: balances wildly different tree heights. */}
-        <div className="mt-10 md:columns-2 md:gap-4">
+        {/* The people, up front — the structure below is collapsed by default. */}
+        {members.length > 0 ? (
+          <div className="mt-10">
+            <p className="micro-label">Command &amp; staff</p>
+            <ul className="mt-3 flex flex-wrap gap-2">
+              {members.map(({ member, title }) => (
+                <li
+                  key={member.name}
+                  className="flex items-center gap-2 rounded-sm border border-edge bg-surface px-3 py-1.5"
+                >
+                  {member.rankInsigniaUrl ? (
+                    <img
+                      src={member.rankInsigniaUrl}
+                      alt=""
+                      className="h-4 w-4 object-contain"
+                      loading="lazy"
+                    />
+                  ) : member.rankAbbr ? (
+                    <span className="micro-label">{member.rankAbbr}</span>
+                  ) : null}
+                  <span className="font-mono text-sm text-ink">{member.name}</span>
+                  <span className="hidden text-xs text-ink-faint sm:inline">
+                    {title}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
+        {/* Uniform collapsed rows → a manning table, not a wall of slots. */}
+        <div className="mt-8 grid items-start gap-4 md:grid-cols-2">
           {roster.elements.map((el) => (
-            <div key={el.id} className="mb-4">
-              <ElementCard element={el} />
+            <div
+              key={el.id}
+              className="overflow-hidden rounded-sm border border-edge bg-surface"
+            >
+              <ElementBlock element={el} />
             </div>
           ))}
         </div>
 
-        {/* The one conversion point for the whole roster — a single strip
-            instead of a hundred red links. */}
         {openBillets > 0 ? (
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
             <p className="text-sm text-ink-muted">

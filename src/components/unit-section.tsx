@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { links } from "@/lib/config";
 import { SectionLabel } from "@/components/ui/section-label";
 
 /** One mono key-fact readout inside the unit card. */
@@ -33,17 +34,24 @@ export function UnitSection() {
               fictionalized Marine Aircraft Group 36.
             </p>
             <p>
-              We are the Paramarines: an Arma 3 milsim unit built around
-              rapid-deployment Marines. That means structured training, real
-              progression — ranks, courses, and awards tracked in our
-              personnel system — and squads that actually show up, week
-              after week.
+              Ten years on, PTF stands among the most historic and
+              well-known units in Arma 3. Very few units last a decade —
+              fewer still do it well. That longevity comes from structured
+              training, real progression tracked in our personnel system,
+              and squads that actually show up, week after week.
             </p>
             <p>
-              Founded in 2016, the unit ran strong through 2019, went quiet,
-              and relaunched in 2025. What hasn&apos;t changed is the
-              balance we look for: serious enough to run a real op, relaxed
-              enough to enjoy it.
+              It also comes from craft and camaraderie. We field a
+              sophisticated{" "}
+              <a
+                href={links.modpack}
+                className="text-ink underline decoration-edge-bright underline-offset-4 hover:decoration-ink"
+              >
+                in-house modpack
+              </a>{" "}
+              tuned for our campaigns, and when the op is over the unit
+              doesn&apos;t log off — we game together across other titles in
+              the downtime.
             </p>
           </div>
 
@@ -54,8 +62,9 @@ export function UnitSection() {
               </div>
               <dl className="divide-y divide-edge">
                 <Readout label="Founded" value="2016" />
-                <Readout label="Relaunched" value="2025" />
+                <Readout label="Celebrating" value="10 YEARS" />
                 <Readout label="Weekly ops" value="SAT + SUN · 8PM ET" />
+                <Readout label="Off-duty" value="GAME NIGHTS" />
               </dl>
             </div>
             <figure className="overflow-hidden rounded-sm border border-edge bg-surface">
