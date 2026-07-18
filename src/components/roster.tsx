@@ -27,7 +27,7 @@ function ChartBox({
   const leader = leaderOf(element);
   const empty = element.filled === 0;
   return (
-    <div className="w-40 rounded-sm border border-edge bg-surface px-3 py-2 text-left">
+    <div className="w-44 rounded-sm border border-edge bg-surface px-3 py-2 text-left">
       <p className="flex items-center gap-1.5 truncate font-display text-sm font-semibold text-ink">
         {element.patchUrl ? (
           <img
@@ -76,18 +76,23 @@ function ChartBox({
  * Recursive chart node. Children that lead elements of their own get boxes
  * and connector lines; childless children fold into the parent box as rows
  * (a platoon box lists its HQ and vehicle sections, an HQ box its staff
- * sections). Keeps the chart narrow enough to fit without scrolling.
+ * sections).
+ *
+ * Layout follows US ORBAT convention: the top echelons fan out horizontally,
+ * everything below stacks vertically with a left spine (keeps the chart
+ * narrow instead of wide).
  */
-function ChartNode({ element }: { element: BilletElement }) {
+function ChartNode({ element, depth }: { element: BilletElement; depth: number }) {
   const boxChildren = element.children.filter((c) => c.children.length > 0);
   const foldedChildren = element.children.filter((c) => c.children.length === 0);
+  const vertical = depth >= 2; // children of depth-2+ boxes stack vertically
   return (
     <li>
       <ChartBox element={element} folded={foldedChildren} />
       {boxChildren.length > 0 ? (
-        <ul>
+        <ul className={vertical ? "vtree" : undefined}>
           {boxChildren.map((child) => (
-            <ChartNode key={child.id} element={child} />
+            <ChartNode key={child.id} element={child} depth={depth + 1} />
           ))}
         </ul>
       ) : null}
@@ -185,7 +190,7 @@ export async function RosterSection() {
               </div>
               <ul>
                 {combatElements.map((el) => (
-                  <ChartNode key={el.id} element={el} />
+                  <ChartNode key={el.id} element={el} depth={1} />
                 ))}
               </ul>
             </li>

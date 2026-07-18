@@ -181,6 +181,54 @@ body::before {
   display: none;
 }
 
+/*
+ * Vertical stack mode (military-style): below the top echelons, subordinate
+ * boxes stack vertically with a left spine and elbow connectors — like a US
+ * ORBAT chart — instead of fanning out horizontally.
+ */
+.orbat-tree ul.vtree {
+  display: block;
+  padding: 0.25rem 0 0 0;
+}
+.orbat-tree ul.vtree::before {
+  display: none; /* no horizontal-mode parent stub */
+}
+.orbat-tree .vtree li {
+  display: block;
+  padding: 0.625rem 0 0 1.25rem;
+}
+.orbat-tree .vtree li::before,
+.orbat-tree .vtree li:first-child::before,
+.orbat-tree .vtree li:only-child::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0.5rem;
+  right: auto;
+  top: 0;
+  width: 0;
+  height: 100%;
+  border: 0 none;
+  border-left: 1px solid var(--edge-bright);
+}
+.orbat-tree .vtree li:last-child::before {
+  height: 1.625rem; /* stop the spine at the last elbow */
+}
+.orbat-tree .vtree li::after,
+.orbat-tree .vtree li:last-child::after,
+.orbat-tree .vtree li:only-child::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0.5rem;
+  right: auto;
+  top: 1.625rem;
+  width: 0.75rem;
+  height: 0;
+  border: 0 none;
+  border-top: 1px solid var(--edge-bright);
+}
+
 /* Display headings: Saira Condensed carries weight without shouting. */
 .heading-display {
   font-family: var(--font-display);
