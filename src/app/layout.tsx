@@ -116,7 +116,12 @@ export const metadata: Metadata = {
     description,
     images: ["/og.jpg"],
   },
-  robots: { index: true, follow: true },
+  // Pre-launch: NEXT_PUBLIC_NOINDEX=1 keeps the dev deployment out of search
+  // engines so ranking only ever accrues to the real domain. Delete the env
+  // var at cutover and redeploy.
+  robots: process.env.NEXT_PUBLIC_NOINDEX
+    ? { index: false, follow: false }
+    : { index: true, follow: true },
 };
 
 export default function RootLayout({
