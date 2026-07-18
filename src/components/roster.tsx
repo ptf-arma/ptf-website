@@ -16,13 +16,13 @@ function leaderOf(element: BilletElement): BilletMember | null {
   return b?.member ?? null;
 }
 
-/** One box in the org chart. */
+/** One box in the org chart, with childless sub-elements folded in as rows. */
 function ChartBox({
   element,
-  hiddenChildren,
+  folded,
 }: {
   element: BilletElement;
-  hiddenChildren: number;
+  folded: BilletElement[];
 }) {
   const leader = leaderOf(element);
   const empty = element.filled === 0;
@@ -52,33 +52,42 @@ function ChartBox({
         className={`mt-1 font-mono text-xs ${empty ? "text-ink-faint" : "text-ink-muted"}`}
       >
         {element.filled}/{element.total}
-        {hiddenChildren > 0 ? (
-          <span className="text-ink-faint"> · +{hiddenChildren} teams</span>
-        ) : null}
       </p>
+      {folded.length > 0 ? (
+        <ul className="mt-1.5 space-y-0.5 border-t border-edge pt-1.5">
+          {folded.map((sub) => (
+            <li
+              key={sub.id}
+              className="flex items-center justify-between gap-2 text-xs"
+            >
+              <span className="truncate text-ink-muted">{sub.name}</span>
+              <span className="shrink-0 font-mono text-ink-faint">
+                {sub.filled}/{sub.total}
+              </span>
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </div>
   );
 }
 
 /**
- * Recursive chart node. Depth 3 (fire teams) is summarized inside the parent
- * box instead of drawn — keeps the chart readable at platoon strength.
+ * Recursive chart node. Children that lead elements of their own get boxes
+ * and connector lines; childless children fold into the parent box as rows
+ * (a platoon box lists its HQ and vehicle sections, an HQ box its staff
+ * sections). Keeps the chart narrow enough to fit without scrolling.
  */
-function ChartNode({ element, depth }: { element: BilletElement; depth: number }) {
-  // Children render at depth+1. With reporting lines the tree runs
-  // HQ(1) → Company(2) → Platoon(3) → Squad(4) → fire teams(5); squads are
-  // the smallest drawn echelon, teams get summarized in their parent box.
-  const showChildren = element.children.length > 0 && depth < 4;
+function ChartNode({ element }: { element: BilletElement }) {
+  const boxChildren = element.children.filter((c) => c.children.length > 0);
+  const foldedChildren = element.children.filter((c) => c.children.length === 0);
   return (
     <li>
-      <ChartBox
-        element={element}
-        hiddenChildren={showChildren ? 0 : element.children.length}
-      />
-      {showChildren ? (
+      <ChartBox element={element} folded={foldedChildren} />
+      {boxChildren.length > 0 ? (
         <ul>
-          {element.children.map((child) => (
-            <ChartNode key={child.id} element={child} depth={depth + 1} />
+          {boxChildren.map((child) => (
+            <ChartNode key={child.id} element={child} />
           ))}
         </ul>
       ) : null}
@@ -176,7 +185,7 @@ export async function RosterSection() {
               </div>
               <ul>
                 {combatElements.map((el) => (
-                  <ChartNode key={el.id} element={el} depth={1} />
+                  <ChartNode key={el.id} element={el} />
                 ))}
               </ul>
             </li>
