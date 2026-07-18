@@ -186,8 +186,14 @@ export async function RosterSection() {
     );
   }
 
-  const openBillets = countOpenBillets(roster.elements);
-  const members = [...collectMembers(roster.elements).values()];
+  // The unit keeps a separate Staff Roster (S-sections: S1 Personnel, S3
+  // Operations, ...) alongside the Combat Roster. The public ORBAT shows
+  // combat only — filter any top-level "S<number>-..." element out.
+  const combatElements = roster.elements.filter(
+    (el) => !/^S\d+\b/.test(el.name.trim()),
+  );
+  const openBillets = countOpenBillets(combatElements);
+  const members = [...collectMembers(combatElements).values()];
 
   return (
     <section id="roster" className="border-t border-edge">
@@ -227,7 +233,7 @@ export async function RosterSection() {
         {/* The people, up front — the structure below is collapsed by default. */}
         {members.length > 0 ? (
           <div className="mt-10">
-            <p className="micro-label">Command &amp; staff</p>
+            <p className="micro-label">Leadership</p>
             <ul className="mt-3 flex flex-wrap gap-2">
               {members.map(({ member, title }) => (
                 <li
@@ -256,7 +262,7 @@ export async function RosterSection() {
 
         {/* Uniform collapsed rows → a manning table, not a wall of slots. */}
         <div className="mt-8 grid items-start gap-4 md:grid-cols-2">
-          {roster.elements.map((el) => (
+          {combatElements.map((el) => (
             <div
               key={el.id}
               className="overflow-hidden rounded-sm border border-edge bg-surface"
