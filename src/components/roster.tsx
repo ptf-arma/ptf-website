@@ -133,12 +133,16 @@ export async function RosterSection() {
     );
   }
 
-  // The unit keeps a separate Staff Roster (S-sections: S1 Personnel, S3
-  // Operations, ...) alongside the Combat Roster. The public ORBAT shows
-  // combat only — filter any top-level "S<number>-..." element out, then
-  // re-parent the rest along their reporting lines into the real hierarchy.
+  // The public ORBAT shows the combat structure only. Filter out top-level
+  // elements that aren't part of it — the Staff Roster (S-sections: S1
+  // Personnel, S3 Operations, ...) and the Training Platoon (where recruits
+  // sit before they're assigned) — then re-parent the rest along their
+  // reporting lines into the real hierarchy.
   const combatElements = buildReportingTree(
-    roster.elements.filter((el) => !/^S\d+\b/.test(el.name.trim())),
+    roster.elements.filter((el) => {
+      const name = el.name.trim();
+      return !/^S\d+\b/.test(name) && name !== "Training Platoon";
+    }),
   );
   const openBillets = countOpenBillets(combatElements);
 
