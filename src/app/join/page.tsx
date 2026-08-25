@@ -9,7 +9,7 @@ import { LocalTime } from "@/components/local-time";
 export const metadata: Metadata = {
   title: "How to Join",
   description:
-    "How to join the Paramarine Task Force, a 10-year Arma 3 milsim unit: what you need, how the application works, and what your first weeks look like. Main op Sundays 8PM ET.",
+    "How to join the Paramarine Task Force, a 10-year Arma 3 milsim unit: what you need, how the application works, and what your first weeks look like.",
   alternates: { canonical: "/join" },
   openGraph: {
     title: "How to Join the Paramarine Task Force",
@@ -17,6 +17,13 @@ export const metadata: Metadata = {
       "What you need, how the application works, and what your first weeks in our Arma 3 milsim unit look like.",
     url: `${SITE_URL}/join`,
     images: [{ url: "/og.jpg", width: 1200, height: 630 }],
+  },
+  // Without this, X falls back to the root layout's card and shows the
+  // homepage's title and blurb for every subpage.
+  twitter: {
+    title: "How to Join the Paramarine Task Force",
+    description:
+      "What you need, how the application works, and what your first weeks in our Arma 3 milsim unit look like.",
   },
 };
 

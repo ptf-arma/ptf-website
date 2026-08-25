@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     url: `${SITE_URL}/progression`,
     images: [{ url: "/og.jpg", width: 1200, height: 630 }],
   },
+  twitter: {
+    title: "Ranks & Progression — Paramarine Task Force",
+    description:
+      "Rank tracks, promotion requirements, and awards — live from our personnel system.",
+  },
 };
 
 /** Compact "140d TIG · 162 pts · 10 courses" requirements summary. */

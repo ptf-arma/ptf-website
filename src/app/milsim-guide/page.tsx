@@ -5,9 +5,11 @@ import { ButtonLink } from "@/components/ui/button";
 import { SectionLabel } from "@/components/ui/section-label";
 
 export const metadata: Metadata = {
-  title: "What Is Arma 3 Milsim? A Beginner's Guide",
+  // Absolute, so the "· Paramarine Task Force" template doesn't push this past
+  // the ~60 characters Google will render before truncating.
+  title: { absolute: "What Is Arma 3 Milsim? A Beginner's Guide" },
   description:
-    "New to Arma 3 milsim? What it involves, how an operation actually runs, radio discipline, squad structure, mods, common mistakes, and how to pick a unit worth joining.",
+    "What Arma 3 milsim involves: how an operation runs, radio and squad structure, modpacks, and how to pick a unit worth joining.",
   alternates: { canonical: "/milsim-guide" },
   openGraph: {
     title: "What Is Arma 3 Milsim? A Beginner's Guide",
@@ -15,6 +17,11 @@ export const metadata: Metadata = {
       "What military simulation actually is, what an operation feels like, and how to choose your first Arma 3 milsim unit.",
     url: `${SITE_URL}/milsim-guide`,
     images: [{ url: "/og.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    title: "What Is Arma 3 Milsim? A Beginner's Guide",
+    description:
+      "What military simulation actually is, what an operation feels like, and how to choose your first Arma 3 milsim unit.",
   },
 };
 
@@ -27,6 +34,11 @@ const articleJsonLd = {
   author: { "@type": "Organization", name: "Paramarine Task Force" },
   publisher: { "@id": `${SITE_URL}/#org` },
   mainEntityOfPage: `${SITE_URL}/milsim-guide`,
+  image: `${SITE_URL}/og.jpg`,
+  // Google's Article guidance expects both. Bump dateModified when the guide
+  // is substantively rewritten, not for typo fixes.
+  datePublished: "2026-07-18",
+  dateModified: "2026-08-25",
 };
 
 function H2({ children }: { children: React.ReactNode }) {
