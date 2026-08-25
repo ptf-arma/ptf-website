@@ -56,11 +56,11 @@ export const roles: Role[] = [
     blurb: "Attached to a squad. Keeps the wounded in the fight.",
     status: "Waitlist · Requires Combat Life Saver",
     detail: [
-      "A corpsman moves like everyone else. Same formation, same spacing, a sector to watch while nobody is hurt.",
+      "A corpsman moves like everyone else. Same formation, same spacing, a sector to watch while nobody's hurt.",
       "The job starts when someone goes down. Get to them, under fire if you have to. Treat what the medical system models: bleeding, morphine, splints. Get them back up, or stable enough to wait for extraction.",
       "Most of an op, that call never comes. You're a rifleman carrying a medical bag.",
       "Combat Life Saver gates it, and it runs as a waitlist rather than an open billet. Ask a recruiter where the queue stands before you set your heart on it.",
-      "The billet needs someone who stays switched on through long stretches of nothing. Ten seconds after a casualty isn't the moment to be fumbling. If you want to be busy for three straight hours, this is the wrong job. Most of it's watching people who are fine and hoping they stay that way.",
+      "The billet needs someone who stays switched on through long stretches of nothing. Ten seconds after a casualty isn't the moment to be fumbling. If you want to be busy for three straight hours, this is the wrong job. Most of it is watching people who are fine and hoping they stay that way.",
     ],
   },
   {
