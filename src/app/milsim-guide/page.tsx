@@ -112,15 +112,12 @@ export default function MilsimGuidePage() {
             browser entry for a reason.
           </p>
           <p>
-            Milsim replaces that with persistence. The same roster shows up
-            week after week, which means a plan survives longer than the
-            first three minutes, because the person next to you already
-            knows what &ldquo;flank the treeline on my mark&rdquo; means and
-            isn&apos;t going to wander off to loot bodies. Positions are
-            assigned before the op starts, not fought over. Someone is
-            explicitly in charge, and everyone else has agreed, by joining
-            the unit, to do what that person says for the two or three hours
-            the operation runs.
+            Milsim replaces that with persistence. The same roster turns up
+            week after week, so a plan survives past the first three minutes.
+            The person next to you knows what &ldquo;flank the treeline on my
+            mark&rdquo; means. They won&apos;t wander off to loot bodies.
+            Positions are assigned before the op starts, not fought over. One
+            person is in charge, and everyone else agreed to that by joining.
           </p>
           <p>
             The other real difference is what death costs. On a public
@@ -158,10 +155,9 @@ export default function MilsimGuidePage() {
             <li>
               <span className="text-ink">Insertion and movement.</span> You
               load into vehicles or helicopters, or you start walking. Fire
-              teams hold formation, squads hold spacing, and the whole
-              element moves at the pace of its most careful member — bunching
-              up or rushing is how a unit loses half its strength to one
-              machine gun.
+              teams hold formation and squads hold spacing. The element moves
+              at the pace of its most careful member. Bunching up is how a
+              unit loses half its strength to one machine gun.
             </li>
             <li>
               <span className="text-ink">Actions on contact.</span> The plan
@@ -194,15 +190,14 @@ export default function MilsimGuidePage() {
             most games bother giving you.
           </p>
 
-          <H2>Radio discipline — why it&apos;s not just flavor</H2>
+          <H2>Radio discipline</H2>
           <p>
-            Most units run separate radio nets for different levels of
-            command: a squad net that your fire team and squad leader share,
-            and a platoon or command net that only squad leaders and above
-            use to talk to each other. You don&apos;t hear the platoon net,
-            and platoon doesn&apos;t hear every rifleman&apos;s individual
-            chatter — that separation is what keeps forty or sixty people on
-            the same server from turning into unusable noise.
+            Most units run separate radio nets by level of command. Your fire
+            team and squad leader share a squad net. Squad leaders and above
+            talk to each other on a platoon or command net. You don&apos;t
+            hear the platoon net, and platoon doesn&apos;t hear every
+            rifleman. That separation is what stops sixty people on one server
+            turning into noise.
           </p>
           <p>
             Brevity is the whole point. A call like &ldquo;contact,
@@ -239,11 +234,10 @@ export default function MilsimGuidePage() {
             specifically — where they move, what they&apos;re watching,
             whether they&apos;ve taken casualties — and reports up to the
             squad leader. The squad leader owns the bigger picture: the
-            objective, the route, when to commit the second team versus hold
-            it in reserve. A rifleman&apos;s job is to watch an assigned
-            sector and follow the team leader&apos;s direction rather than
-            freelance — chasing a target you spotted on your own is how a
-            fire team loses a member and its formation at the same time.
+            objective, the route, when to commit the second team. A
+            rifleman watches an assigned sector and follows the team
+            leader. Chasing a target you spotted yourself is how a fire team
+            loses a member and its formation at once.
           </p>
           <p>
             Specialists slot into this structure rather than operating
@@ -257,48 +251,72 @@ export default function MilsimGuidePage() {
 
           <H2>Roles</H2>
           <p>
-            Everyone starts as a rifleman, and it&apos;s genuinely the best
-            place to learn — you get to watch how a squad works before
-            you&apos;re responsible for anything beyond your own sector and
-            rifle. After that, most units offer some version of: marksman
-            (precision fire, usually attached to a squad rather than working
-            solo), corpsman or medic (keeping people in the fight after
-            they&apos;re hit), machine gunner (the fire team&apos;s
-            suppression), engineer (breaching, mines, fortifications), armor
-            crew, pilots if the unit flies its own aircraft, and JTAC — the
-            person on the ground talking aircraft onto targets, which is as
-            much about radio procedure as it is about spotting.
+            Everyone starts as a rifleman. It&apos;s the best place to learn.
+            You watch how a squad works before you&apos;re responsible for
+            anything beyond your own sector.
           </p>
+          <p>After that, most units offer some version of these:</p>
+          <ul className="list-disc space-y-2 pl-6">
+            <li>
+              <span className="text-ink">Marksman.</span> Precision fire,
+              attached to a squad rather than working alone.
+            </li>
+            <li>
+              <span className="text-ink">Corpsman.</span> Keeps people in the
+              fight after they&apos;re hit.
+            </li>
+            <li>
+              <span className="text-ink">Machine gunner.</span> The fire
+              team&apos;s suppression.
+            </li>
+            <li>
+              <span className="text-ink">Engineer.</span> Breaching, mines,
+              fortifications.
+            </li>
+            <li>
+              <span className="text-ink">Armor crew and pilots.</span> Where
+              the unit runs its own vehicles and aircraft.
+            </li>
+            <li>
+              <span className="text-ink">JTAC.</span> Talks aircraft onto
+              targets from the ground. More radio procedure than spotting.
+            </li>
+          </ul>
           <p>
             In a decent unit these are qualifications you earn on a course,
-            not roles you pick off a list on day one. That matters more than
-            it sounds like it should — a unit that lets brand-new members
-            fly attack helicopters or call in airstrikes on request usually
-            has a training pipeline in name only, and it tends to show in how
-            the operations actually run.
+            not roles you pick off a list on day one. That matters. A unit
+            that lets brand-new members fly attack helicopters on request has
+            a training pipeline in name only, and it shows in how the
+            operations run.
           </p>
 
           <H2>Mods and modpacks</H2>
           <p>
-            Arma 3 out of the box is a sandbox. What turns it into a
-            specific unit&apos;s version of milsim is the modpack — a
-            curated collection of mods bundled together, usually distributed
-            as a single Steam Workshop collection so installing it is one
-            click and one download instead of hunting down forty individual
+            Arma 3 out of the box is a sandbox. The modpack is what turns it
+            into a specific unit&apos;s version of milsim. It&apos;s a curated
+            set of mods bundled together, usually as one Steam Workshop
+            collection, so you subscribe once instead of hunting down forty
             mods yourself.
           </p>
           <p>
-            A typical modpack changes more than it looks like from the
-            outside: uniforms and factions matching whatever setting the
-            unit uses, weapon and attachment overhauls, a reworked UI, task
-            and mission frameworks that mission-makers build operations
-            around, and usually something like ACE3 or a similar system that
-            changes how medical treatment, weapon handling, and interaction
-            with the environment all work. Running a modpack instead of
-            vanilla or someone else&apos;s public mod mix is also how a unit
-            keeps its look and rule set consistent operation to operation —
-            everyone&apos;s in the same uniforms, using the same interaction
-            keybinds, playing under the same medical system.
+            A modpack changes more than it looks like from the outside:
+          </p>
+          <ul className="list-disc space-y-2 pl-6">
+            <li>Uniforms and factions matching the unit&apos;s setting.</li>
+            <li>Weapon and attachment overhauls.</li>
+            <li>A reworked interface.</li>
+            <li>
+              Mission frameworks that mission-makers build operations around.
+            </li>
+            <li>
+              Usually ACE3 or something like it, which rewrites medical
+              treatment, weapon handling, and how you interact with anything.
+            </li>
+          </ul>
+          <p>
+            Running one is also how a unit stays consistent week to week.
+            Everyone&apos;s in the same uniforms, on the same keybinds, under
+            the same medical system.
           </p>
           <p>
             Installing one is normally just subscribing to a Steam Workshop
@@ -324,12 +342,11 @@ export default function MilsimGuidePage() {
             usually solves it on its own.
           </p>
           <p>
-            Freelancing is the third. Spotting a target and moving to engage
-            it without telling anyone, or deciding the plan is wrong and
-            doing something else instead, breaks the thing that makes milsim
-            different from a public server in the first place — everyone
-            moving off a shared plan. A mediocre plan executed together
-            usually beats a good idea executed alone.
+            Freelancing is the third. Moving to engage something without
+            telling anyone, or deciding the plan is wrong and doing your own
+            thing, breaks the one thing that separates milsim from a public
+            server. Everyone works off a shared plan. A mediocre plan carried
+            out together beats a good idea carried out alone.
           </p>
           <p>
             None of this reflects badly on new players. It&apos;s habits
@@ -342,10 +359,10 @@ export default function MilsimGuidePage() {
           <p>
             Most units run one main operation a week at a fixed time, plus
             some combination of training nights, courses, or secondary
-            operations on other days. The main operation is usually the one
-            thing attendance actually gets measured against — miss too many
-            in a row and expect a conversation about whether the schedule
-            works for you, even in units that don&apos;t formally track it.
+            operations on other days. The main operation is the one
+            attendance gets measured against. Miss too many in a row and
+            expect a conversation about whether the schedule works for you,
+            even in units that don&apos;t formally track it.
           </p>
           <p>
             The extra nights — training, schools, specialized operations —
@@ -365,51 +382,47 @@ export default function MilsimGuidePage() {
 
           <H2>What to expect from training</H2>
           <p>
-            Nearly every unit that isn&apos;t purely casual runs some kind
-            of recruit or basic course before letting new members into a
-            full operation. It typically covers movement — formations,
-            spacing, moving as part of a fire team rather than as an
-            individual — basic radio procedure, and how the unit
-            specifically runs its briefings and command structure, since
-            that varies unit to unit even when the underlying skills
-            don&apos;t.
+            Nearly every unit that isn&apos;t purely casual runs a recruit
+            course before letting you into a full operation. It covers
+            movement: formations, spacing, working as part of a fire team
+            instead of as an individual. Then basic radio procedure. Then how
+            that particular unit runs its briefings and chain of command,
+            which varies even where the underlying skills don&apos;t.
           </p>
           <p>
-            It&apos;s usually shorter and less intimidating than it sounds.
-            A few hours, sometimes split across a couple of sessions, run by
-            existing members rather than some separate instructor cadre.
-            Nobody expects you to show up already knowing formations or
-            brevity codes — the entire point of the course is that you
-            don&apos;t, yet.
+            It&apos;s shorter and less intimidating than it sounds. A few
+            hours, sometimes split over two sessions, run by existing members
+            rather than a separate instructor cadre. Nobody expects you to
+            arrive knowing formations or brevity codes. That&apos;s the point
+            of the course.
           </p>
           <p>
-            After training, the normal next step is a real operation in a
-            rifle squad, usually as a rifleman, with a team leader keeping
-            an eye on you. Specialist roles — marksman, medic, pilot, and so
-            on — come later, through further courses once you&apos;ve got a
-            normal operation or two behind you.
+            After training you go into a real operation in a rifle squad,
+            usually as a rifleman, with a team leader watching how you get on.
+            Specialist roles come later, through further courses, once
+            you&apos;ve got an operation or two behind you.
           </p>
 
           <H2>What you need</H2>
           <p>
-            Arma 3 on PC, a working microphone, and whatever modpack the
-            unit runs. That&apos;s the actual floor. You don&apos;t need a
-            powerful PC, but know that Arma leans harder on your CPU than
-            your graphics card, and a sixty-player operation with a lot of
-            AI is the worst case rather than the average — if the game runs
-            acceptably in singleplayer, expect a large op to run worse. You
-            don&apos;t need prior experience, and you don&apos;t need a
-            headset better than whatever came in the box.
+            Arma 3 on PC, a working microphone, and whatever modpack the unit
+            runs. That&apos;s the floor. You don&apos;t need prior experience,
+            and you don&apos;t need a headset better than whatever came in the
+            box.
           </p>
           <p>
-            Voice comms usually run through Discord, TeamSpeak, or both,
-            separate from in-game radio — one for the community and general
-            chat, in-game radio simulated through mods for the operation
-            itself. Any unit worth joining teaches recruits from scratch. If
-            a unit&apos;s application or Discord reads like it expects you
-            to arrive already fluent in formations and brevity codes, that
-            tells you something about how they treat new players, and
-            it&apos;s not a good sign.
+            One thing worth knowing about the hardware. Arma leans harder on
+            your CPU than your graphics card. A sixty-player operation with a
+            lot of AI is the worst case, not the average. If the game runs
+            acceptably in singleplayer, expect a large op to run worse.
+          </p>
+          <p>
+            Voice runs through Discord, TeamSpeak, or both, separate from the
+            in-game radio. One is for the community, the other is simulated
+            through mods during the operation. Any unit worth joining teaches
+            recruits from scratch. If an application reads like it expects you
+            to arrive fluent in formations and brevity codes, that tells you
+            how they treat new players.
           </p>
 
           <H2>How to pick one</H2>
