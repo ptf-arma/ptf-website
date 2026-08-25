@@ -22,6 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${SITE_URL}/roles`,
+      lastModified: "2026-08-25",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${SITE_URL}/progression`,
       lastModified: "2026-07-18",
       changeFrequency: "monthly",
