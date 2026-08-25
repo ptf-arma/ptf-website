@@ -198,6 +198,18 @@ export default async function JoinPage() {
             ))}
           </div>
 
+          <p className="mt-8 max-w-2xl text-sm text-ink-muted">
+            Never done milsim before?{" "}
+            <Link
+              href="/milsim-guide"
+              className="text-ink underline decoration-edge-bright underline-offset-4 hover:decoration-ink"
+            >
+              Our guide to Arma 3 milsim
+            </Link>{" "}
+            covers how an operation actually runs, what recruit training
+            involves, and the mistakes everyone makes in their first few weeks.
+          </p>
+
           <div className="mt-12 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
             <p className="text-sm text-ink-muted">
               Applications take about five minutes.
