@@ -6,6 +6,7 @@ import { SITE_URL, links } from "@/lib/config";
 import { schedule } from "@/lib/schedule";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { OutboundTracking } from "@/components/outbound-tracking";
 
 // Structured data: Organization + the two recurring weekly events.
 const jsonLd = {
@@ -129,6 +130,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <SiteFooter />
         <Analytics />
+        <OutboundTracking />
       </body>
     </html>
   );
