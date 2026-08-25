@@ -8,18 +8,47 @@ import { VideoCard } from "@/components/video-card";
  * come from i.ytimg.com (allowed in next.config remotePatterns).
  */
 
+/*
+ * `title` is the short display label on the card; `officialTitle`, `uploadDate`
+ * and `duration` come from the YouTube watch pages and exist for the
+ * VideoObject structured data below. Google requires uploadDate, so never
+ * invent one — read it off the video before adding a film here.
+ */
 const films = [
   {
     id: "GstgoRjBylA",
     title: "Calm Before the Storm",
     kind: "Amphibious film",
+    officialTitle: "Calm Before the Storm - Arma 3 Milsim, Amphibious Film",
+    description:
+      "An amphibious operation filmed with the Paramarine infantry platoon and Marine Aircraft Group 36.",
+    uploadDate: "2018-01-20",
+    duration: "PT3M8S",
   },
   {
     id: "w3IZoN5j53E",
     title: "Here Comes the Thunder",
     kind: "MAG-36 aviation film",
+    officialTitle: "Here Comes the Thunder - MAG 36 | Arma 3 Milsim",
+    description:
+      "A short film showing the capabilities of MAG-36, the Paramarine Task Force air element.",
+    uploadDate: "2018-02-15",
+    duration: "PT2M1S",
   },
 ];
+
+const filmJsonLd = films.map((f) => ({
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  name: f.officialTitle,
+  description: f.description,
+  thumbnailUrl: `https://i.ytimg.com/vi/${f.id}/maxresdefault.jpg`,
+  uploadDate: f.uploadDate,
+  duration: f.duration,
+  embedUrl: `https://www.youtube-nocookie.com/embed/${f.id}`,
+  contentUrl: `https://www.youtube.com/watch?v=${f.id}`,
+  publisher: { "@id": "https://paramarines.net/#org" },
+}));
 
 /* The early years — resurfaced classics. (The classic film plus two more
    stills live in the hero for the anniversary.) */
@@ -60,6 +89,10 @@ const shots = [
 export function MediaSection() {
   return (
     <section id="media" className="border-t border-edge">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(filmJsonLd) }}
+      />
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionLabel>Media</SectionLabel>
         <h2 className="heading-display mt-3 text-3xl text-ink sm:text-4xl">

@@ -44,7 +44,9 @@ const jsonLd = {
 // Display / headings — brand kit: Saira Condensed.
 const saira = Saira_Condensed({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  // Only 600 is reachable: .heading-display sets it, and every button and nav
+  // link pairs font-display with font-semibold. Audited before trimming.
+  weight: ["600"],
   variable: "--font-saira",
   display: "swap",
 });
@@ -52,7 +54,8 @@ const saira = Saira_Condensed({
 // Labels, numbers, "readout" bits — brand kit: JetBrains Mono.
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  // Mono is only ever used unweighted, including .micro-label.
+  weight: ["400"],
   variable: "--font-jetbrains",
   display: "swap",
 });
@@ -60,7 +63,9 @@ const jetbrains = JetBrains_Mono({
 // Body copy — brand kit: Barlow.
 const barlow = Barlow({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  // Body default. Every font-semibold in the codebase co-occurs with
+  // font-display, so Barlow is never asked for a heavier weight.
+  weight: ["400"],
   variable: "--font-barlow",
   display: "swap",
 });

@@ -56,7 +56,10 @@ export function VideoCard({
             aria-hidden
             className="absolute inset-0 grid place-items-center bg-bg/25 transition-colors group-hover:bg-bg/10"
           >
-            <span className="grid h-14 w-14 place-items-center rounded-full border border-edge-bright bg-bg/80 pl-1 font-display text-xl text-ink">
+            {/* Explicit weight: font-display with no weight class asks for 400,
+                which Saira doesn't ship here, so the browser was silently
+                matching a weight we no longer load. */}
+            <span className="grid h-14 w-14 place-items-center rounded-full border border-edge-bright bg-bg/80 pl-1 font-display text-xl font-semibold text-ink">
               ▶
             </span>
           </span>
