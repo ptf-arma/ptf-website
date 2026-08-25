@@ -22,6 +22,20 @@ export default function NotFound() {
             Enlist Now
           </ButtonLink>
         </div>
+        {/*
+         * Most 404s here are old forum links that predate the 2026-08-25
+         * cutover and don't match a redirect rule. Without this they dead-end.
+         */}
+        <p className="mt-8 max-w-xl text-sm text-ink-muted">
+          Following a link to the old forum? It moved. The archive is at{" "}
+          <a
+            href="https://legacy.paramarines.net"
+            className="text-ink underline decoration-edge-bright underline-offset-4 hover:decoration-ink"
+          >
+            legacy.paramarines.net
+          </a>
+          .
+        </p>
       </div>
     </section>
   );
