@@ -74,7 +74,7 @@ export const roles: Role[] = [
       "Your seat decides the job: driving, gunning, or commanding. You work the vehicle net with your crew and with whatever squad you're carrying that night.",
       "Much of it's positioning. Get somewhere useful without getting somewhere you'll be killed, then hold it. A dead ACV helps nobody, and it takes its crew and its cargo with it.",
       "The billet is selective and it sits with 3rd Platoon. It isn't a side qualification you pick up alongside a rifle squad.",
-      "Crewing suits people who 'd rather work a machine with two or three others than move with eight. The flip side is that your fight looks nothing like a rifleman's. If what you want is to take ground on foot, take it on foot.",
+      "Crewing suits people who'd rather work a machine with two or three others than move with eight. The flip side is that your fight looks nothing like a rifleman's. If what you want is to take ground on foot, take it on foot.",
     ],
   },
   {

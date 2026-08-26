@@ -3,6 +3,47 @@
 Plan, not a spec. Spans two repos. Written 2026-08-25 against the billet repo
 at the same date.
 
+## Start with the latest operation only
+
+Showing just the most recent operation is a much smaller build than a library,
+and it removes the two hardest problems in this document rather than solving
+them.
+
+**No permanent URLs.** One address — `/operations/latest`, or a section on the
+homepage. The frozen-slug requirement disappears, because nothing is addressed
+by slug.
+
+**No retention hazard.** The worst risk below is that retention deletes a
+recording Google has indexed, 404ing the best content on the site. If the only
+public replay is always the newest one, old recordings can expire exactly as
+they do today and nothing breaks.
+
+It also fixes a problem this site actually has. The media section shows two
+films from 2018, while the milsim guide tells readers to judge a unit by whether
+its media is recent. A replay of last Sunday's operation is the strongest
+possible answer to that, and it stays true without anyone maintaining it.
+
+**What it costs: the SEO thesis.** The case for AARs was accumulation — fifty
+indexed pages a year, each unique. One URL whose content churns weekly does not
+accumulate. It earns links, shares, and credibility with a prospective recruit
+reading the page; it does not build the content moat that UNITAF and the 506th
+have. Those are different goals and it is worth being clear which one is being
+bought.
+
+**Recommended sequencing.** Build latest-only first regardless of whether the
+archive ever follows. It exercises the whole pipeline — public flag, public
+frames endpoint, terrain access, framable page, CSP — against one recording
+instead of a library. If something about serving replays publicly turns out to
+be impractical, that is discovered in the cheapest possible way. The archive is
+then an extension: add the slug column, a list endpoint, and per-recording
+pages.
+
+Still needed even for latest-only: `is_public` on `aar_recordings`, defaulting
+to false. "Most recent" must mean "most recent recording somebody chose to
+publish", or one bad night becomes the unit's shop window.
+
+---
+
 ## The decision that shapes everything: embed, don't port
 
 Billet's replay is not a small component.
