@@ -11,8 +11,8 @@ export default function NotFound() {
           You&apos;ve wandered off the map
         </h1>
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
-          This position doesn&apos;t exist — or it&apos;s been overrun. Fall
-          back to the rally point.
+          This position doesn&apos;t exist, or it&apos;s been overrun. Fall back
+          to the rally point.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <ButtonLink href="/" variant="secondary" size="lg">

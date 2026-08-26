@@ -9,19 +9,19 @@ import { SectionLabel } from "@/components/ui/section-label";
 export const metadata: Metadata = {
   title: "Ranks & Progression",
   description:
-    "The Paramarine Task Force rank structure, promotion requirements, and awards — live from our personnel system. Real progression in an Arma 3 milsim unit.",
+    "The Paramarine Task Force rank structure, promotion requirements, and awards, live from our personnel system. Real progression in an Arma 3 milsim unit.",
   alternates: { canonical: "/progression" },
   openGraph: {
     title: "Ranks & Progression — Paramarine Task Force",
     description:
-      "Rank tracks, promotion requirements, and awards — live from our personnel system.",
+      "Rank tracks, promotion requirements, and awards, live from our personnel system.",
     url: `${SITE_URL}/progression`,
     images: [{ url: "/og.jpg", width: 1200, height: 630 }],
   },
   twitter: {
     title: "Ranks & Progression — Paramarine Task Force",
     description:
-      "Rank tracks, promotion requirements, and awards — live from our personnel system.",
+      "Rank tracks, promotion requirements, and awards, live from our personnel system.",
   },
 };
 
@@ -78,7 +78,7 @@ export default async function ProgressionPage() {
             Ranks, schools, and awards
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
-            Promotions have requirements — time in grade, points, courses
+            Promotions have requirements: time in grade, points, courses
             completed. Everything below is pulled live from the personnel
             system, so it&apos;s current.
           </p>
@@ -153,7 +153,7 @@ export default async function ProgressionPage() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <div className="flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
             <p className="text-sm text-ink-muted">
-              Every service record starts the same way — with an application.
+              Every service record starts the same way, with an application.
             </p>
             <ButtonLink href={billet.applyUrl} variant="primary" size="md">
               Enlist Now

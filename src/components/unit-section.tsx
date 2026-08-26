@@ -58,9 +58,9 @@ export function UnitSection() {
                 className="text-ink underline decoration-edge-bright underline-offset-4 hover:decoration-ink"
               >
                 Here&apos;s what it actually involves
-              </Link>{" "}
-              — how an operation runs, what the radio is for, and how to tell
-              a unit worth joining from one that folds inside a year.
+              </Link>
+              : how an operation runs, what the radio is for, and how to tell a
+              unit worth joining from one that folds inside a year.
             </p>
 
             <ul className="space-y-3 border-t border-edge pt-4">
