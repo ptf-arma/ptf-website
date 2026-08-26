@@ -29,8 +29,8 @@ export function HeroMeta({
         <span className="font-mono text-ink">
           {session.member.rankAbbr ? `${session.member.rankAbbr} ` : ""}
           {session.member.name}
-        </span>{" "}
-        —{" "}
+        </span>
+        ,{" "}
         <a
           href={billet.base}
           className="text-ink underline decoration-edge-bright underline-offset-4 hover:decoration-ink"
@@ -52,7 +52,7 @@ export function HeroMeta({
   if (isApplicant(session)) {
     return (
       <p className="mt-4 text-sm text-ink-muted">
-        Your application is in progress —{" "}
+        Your application is in progress.{" "}
         <a
           href={billet.applyUrl}
           className="text-ink underline decoration-edge-bright underline-offset-4 hover:decoration-ink"

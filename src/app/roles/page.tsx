@@ -7,7 +7,7 @@ import { SectionLabel } from "@/components/ui/section-label";
 
 const title = "Arma 3 Milsim Roles: What Each Billet Actually Does";
 const description =
-  "Rifleman, marksman, corpsman, ACV crew, pilot, and MSO — what each role does during an operation, what gates it, and who it suits.";
+  "Rifleman, marksman, corpsman, ACV crew, pilot, and MSO: what each role does during an operation, what gates it, and who it suits.";
 
 export const metadata: Metadata = {
   // Absolute: the "· Paramarine Task Force" template would push this past the

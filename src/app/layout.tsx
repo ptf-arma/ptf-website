@@ -21,7 +21,7 @@ const jsonLd = {
       logo: `${SITE_URL}/brand/ptf-emblem-326w.png`,
       foundingDate: "2016",
       description:
-        "A serious, fun, and immersive Arma 3 milsim unit — rapid-deployment Marines with weekly operations and structured training.",
+        "A serious, fun, and immersive Arma 3 milsim unit. Rapid-deployment Marines with weekly operations and structured training.",
       sameAs: [links.discord, links.steam, links.arma3units, links.patreon],
     },
     ...schedule.map((slot) => ({
