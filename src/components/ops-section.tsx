@@ -22,19 +22,23 @@ export async function OpsSection() {
           The week
         </h2>
         <p className="mt-4 max-w-2xl text-ink-muted">
-          Four nights on the calendar. Sunday is the one everybody turns out
+          Five nights on the calendar. Sunday is the one everybody turns out
           for.
         </p>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {schedule.map((slot) => (
             <div
               key={slot.key}
               className="overflow-hidden rounded-sm border border-edge bg-surface"
             >
-              <div className="flex items-center justify-between gap-3 border-b border-edge bg-raised px-4 py-2.5">
+              {/* min-h keeps the five headers aligned once a label wraps to
+                  two lines at the narrower five-column width. */}
+              <div className="flex min-h-[3.25rem] items-center justify-between gap-3 border-b border-edge bg-raised px-4 py-2.5">
                 <span className="micro-label">{slot.label}</span>
-                <span className="font-mono text-sm text-ink">{slot.time}</span>
+                <span className="shrink-0 font-mono text-sm text-ink">
+                  {slot.time}
+                </span>
               </div>
               <div className="px-4 py-4">
                 <h3 className="font-display text-base font-semibold text-ink">

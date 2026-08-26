@@ -27,7 +27,7 @@ export const schedule: ScheduleEntry[] = [
     time: "8PM ET",
     schemaDay: "https://schema.org/Tuesday",
     description:
-      "Field Training Exercise. Drills and rehearsal with your squad or platoon.",
+      "Drills with your own squad or platoon, and the whole unit together on the third Tuesday of the month.",
   },
   {
     key: "recon",
@@ -38,7 +38,19 @@ export const schedule: ScheduleEntry[] = [
     time: "8PM ET",
     schemaDay: "https://schema.org/Thursday",
     description: "Reconnaissance operations run by the MSO element.",
-    restricted: "MSO only",
+    restricted: "MSO cert required",
+  },
+  {
+    key: "prt",
+    label: "Recruit training",
+    day: "Fridays",
+    weekday: 5,
+    hourEt: 20,
+    time: "8PM ET",
+    schemaDay: "https://schema.org/Friday",
+    description:
+      "Paramarine Recruit Training. New Marines have 30 days from joining to pass it.",
+    restricted: "Recruits only",
   },
   {
     key: "courses",
@@ -49,7 +61,7 @@ export const schedule: ScheduleEntry[] = [
     time: "8PM ET",
     schemaDay: "https://schema.org/Saturday",
     description:
-      "Specialized training courses. Qualify for a new weapon, vehicle, or billet.",
+      "Attendee's choice: whichever course the most people who turn up need is the one that runs.",
   },
   {
     key: "main-op",
