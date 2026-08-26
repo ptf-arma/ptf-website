@@ -49,6 +49,9 @@ export function SiteFooter() {
           <a href="/join" className="micro-label hover:text-ink">
             How to Join
           </a>
+          <a href="/recruit" className="micro-label hover:text-ink">
+            Recruit Guide
+          </a>
           <a href={billet.applyUrl} className="micro-label hover:text-ink">
             Enlist
           </a>

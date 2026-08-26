@@ -63,11 +63,11 @@ const faqs = [
   },
   {
     q: "When does the unit play?",
-    a: "Sunday 8PM Eastern is the main operation and the one to build your week around. Field training runs Tuesdays, specialized courses Saturdays, and MSO recon ops Thursdays — all 8PM Eastern.",
+    a: "Sunday 8PM Eastern is the main operation and the one to build your week around. Field training runs Tuesdays, MSO recon ops Thursdays, recruit training Fridays, and courses Saturdays — all 8PM Eastern.",
   },
   {
     q: "Do I have to attend everything?",
-    a: "No. Sunday is the operation everyone turns out for. Tuesday and Saturday are there when you want to train or qualify for something new.",
+    a: "No. The expectation is 75% attendance at operations and 50% at training — deliberately not everything, because people have jobs. Sunday is the one everyone turns out for; Tuesday and Saturday are there when you want to train or qualify for something new.",
   },
   {
     q: "I'm not in North America — can I still join?",
@@ -170,7 +170,18 @@ export default async function JoinPage() {
           <p className="mt-6 font-mono text-xs text-ink-faint">
             Main op SUN · 8PM ET{" "}
             <LocalTime weekday={0} hourEt={20} className="text-ink-faint" /> ·
-            FTX TUE · Recon THU (MSO) · Courses SAT
+            FTX TUE · Recon THU (MSO) · PRT FRI · Courses SAT
+          </p>
+          <p className="mt-6 max-w-2xl text-sm text-ink-muted">
+            Already applied?{" "}
+            <Link
+              href="/recruit"
+              className="text-ink underline decoration-edge-bright underline-offset-4 hover:decoration-ink"
+            >
+              The new recruit guide
+            </Link>{" "}
+            takes it from there — what to install, what recruit training
+            covers, and what to do on your first op night.
           </p>
         </div>
       </section>
