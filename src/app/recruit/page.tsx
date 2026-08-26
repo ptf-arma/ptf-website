@@ -40,35 +40,43 @@ function Phase({
 }) {
   return (
     <section className="border-t border-edge">
-      <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
-        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-          <span className="micro-label">Phase {n}</span>
-          <span className="font-mono text-xs text-ink-faint">{when}</span>
-          <span className="font-mono text-xs text-ink-faint">{effort}</span>
-        </div>
-        <h2 className="heading-display mt-2 text-2xl text-ink sm:text-3xl">
-          {title}
-        </h2>
-        <div className="mt-5 space-y-4 leading-relaxed text-ink-muted">
-          {children}
+      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        {/* Heading rides along in the left rail on wide screens — the phases
+            are long enough that you lose track of which one you're in. */}
+        <div className="grid gap-x-12 gap-y-6 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
+          <div className="lg:sticky lg:top-24 lg:self-start">
+            <span className="micro-label">Phase {n}</span>
+            <h2 className="heading-display mt-2 text-2xl text-ink sm:text-3xl">
+              {title}
+            </h2>
+            <p className="mt-2 font-mono text-xs text-ink-faint">
+              {when}
+              <span className="mx-2 text-edge-bright">·</span>
+              {effort}
+            </p>
+          </div>
+          {/* Prose stays at a readable measure; the checklists below are free
+              to use the full column width. */}
+          <div className="space-y-4 leading-relaxed text-ink-muted [&>p]:max-w-2xl">
+            {children}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/** Tickable-looking checklist. Static markup — nothing to persist. */
+/**
+ * Tickable-looking checklist. Static markup — nothing to persist. Two-up on
+ * anything wider than mobile, matching the card grids on /join.
+ */
 function Checklist({ children }: { children: ReactNode }) {
-  return (
-    <ul className="mt-6 divide-y divide-edge rounded-sm border border-edge bg-surface">
-      {children}
-    </ul>
-  );
+  return <ul className="mt-6 grid gap-3 sm:grid-cols-2">{children}</ul>;
 }
 
 function Check({ title, children }: { title: string; children?: ReactNode }) {
   return (
-    <li className="flex gap-3 p-4">
+    <li className="flex gap-3 rounded-sm border border-edge bg-surface p-4">
       <span
         aria-hidden
         className="mt-[3px] h-4 w-4 shrink-0 rounded-[2px] border border-edge-bright"
@@ -130,18 +138,18 @@ export default function RecruitGuidePage() {
   return (
     <>
       <section className="relative">
-        <div className="mx-auto max-w-3xl px-4 pb-12 pt-20 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 pb-12 pt-20 sm:px-6">
           <SectionLabel>Recruit guide</SectionLabel>
-          <h1 className="heading-display mt-3 text-4xl text-ink sm:text-5xl">
+          <h1 className="heading-display mt-3 max-w-2xl text-4xl text-ink sm:text-5xl">
             New recruit guide
           </h1>
-          <p className="mt-5 text-lg leading-relaxed text-ink-muted">
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
             You applied. Here is everything that happens next, in the order it
             happens, with the parts you have to do yourself marked clearly.
             Work through it top to bottom and you will be stood in a formation
             on a Sunday night with nothing to apologise for.
           </p>
-          <p className="mt-4 text-sm text-ink-muted">
+          <p className="mt-4 max-w-xl text-sm text-ink-muted">
             Haven&apos;t applied yet?{" "}
             <Link
               href="/join"
@@ -403,7 +411,7 @@ export default function RecruitGuidePage() {
             in. The specialist kit sits behind the courses that teach it.
           </Check>
         </Checklist>
-        <dl className="mt-6 space-y-3 rounded-sm border border-edge bg-surface p-5 font-mono text-sm">
+        <dl className="mt-6 max-w-2xl space-y-3 rounded-sm border border-edge bg-surface p-5 font-mono text-sm">
           <div className="flex gap-4">
             <dt className="w-16 shrink-0 text-ink-faint">T-30</dt>
             <dd className="text-ink-muted">
@@ -436,7 +444,7 @@ export default function RecruitGuidePage() {
         <h3 className="mt-8 font-display text-base font-semibold text-ink">
           Five things to get right on the night
         </h3>
-        <ul className="list-disc space-y-2 pl-6">
+        <ul className="max-w-2xl list-disc space-y-2 pl-6">
           <li>
             <span className="text-ink">Hold your spacing.</span> Standing close
             to your fire team feels safer and is the fastest way to lose all
@@ -517,12 +525,12 @@ export default function RecruitGuidePage() {
       </Phase>
 
       <section className="border-t border-edge">
-        <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
           <SectionLabel>Reference</SectionLabel>
           <h2 className="heading-display mt-2 text-2xl text-ink sm:text-3xl">
             Words you will hear in your first week
           </h2>
-          <dl className="mt-6 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+          <dl className="mt-6 grid gap-x-10 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
             {glossary.map(([term, def]) => (
               <div key={term}>
                 <dt className="font-mono text-sm text-ink">{term}</dt>
