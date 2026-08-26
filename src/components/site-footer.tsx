@@ -43,6 +43,9 @@ export function SiteFooter() {
           <a href="/roles" className="micro-label hover:text-ink">
             Roles
           </a>
+          <a href="/operations" className="micro-label hover:text-ink">
+            Operations
+          </a>
           <a href="/progression" className="micro-label hover:text-ink">
             Ranks &amp; Awards
           </a>
