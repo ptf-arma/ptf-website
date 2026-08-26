@@ -102,10 +102,7 @@ const glossary: [string, string][] = [
   ["Billet", "Your job in the unit."],
   ["Net", "A radio channel. Squad net, command net."],
   ["FTL / SL", "Fire team leader, squad leader."],
-  [
-    "Contact report",
-    "Direction, distance, description. “Contact, bearing 158, 200 meters, enemy squad.”",
-  ],
+  ["Contact report", "Calling out an enemy you've spotted or engaged."],
   ["Spacing", "How far you keep from the man next to you."],
   ["ACE3", "The mod that rewrites medical, weapon handling and interaction."],
   ["TFAR", "Task Force Arrowhead Radio. The in-game radio, carried over TeamSpeak."],
@@ -253,8 +250,7 @@ export default function RecruitGuidePage() {
       >
         <p>
           PRT runs Friday nights, recruits only, and an instructor teaches it
-          live. About ninety minutes. It covers movement and formations, radio
-          work, and medical.
+          live. About ninety minutes.
         </p>
         <p className="rounded-sm border border-edge bg-raised px-5 py-4 text-ink">
           You don&apos;t need PRT before your first op, so come out on Sunday
@@ -266,9 +262,6 @@ export default function RecruitGuidePage() {
           </Check>
           <Check title="Have your mods loaded before 8">
             It starts on time.
-          </Check>
-          <Check title="Rules and Regs come from your recruiter">
-            Covered in your interview.
           </Check>
         </Checklist>
         <p>
@@ -338,8 +331,8 @@ export default function RecruitGuidePage() {
             should never be able to take your whole fire team.
           </li>
           <li>
-            <span className="text-ink">Stay off the net.</span> When you do
-            transmit: direction, distance, description.
+            <span className="text-ink">Stay off the net.</span> Listen, and
+            keep it short when you do transmit.
           </li>
           <li>
             <span className="text-ink">Follow your team leader.</span>{" "}
@@ -367,9 +360,7 @@ export default function RecruitGuidePage() {
           whichever one the most people there need.
         </p>
         <Checklist>
-          <Check title="Show up on Sundays">
-            We expect 75% attendance at operations and 50% at training.
-          </Check>
+          <Check title="Show up on Sundays" />
           <Check title="File a PAR on the portal when you'll be away" />
           <Check title="Ask for the Saturday course you want" />
           <Check title="Watch your service record">
