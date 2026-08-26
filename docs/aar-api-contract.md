@@ -130,10 +130,56 @@ No authentication, no write access, no comments, no per-member filtering. If
 private AARs ever need to reach the site, that is a separate authenticated
 endpoint and a separate decision.
 
-## Open questions for Billet
+## What Billet actually has today (checked against the schema)
 
-1. Does the TOC record already have a stable slug, or does one need generating
-   from the title? If generated, it must be frozen at first publish.
-2. Is `terrain` captured as a field today, or only mentioned in prose? It is the
-   most valuable optional field for search — worth adding if missing.
-3. What does the TOC store the prose as — markdown, rich-text HTML, or plain?
+The three questions this document originally left open are answered by
+`apps/web/src/db/schema.ts` in the billet repo. One answer invalidates an
+assumption made above.
+
+`aar_recordings` is a **replay recording, not a written report**. Columns:
+`id`, `unitId`, `serverId`, `serverName`, `world`, `title`, `eventId`, `tags`,
+`status`, `startedAt`, `endedAt`, `durationSeconds`, `frameCount`, `bytes`,
+`debrief`, `drawings`, `createdBy`. `aar_frames` holds positional snapshots and
+`aar_events` holds `BattleEvent` telemetry.
+
+1. **Stable slug — no.** The primary key is an opaque `text` id. A URL-safe
+   slug column has to be added, and frozen at first publish, because it becomes
+   a permanent public address.
+2. **Terrain — yes, already captured**, as `world`. This is the most valuable
+   optional field for long-tail search and it exists for free.
+3. **Prose format — there is no prose.** No `summary`, `notes`, `body` or
+   `description` column exists on any AAR table. The only narrative text
+   anywhere nearby is `events.description` on the *scheduled* operation, which
+   is a pre-op briefing, not an after-action write-up.
+
+### What that means
+
+Most of the metadata this contract asks for already exists and needs only
+exposing:
+
+| Contract field | Source |
+|---|---|
+| `title` | `aar_recordings.title` |
+| `operation_date` | `aar_recordings.startedAt` |
+| `terrain` | `aar_recordings.world` |
+| `participants` | length of `aar_recordings.debrief` |
+| `operation_type` | derivable from `aar_recordings.tags` |
+| `updated_at` | `aar_recordings.endedAt` or a new column |
+
+Three columns are genuinely new on `aar_recordings`:
+
+- `slug` — URL-safe, unique per unit, frozen at first publish
+- `is_public` — boolean, **default false**
+- `summary` and `body` — the after-action narrative, written by a human
+
+The narrative is the real work, and no schema change writes it. Somebody has to
+sit down after an operation and describe what happened. That was always the
+actual cost of this idea; the plumbing was never the hard part.
+
+### The other option
+
+The replay itself is genuinely unusual — no competing unit publishes anything
+like it, and an embeddable playback of a real operation would be far more
+linkable than another page of prose. It is also member-gated today (`403 not a
+member`), heavy to serve, and a much larger product decision. Worth considering
+separately; it is not what this contract covers.
