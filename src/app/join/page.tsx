@@ -67,7 +67,7 @@ const faqs = [
   },
   {
     q: "Do I have to attend everything?",
-    a: "No. We expect 75% attendance at operations and 50% at training. It's deliberately not everything, because people have jobs. Sunday is the one everyone turns out for. Tuesday and Saturday are there when you want to train or qualify for something new.",
+    a: "No. Sunday is the operation everyone turns out for. Tuesday and Saturday are there when you want to train or qualify for something new.",
   },
   {
     q: "I'm not in North America. Can I still join?",
