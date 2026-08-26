@@ -86,18 +86,18 @@ export default function MilsimGuidePage() {
             conversation either side of it. In practice that tends to mean
             nobody stands on ceremony in the general Discord channel, and
             everybody takes direction from their fire team leader once the
-            operation starts. That&apos;s the balance most people looking
-            are actually after — enough structure to make the game work,
-            without a second job&apos;s worth of formality bolted onto it.
+            operation starts. That&apos;s the balance most people are
+            actually after. Enough structure to make the game work, without a
+            second job&apos;s worth of formality bolted onto it.
           </p>
           <p>
-            Work out where a unit sits before you apply. Too loose and
+            Figure out where a unit sits before you apply. Too loose and
             operations turn into the same disorganized scramble as a public
             server, just with extra steps. Too rigid and it stops being fun
             for anyone who isn&apos;t already fully committed. Ask what a
             normal week actually looks like rather than taking anyone&apos;s
             word for how &ldquo;hardcore&rdquo; or &ldquo;casual&rdquo; they
-            are — those words mean something different in every Discord.
+            are. Those words mean something different in every Discord.
           </p>
 
           <H2>What actually separates milsim from a public server</H2>
@@ -107,12 +107,12 @@ export default function MilsimGuidePage() {
             different is everything around the shooting. On a public server
             you spawn in, grab a loadout, and go fight whoever&apos;s
             nearest. There&apos;s no real plan because there&apos;s no one
-            to plan with — half the server leaves after the first firefight,
-            and the other half is on a different continent&apos;s server
-            browser entry for a reason.
+            to plan with. Half the server leaves after the first firefight, and
+            the other half is on a different continent&apos;s server browser
+            entry for a reason.
           </p>
           <p>
-            Milsim replaces that with persistence. The same roster turns up
+            Milsim replaces that with persistence. The same roster shows up
             week after week, so a plan survives past the first three minutes.
             The person next to you knows what &ldquo;flank the treeline on my
             mark&rdquo; means. They won&apos;t wander off to loot bodies.
@@ -122,9 +122,9 @@ export default function MilsimGuidePage() {
           <p>
             The other real difference is what death costs. On a public
             server, dying just means you respawn thirty seconds later.
-            Units handle it differently — some run limited respawns or
-            respawn waves, others put you out for the rest of the operation
-            once your character is gone. Either way the cost is high enough
+            Units handle it differently. Some run limited respawns or respawn
+            waves. Others put you out for the rest of the operation once your
+            character is gone. Either way the cost is high enough
             to change how people move. Nobody sprints across open ground on
             the assumption the AI will probably miss, because it might not,
             and that might be the last thing that character does all night.
@@ -140,7 +140,7 @@ export default function MilsimGuidePage() {
           <ul className="list-disc space-y-2 pl-6">
             <li>
               <span className="text-ink">Warning order.</span> Hours or days
-              before the op, leadership puts out a short heads-up — mission
+              before the op, leadership puts out a short heads-up: mission
               type, rough area, what to bring. Enough for squad leaders to
               start thinking, not a full plan yet.
             </li>
@@ -166,7 +166,7 @@ export default function MilsimGuidePage() {
               direction and distance, get people into cover, and the team
               leader decides whether to push, flank, or pull back. This is
               the part that separates a unit that trains from one that
-              doesn&apos;t — a trained fire team has run this so many times
+              doesn&apos;t. A trained fire team has run it so many times
               it&apos;s closer to muscle memory than decision-making.
             </li>
             <li>
@@ -179,7 +179,7 @@ export default function MilsimGuidePage() {
               <span className="text-ink">Debrief.</span> Back at base, or in
               Discord afterward, leadership runs through what worked and what
               didn&apos;t. This is also where most of the arguing happens,
-              and it&apos;s normal — people disagree about whose fault the
+              and that&apos;s normal. People disagree about whose fault the
               ambush was.
             </li>
           </ul>
@@ -206,8 +206,8 @@ export default function MilsimGuidePage() {
             The same information delivered as a rambling description of what
             you think you saw takes ten times as long and usually arrives
             after the situation has already changed. Units teach standard
-            call formats — contact reports, situation reports, requests for
-            fire — specifically so people aren&apos;t inventing phrasing
+            call formats for contact reports, situation reports, and requests
+            for fire, specifically so people aren&apos;t inventing phrasing
             under pressure.
           </p>
           <p>
@@ -221,8 +221,8 @@ export default function MilsimGuidePage() {
 
           <H2>Squad and fire team structure</H2>
           <p>
-            The basic building block is the fire team — usually three or
-            four people. A rifle squad is normally two fire teams plus a
+            The basic building block is the fire team, usually three or four
+            people. A rifle squad is normally two fire teams plus a
             squad leader, so somewhere around seven to nine people. Multiple
             squads make up a platoon, run by a platoon leader coordinating
             over the command net, sometimes with a platoon sergeant handling
@@ -231,9 +231,8 @@ export default function MilsimGuidePage() {
           <p>
             Positions inside that structure aren&apos;t interchangeable. A
             fire team leader is responsible for their three or four people
-            specifically — where they move, what they&apos;re watching,
-            whether they&apos;ve taken casualties — and reports up to the
-            squad leader. The squad leader owns the bigger picture: the
+            specifically: where they move, what they&apos;re watching, whether
+            they&apos;ve taken casualties. They report up to the squad leader. The squad leader owns the bigger picture: the
             objective, the route, when to commit the second team. A
             rifleman watches an assigned sector and follows the team
             leader. Chasing a target you spotted yourself is how a fire team
@@ -245,8 +244,8 @@ export default function MilsimGuidePage() {
             from the team leader; a corpsman attached to a squad still moves
             and holds cover like everyone else, just with a different job
             once someone goes down. Nobody in a working squad is out there
-            making independent calls — that&apos;s what the chain of command
-            exists to prevent.
+            making independent calls. That&apos;s what the chain of command is
+            for.
           </p>
 
           <H2>Roles</H2>
@@ -365,8 +364,8 @@ export default function MilsimGuidePage() {
             even in units that don&apos;t formally track it.
           </p>
           <p>
-            The extra nights — training, schools, specialized operations —
-            are typically optional, there for people who want to qualify for
+            The extra nights, meaning training, schools, and specialized
+            operations, are usually optional, there for people who want to qualify for
             a new role or simply want to play more. A unit that expects
             every member at every event on the calendar is unusual and worth
             asking about directly, since that&apos;s a considerably bigger
@@ -374,8 +373,8 @@ export default function MilsimGuidePage() {
           </p>
           <p>
             Realistically, budget two to three hours for the main operation
-            and expect it to occasionally run long — operations don&apos;t
-            always wrap up on schedule. Time zone matters more than almost
+            and expect it to run long sometimes. Operations don&apos;t always
+            wrap up on schedule. Time zone matters more than almost
             anything else here. A great unit whose op runs at an hour you
             can&apos;t reliably make isn&apos;t a great unit for you.
           </p>
@@ -443,7 +442,7 @@ export default function MilsimGuidePage() {
             <li>
               <span className="text-ink">Whether progression is tracked.</span>{" "}
               Ask where ranks and course completions live. If the answer is
-              &ldquo;Discord roles,&rdquo; adjust expectations — that usually
+              &ldquo;Discord roles,&rdquo; adjust expectations. That usually
               means promotions are informal and easy to forget about.
             </li>
             <li>
@@ -463,13 +462,13 @@ export default function MilsimGuidePage() {
           <p>
             Most units follow the same pattern: application, a conversation
             with a recruiter, a training course, then your first op in a
-            rifle squad. The application itself is usually short — a form
+            rifle squad. The application itself is usually short: a form
             asking for basic information and maybe your availability, not an
             essay. The recruiter conversation that follows is where the
             modpack gets installed and most of your actual questions get
             answered, so it&apos;s worth showing up to that step rather than
-            letting the application sit unanswered. Reckon on one to two
-            weeks from application to your first operation, depending on
+            letting the application sit unanswered. Figure one to two weeks
+            from application to your first operation, depending on
             when training runs.{" "}
             <Link
               href="/join"

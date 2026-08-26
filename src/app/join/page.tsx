@@ -31,7 +31,7 @@ const steps = [
   {
     n: "01",
     title: "Submit your application",
-    body: "Five minutes on the personnel portal. The profile you create becomes your service record — rank, courses, and awards all hang off it.",
+    body: "Five minutes on the personnel portal. The profile you create becomes your service record, so rank, courses, and awards all hang off it.",
   },
   {
     n: "02",
@@ -41,7 +41,7 @@ const steps = [
   {
     n: "03",
     title: "Paramarine Recruit Training",
-    body: "PRT covers movement, comms, and formations. Nobody expects you to arrive knowing this — that's what the course is for.",
+    body: "PRT covers movement, comms, and formations. Nobody expects you to arrive knowing this. That's what the course is for.",
   },
   {
     n: "04",
@@ -59,19 +59,19 @@ const faqs = [
   },
   {
     q: "What do I need to play?",
-    a: "Arma 3 on PC, a microphone, and our modpack — “Paramarine Milsim Core” on the Steam Workshop, which installs in one click. Voice is on Discord and TeamSpeak.",
+    a: "Arma 3 on PC, a microphone, and our modpack, “Paramarine Milsim Core” on the Steam Workshop, which installs in one click. In-game voice runs on TeamSpeak. Discord handles everything either side of that.",
   },
   {
     q: "When does the unit play?",
-    a: "Sunday 8PM Eastern is the main operation and the one to build your week around. Field training runs Tuesdays, MSO recon ops Thursdays, recruit training Fridays, and courses Saturdays — all 8PM Eastern.",
+    a: "Sunday 8PM Eastern is the main operation and the one to build your week around. Field training runs Tuesdays, MSO recon ops Thursdays, recruit training Fridays, and courses Saturdays, all at 8PM Eastern.",
   },
   {
     q: "Do I have to attend everything?",
-    a: "No. The expectation is 75% attendance at operations and 50% at training — deliberately not everything, because people have jobs. Sunday is the one everyone turns out for; Tuesday and Saturday are there when you want to train or qualify for something new.",
+    a: "No. We expect 75% attendance at operations and 50% at training. It's deliberately not everything, because people have jobs. Sunday is the one everyone turns out for. Tuesday and Saturday are there when you want to train or qualify for something new.",
   },
   {
-    q: "I'm not in North America — can I still join?",
-    a: "Yes, as long as 8PM Eastern lands somewhere you can play. We have members outside North America. Work out what that time is locally before you apply.",
+    q: "I'm not in North America. Can I still join?",
+    a: "Yes, as long as 8PM Eastern lands somewhere you can play. We have members outside North America. Check what that time is where you live before you apply.",
   },
   {
     q: "What role do I start in?",
@@ -79,7 +79,7 @@ const faqs = [
   },
   {
     q: "What is MSO?",
-    a: "Marine Special Operator — a second role on top of your normal billet, running its own recon operations on Thursdays. Selection is demanding and the standard is high, but anyone in the unit can try out.",
+    a: "Marine Special Operator. It's a second role on top of your normal billet, running its own recon operations on Thursdays. Selection is hard, but anyone in the unit can try out for it.",
   },
   {
     q: "Is the rank structure real?",
@@ -180,7 +180,7 @@ export default async function JoinPage() {
             >
               The new recruit guide
             </Link>{" "}
-            takes it from there — what to install, what recruit training
+            picks up from there: what to install, what recruit training
             covers, and what to do on your first op night.
           </p>
         </div>
