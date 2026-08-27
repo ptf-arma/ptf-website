@@ -64,3 +64,38 @@ export function formatOperationDate(iso: string): string {
     timeZone: "UTC",
   });
 }
+
+/*
+ * Billet reports the terrain by its Arma class name, lowercase: "islapera",
+ * "enoch". Title-casing alone gets "Islapera" and "Enoch", so the terrains the
+ * unit actually plays are named here. Anything unlisted falls back to
+ * title-case, which is right for single-word maps and no worse than the raw id
+ * for the rest.
+ */
+const WORLD_LABELS: Record<string, string> = {
+  islapera: "Isla Pera",
+  altis: "Altis",
+  stratis: "Stratis",
+  tanoa: "Tanoa",
+  malden: "Malden",
+  enoch: "Livonia",
+  chernarus: "Chernarus",
+  chernarus_summer: "Chernarus",
+  cham: "Chernarus 2020",
+  vt7: "Vinjesvingen",
+  kunduz: "Kunduz",
+  takistan: "Takistan",
+  lythium: "Lythium",
+  vr: "Virtual Reality",
+};
+
+export function formatWorld(world: string | null): string | null {
+  if (!world) return null;
+  const key = world.trim().toLowerCase();
+  if (WORLD_LABELS[key]) return WORLD_LABELS[key];
+  return key
+    .split(/[\s_-]+/)
+    .filter(Boolean)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}

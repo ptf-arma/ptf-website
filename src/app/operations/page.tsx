@@ -6,6 +6,7 @@ import {
   replayEmbedUrl,
   formatDuration,
   formatOperationDate,
+  formatWorld,
 } from "@/lib/replay";
 import { ReplayEmbed, ReplayEmbedEmpty } from "@/components/replay-embed";
 import { ButtonLink } from "@/components/ui/button";
@@ -69,7 +70,7 @@ export default async function OperationsPage() {
               title={replay.title}
               meta={[
                 formatOperationDate(replay.startedAt),
-                replay.world,
+                formatWorld(replay.world),
                 formatDuration(replay.durationSeconds),
                 replay.participants ? `${replay.participants} on the ground` : null,
               ]

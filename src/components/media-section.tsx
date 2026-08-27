@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/section-label";
-import { getLatestReplay, formatDuration, formatOperationDate } from "@/lib/replay";
+import { getLatestReplay, formatDuration, formatOperationDate,
+  formatWorld } from "@/lib/replay";
 import { VideoCard } from "@/components/video-card";
 
 /**
@@ -118,7 +119,7 @@ export async function MediaSection() {
               <p className="micro-label mt-1 text-ink-muted">
                 {[
                   formatOperationDate(replay.startedAt),
-                  replay.world,
+                  formatWorld(replay.world),
                   formatDuration(replay.durationSeconds),
                   replay.participants ? `${replay.participants} on the ground` : null,
                 ]

@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
-import { getLatestReplay, formatDuration, formatOperationDate } from "@/lib/replay";
+import { getLatestReplay, formatDuration, formatOperationDate,
+  formatWorld } from "@/lib/replay";
 
 /*
  * Share card for the replay page.
@@ -25,7 +26,7 @@ export default async function Image() {
   const meta = replay
     ? [
         formatOperationDate(replay.startedAt),
-        replay.world,
+        formatWorld(replay.world),
         formatDuration(replay.durationSeconds),
         replay.participants ? `${replay.participants} on the ground` : null,
       ]
