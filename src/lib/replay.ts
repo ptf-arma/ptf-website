@@ -40,9 +40,15 @@ export function replayEmbedUrl(): string {
   return `${billet.base}/embed/replay/${billet.slug}`;
 }
 
-/** "3h 0m" — replays run long, so hours read better than raw minutes. */
+/**
+ * "3h" / "2h 45m" / "40m". Replays run long, so hours read better than raw
+ * minutes. Rounds to whole minutes first and carries the hour, since rounding
+ * each part separately renders 10776s as "2h 60m".
+ */
 export function formatDuration(seconds: number): string {
-  const h = Math.floor(seconds / 3600);
-  const m = Math.round((seconds % 3600) / 60);
-  return h > 0 ? `${h}h ${m}m` : `${m}m`;
+  const totalMinutes = Math.round(seconds / 60);
+  const h = Math.floor(totalMinutes / 60);
+  const m = totalMinutes % 60;
+  if (h === 0) return `${m}m`;
+  return m === 0 ? `${h}h` : `${h}h ${m}m`;
 }
