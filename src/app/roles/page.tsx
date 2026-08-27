@@ -44,12 +44,12 @@ export default function RolesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
-      <article className="mx-auto max-w-3xl px-4 pb-20 pt-20 sm:px-6">
+      <article className="mx-auto max-w-6xl px-4 pb-20 pt-20 sm:px-6">
         <SectionLabel>Roles</SectionLabel>
-        <h1 className="heading-display mt-3 text-4xl text-ink sm:text-5xl">
+        <h1 className="heading-display mt-3 max-w-2xl text-4xl text-ink sm:text-5xl">
           What each billet actually does
         </h1>
-        <p className="mt-5 text-lg leading-relaxed text-ink-muted">
+        <p className="max-w-2xl mt-5 text-lg leading-relaxed text-ink-muted">
           Everyone joins as an 0311 Rifleman and stays there until they&apos;ve
           got a few operations behind them. Everything else on this page is a
           qualification you earn afterwards, on a course or through selection.
@@ -86,7 +86,7 @@ export default function RolesPage() {
                 {role.status}
               </span>
             </p>
-            <div className="mt-4 space-y-4 leading-relaxed text-ink-muted">
+            <div className="max-w-2xl mt-4 space-y-4 leading-relaxed text-ink-muted">
               {role.detail.map((para) => (
                 <p key={para.slice(0, 40)}>{para}</p>
               ))}

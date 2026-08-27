@@ -80,12 +80,12 @@ export default async function OperationsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
       />
-      <article className="mx-auto max-w-3xl px-4 pb-20 pt-20 sm:px-6">
+      <article className="mx-auto max-w-6xl px-4 pb-20 pt-20 sm:px-6">
         <SectionLabel>Operations</SectionLabel>
-        <h1 className="heading-display mt-3 text-4xl text-ink sm:text-5xl">
+        <h1 className="heading-display mt-3 max-w-2xl text-4xl text-ink sm:text-5xl">
           After-action reports
         </h1>
-        <p className="mt-5 text-lg leading-relaxed text-ink-muted">
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">
           What happened on each operation: the mission, the terrain, who
           showed up, and how it went. Written up by the people who ran it.
         </p>
@@ -93,7 +93,7 @@ export default async function OperationsPage() {
         <h2 className="heading-display mt-12 text-2xl text-ink sm:text-3xl">
           Our last operation
         </h2>
-        <p className="mt-3 leading-relaxed text-ink-muted">
+        <p className="mt-3 max-w-2xl leading-relaxed text-ink-muted">
           Every position, every contact, played back on the map. This is the
           most recent operation we&apos;ve released, not a highlight reel.
         </p>

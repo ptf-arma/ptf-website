@@ -56,19 +56,19 @@ export default function MilsimGuidePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
-      <article className="mx-auto max-w-3xl px-4 pb-20 pt-20 sm:px-6">
+      <article className="mx-auto max-w-6xl px-4 pb-20 pt-20 sm:px-6">
         <SectionLabel>Guide</SectionLabel>
-        <h1 className="heading-display mt-3 text-4xl text-ink sm:text-5xl">
+        <h1 className="heading-display mt-3 max-w-2xl text-4xl text-ink sm:text-5xl">
           What is Arma 3 milsim?
         </h1>
-        <p className="mt-5 text-lg leading-relaxed text-ink-muted">
+        <p className="max-w-2xl mt-5 text-lg leading-relaxed text-ink-muted">
           Milsim is Arma 3 played as a team, with a plan, in a unit that keeps
           the same people week to week. If you&apos;ve only played public
           servers, it&apos;s a different game. Here&apos;s what to expect
           before you sign up anywhere.
         </p>
 
-        <div className="mt-6 space-y-4 leading-relaxed text-ink-muted">
+        <div className="max-w-2xl mt-6 space-y-4 leading-relaxed text-ink-muted">
           <H2>How strict does it get?</H2>
           <p>
             &ldquo;Milsim&rdquo; covers a wide spectrum, and the word alone
