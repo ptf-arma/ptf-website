@@ -7,12 +7,14 @@ import { SectionLabel } from "@/components/ui/section-label";
 import { LocalTime } from "@/components/local-time";
 
 /**
- * "Operations" — the weekly schedule + the closing enlist band. Live op
- * stats appear once the unit has conducted operations.
+ * "Operations" — the weekly schedule + the closing enlist band. The last-op
+ * date appears once Billet has one on record. Billet's opsConducted count
+ * only covers ops tracked there, far below the unit's real total, so we
+ * deliberately don't show it.
  */
 export async function OpsSection() {
   const stats = await getStats();
-  const showOps = stats !== null && stats.opsConducted > 0;
+  const lastOpAt = stats?.lastOpAt ?? null;
 
   return (
     <section id="ops" className="border-t border-edge">
@@ -58,25 +60,17 @@ export async function OpsSection() {
           ))}
         </div>
 
-        {showOps ? (
+        {lastOpAt ? (
           <dl className="mt-6 flex flex-wrap gap-x-10 gap-y-3 rounded-sm border border-edge bg-surface px-5 py-4">
             <div>
-              <dt className="micro-label">Operations conducted</dt>
+              <dt className="micro-label">Last operation</dt>
               <dd className="mt-1 font-mono text-lg text-ink">
-                {stats.opsConducted}
+                {new Date(lastOpAt).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                })}
               </dd>
             </div>
-            {stats.lastOpAt ? (
-              <div>
-                <dt className="micro-label">Last operation</dt>
-                <dd className="mt-1 font-mono text-lg text-ink">
-                  {new Date(stats.lastOpAt).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </dd>
-              </div>
-            ) : null}
           </dl>
         ) : null}
 
