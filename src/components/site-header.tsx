@@ -17,7 +17,7 @@ const nav = [
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-edge bg-bg/90 backdrop-blur">
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4 sm:gap-6 sm:px-6">
         {/* Official horizontal-reversed lockup. Standards v1.3: use the PNG
             on the web — the SVG embeds the patch bitmap and weighs ~300 KB. */}
         <Link href="/" className="flex shrink-0 items-center">

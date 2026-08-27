@@ -25,7 +25,12 @@ export function HeaderActions() {
     return (
       <>
         {member ? null : (
-          <ButtonLink href={billet.applyUrl} variant="primary" size="md">
+          <ButtonLink
+            href={billet.applyUrl}
+            variant="primary"
+            size="md"
+            className="max-sm:hidden"
+          >
             {applicant ? "Finish applying" : "Enlist"}
           </ButtonLink>
         )}
@@ -52,7 +57,7 @@ export function HeaderActions() {
             {session.member.rankAbbr ? `${session.member.rankAbbr} ` : ""}
             {session.member.name}
           </span>
-          <span className="micro-label border-l border-edge pl-2.5">
+          <span className="micro-label border-l border-edge pl-2.5 max-sm:hidden">
             Billet →
           </span>
         </a>
@@ -62,11 +67,14 @@ export function HeaderActions() {
 
   return (
     <>
+      {/* max-sm:hidden, not `hidden sm:inline-flex`: ButtonLink's base
+          `inline-flex` outranks `hidden` in the stylesheet, so plain
+          `hidden` never applies here. Log In lives in the mobile nav. */}
       <ButtonLink
         href={billet.loginUrl}
         variant="ghost"
         size="md"
-        className="hidden sm:inline-flex"
+        className="max-sm:hidden"
       >
         Log In
       </ButtonLink>
