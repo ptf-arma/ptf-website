@@ -21,11 +21,14 @@ export const metadata: Metadata = {
   title: { absolute: title },
   description,
   alternates: { canonical: "/operations" },
+  // No images here on purpose. opengraph-image.tsx generates this page's card
+  // from the replay's own metadata, and an explicit images array in the
+  // metadata object overrides the file convention, which would silently put
+  // the generic site image back.
   openGraph: {
     title,
     description,
     url: `${SITE_URL}/operations`,
-    images: [{ url: "/og.jpg", width: 1200, height: 630 }],
   },
   twitter: { title, description },
 };
