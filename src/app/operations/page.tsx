@@ -78,6 +78,59 @@ export default async function OperationsPage() {
           )}
         </div>
 
+        <div className="mt-14 max-w-2xl space-y-4 leading-relaxed text-ink-muted">
+          <h2 className="heading-display text-2xl text-ink sm:text-3xl">
+            How the recording works
+          </h2>
+          <p>
+            Every operation records itself. The command post writes down where
+            everyone is, roughly every three seconds, for as long as the op
+            runs. Players and AI, both sides, vehicles and aircraft. Nobody
+            edits it afterwards and nobody chooses the angles.
+          </p>
+          <p>
+            That means what you&apos;re watching is the operation, not a
+            trailer cut from it. Plans that worked and plans that fell apart
+            look the same going in.
+          </p>
+
+          <h2 className="heading-display mt-10 text-2xl text-ink sm:text-3xl">
+            Reading the board
+          </h2>
+          <p>
+            Blue is us, red is whoever we were fighting. Each marker is one
+            person or one vehicle, sitting on the real terrain the mission ran
+            on. The panel down the side lists the vehicles in play and how many
+            people are riding in each.
+          </p>
+          <p>
+            The bar under the map is the whole operation end to end. The marks
+            along it are contacts: somebody hit, somebody killed, a vehicle
+            destroyed. Long quiet stretches between them are the parts nobody
+            puts in a highlight reel, and they are most of an operation.
+          </p>
+
+          <h2 className="heading-display mt-10 text-2xl text-ink sm:text-3xl">
+            Watching it properly
+          </h2>
+          <p>
+            Drag the timeline to move around. Run it at 64&times; to watch the
+            shape of the whole night in a couple of minutes, then drop back to
+            1&times; when something starts happening. Pan and zoom the map like
+            any other map.
+          </p>
+          <p>
+            Pick one squad and follow it. Watching four markers hold spacing,
+            take contact, and work a flank tells you more about how a unit
+            actually fights than any amount of writing about it, including
+            ours.
+          </p>
+          <p>
+            Names are stripped from the public version. You can see what a
+            squad did; you can&apos;t see who was in it.
+          </p>
+        </div>
+
         <div className="mt-12 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
           <p className="text-sm text-ink-muted">
             The main operation runs Sundays, 8PM Eastern. Come see one.

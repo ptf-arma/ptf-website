@@ -217,6 +217,16 @@ export default async function JoinPage() {
           </div>
 
           <p className="mt-8 max-w-2xl text-sm text-ink-muted">
+            Want to see one before you apply?{" "}
+            <Link
+              href="/operations"
+              className="text-ink underline decoration-edge-bright underline-offset-4 hover:decoration-ink"
+            >
+              Watch our last operation
+            </Link>{" "}
+            play back on the map. Every position, every contact, unedited.
+          </p>
+          <p className="mt-4 max-w-2xl text-sm text-ink-muted">
             Never done milsim before?{" "}
             <Link
               href="/milsim-guide"

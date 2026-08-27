@@ -190,6 +190,17 @@ export default function MilsimGuidePage() {
             most games bother giving you.
           </p>
 
+          <p>
+            If you&apos;d rather see one than read about one,{" "}
+            <Link
+              href="/operations"
+              className="text-ink underline decoration-edge-bright underline-offset-4 hover:decoration-ink"
+            >
+              here&apos;s a whole operation played back on the map
+            </Link>
+            , recorded automatically while we ran it.
+          </p>
+
           <H2>Radio discipline</H2>
           <p>
             Most units run separate radio nets by level of command. Your fire

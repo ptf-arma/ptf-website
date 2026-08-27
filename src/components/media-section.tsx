@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { SectionLabel } from "@/components/ui/section-label";
+import { getLatestReplay, formatDuration, formatOperationDate } from "@/lib/replay";
 import { VideoCard } from "@/components/video-card";
 
 /**
@@ -86,7 +88,11 @@ const shots = [
   },
 ];
 
-export function MediaSection() {
+export async function MediaSection() {
+  // The replay is the only thing here that dates itself, so it leads. The
+  // films below are commemorative and stay put.
+  const replay = await getLatestReplay();
+
   return (
     <section id="media" className="border-t border-edge">
       <script
@@ -98,6 +104,33 @@ export function MediaSection() {
         <h2 className="heading-display mt-3 text-3xl text-ink sm:text-4xl">
           In the field
         </h2>
+
+        {replay ? (
+          <Link
+            href="/operations"
+            className="group mt-10 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-surface px-5 py-4 transition-colors hover:border-edge-bright"
+          >
+            <div>
+              <span className="micro-label text-ink-faint">Last operation</span>
+              <p className="mt-1 font-display text-base font-semibold text-ink">
+                {replay.title}
+              </p>
+              <p className="micro-label mt-1 text-ink-muted">
+                {[
+                  formatOperationDate(replay.startedAt),
+                  replay.world,
+                  formatDuration(replay.durationSeconds),
+                  replay.participants ? `${replay.participants} on the ground` : null,
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </p>
+            </div>
+            <span className="display shrink-0 text-xs tracking-[0.14em] text-ink-muted transition-colors group-hover:text-ink">
+              WATCH THE REPLAY →
+            </span>
+          </Link>
+        ) : null}
 
         {/* Screenshots: one feature-wide + two standard */}
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
