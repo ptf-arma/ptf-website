@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { billet, links, SITE_URL } from "@/lib/config";
-import { getAars, formatOperationDate, type AarSummary } from "@/lib/aars";
 import {
   getLatestReplay,
   replayEmbedUrl,
   formatDuration,
+  formatOperationDate,
 } from "@/lib/replay";
 import { ReplayEmbed, ReplayEmbedEmpty } from "@/components/replay-embed";
 import { ButtonLink } from "@/components/ui/button";
 import { SectionLabel } from "@/components/ui/section-label";
 
-const title = "Arma 3 Milsim After-Action Reports";
+const title = "Watch an Arma 3 Milsim Operation";
 const description =
-  "After-action reports from Paramarine Task Force Arma 3 operations: mission type, terrain, and how each one played out.";
+  "The Paramarine Task Force's most recent operation, played back on the map: every position, every contact, as it happened.";
 
 export const metadata: Metadata = {
   // Absolute: the "· Paramarine Task Force" template would push this past the
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: { title, description },
 };
 
-const collectionJsonLd = {
+const jsonLd = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   name: title,
@@ -39,71 +39,33 @@ const collectionJsonLd = {
   publisher: { "@id": `${SITE_URL}/#org` },
 };
 
-function AarRow({ aar }: { aar: AarSummary }) {
-  return (
-    <li>
-      <Link
-        href={`/operations/${aar.slug}`}
-        className="group block px-1 py-5 transition-colors hover:bg-raised sm:px-2"
-      >
-        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-          <h2 className="font-display text-lg font-semibold text-ink">
-            {aar.title}
-          </h2>
-          <span className="micro-label shrink-0 text-ink-faint">
-            {formatOperationDate(aar.operation_date)}
-          </span>
-        </div>
-        {aar.operation_type || aar.terrain || aar.participants ? (
-          <p className="micro-label mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-muted">
-            {aar.operation_type ? <span>{aar.operation_type}</span> : null}
-            {aar.terrain ? <span>{aar.terrain}</span> : null}
-            {aar.participants ? (
-              <span>{aar.participants} participants</span>
-            ) : null}
-          </p>
-        ) : null}
-        <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-          {aar.summary}
-        </p>
-      </Link>
-    </li>
-  );
-}
-
 export default async function OperationsPage() {
-  const [aars, replay] = await Promise.all([getAars(), getLatestReplay()]);
+  const replay = await getLatestReplay();
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <article className="mx-auto max-w-6xl px-4 pb-20 pt-20 sm:px-6">
         <SectionLabel>Operations</SectionLabel>
         <h1 className="heading-display mt-3 max-w-2xl text-4xl text-ink sm:text-5xl">
-          After-action reports
+          Our last operation
         </h1>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">
-          What happened on each operation: the mission, the terrain, who
-          showed up, and how it went. Written up by the people who ran it.
+          Every position, every contact, played back on the map. Recorded
+          automatically while we played, not edited afterwards. This is the
+          most recent one we&apos;ve released.
         </p>
 
-        <h2 className="heading-display mt-12 text-2xl text-ink sm:text-3xl">
-          Our last operation
-        </h2>
-        <p className="mt-3 max-w-2xl leading-relaxed text-ink-muted">
-          Every position, every contact, played back on the map. This is the
-          most recent operation we&apos;ve released, not a highlight reel.
-        </p>
-        <div className="mt-6">
+        <div className="mt-8">
           {replay ? (
             <ReplayEmbed
               src={replayEmbedUrl()}
               title={replay.title}
               meta={[
-                formatOperationDate(replay.startedAt.slice(0, 10)),
+                formatOperationDate(replay.startedAt),
                 replay.world,
                 formatDuration(replay.durationSeconds),
                 replay.participants ? `${replay.participants} on the ground` : null,
@@ -115,25 +77,6 @@ export default async function OperationsPage() {
             <ReplayEmbedEmpty portalUrl={billet.base} />
           )}
         </div>
-
-        <h2 className="heading-display mt-14 text-2xl text-ink sm:text-3xl">
-          Written reports
-        </h2>
-
-        {aars.length > 0 ? (
-          <ul className="mt-10 divide-y divide-edge border-y border-edge">
-            {aars.map((aar) => (
-              <AarRow key={aar.slug} aar={aar} />
-            ))}
-          </ul>
-        ) : (
-          <div className="mt-10 rounded-sm border border-edge bg-surface px-5 py-8 text-center">
-            <p className="text-ink-muted">
-              No reports yet. They&apos;ll appear here as operations get
-              written up.
-            </p>
-          </div>
-        )}
 
         <div className="mt-12 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
           <p className="text-sm text-ink-muted">

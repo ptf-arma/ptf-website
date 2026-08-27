@@ -9,6 +9,7 @@ const nav = [
   { label: "Roles", href: "/#roles" },
   { label: "ORBAT", href: "/#roster" },
   { label: "Media", href: "/#media" },
+  { label: "Operations", href: "/operations" },
   { label: "Ranks", href: "/progression" },
   { label: "Join", href: "/join" },
 ];
