@@ -75,7 +75,7 @@ const faqs = [
   },
   {
     q: "What role do I start in?",
-    a: "0311 Rifleman, in a rifle squad. Entry-level billets like automatic rifleman and grenadier open up as soon as a slot does; marksman, corpsman, armor crew, pilot, and MSO come later, through courses and selection.",
+    a: "0311 Rifleman, in a rifle squad. Entry-level billets like automatic rifleman and grenadier are open from the start; marksman, corpsman, armor crew, pilot, and MSO come later, through courses and selection.",
   },
   {
     q: "What is MSO?",

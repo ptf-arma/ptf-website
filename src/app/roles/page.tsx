@@ -51,8 +51,8 @@ export default function RolesPage() {
         </h1>
         <p className="max-w-2xl mt-5 text-lg leading-relaxed text-ink-muted">
           Everyone joins as an 0311 Rifleman. Some of what&apos;s below is
-          entry level and yours as soon as a slot is open; the rest you earn
-          afterwards, on a course, at the range, or through selection. Worth
+          entry level and open as soon as a slot is; the rest you earn
+          afterwards through courses, range scores, or selection. Worth
           reading before you decide what you&apos;re aiming at.
         </p>
 

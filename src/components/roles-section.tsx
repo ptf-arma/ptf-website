@@ -57,7 +57,7 @@ export function RolesSection() {
         </div>
 
         <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-2 rounded-sm border border-edge bg-surface px-5 py-4">
-          <span className="micro-label text-ink-faint">Also on the books</span>
+          <span className="micro-label text-ink-faint">More billets</span>
           <span className="flex flex-wrap gap-2">
             {rest.map((role) => (
               <Link
