@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { billet, links, SITE_URL } from "@/lib/config";
 import { getAars, formatOperationDate, type AarSummary } from "@/lib/aars";
+import {
+  getLatestReplay,
+  replayEmbedUrl,
+  formatDuration,
+} from "@/lib/replay";
+import { ReplayEmbed, ReplayEmbedEmpty } from "@/components/replay-embed";
 import { ButtonLink } from "@/components/ui/button";
 import { SectionLabel } from "@/components/ui/section-label";
 
@@ -66,7 +72,7 @@ function AarRow({ aar }: { aar: AarSummary }) {
 }
 
 export default async function OperationsPage() {
-  const aars = await getAars();
+  const [aars, replay] = await Promise.all([getAars(), getLatestReplay()]);
 
   return (
     <>
@@ -83,6 +89,36 @@ export default async function OperationsPage() {
           What happened on each operation: the mission, the terrain, who
           showed up, and how it went. Written up by the people who ran it.
         </p>
+
+        <h2 className="heading-display mt-12 text-2xl text-ink sm:text-3xl">
+          Our last operation
+        </h2>
+        <p className="mt-3 leading-relaxed text-ink-muted">
+          Every position, every contact, played back on the map. This is the
+          most recent operation we&apos;ve released, not a highlight reel.
+        </p>
+        <div className="mt-6">
+          {replay ? (
+            <ReplayEmbed
+              src={replayEmbedUrl()}
+              title={replay.title}
+              meta={[
+                formatOperationDate(replay.startedAt.slice(0, 10)),
+                replay.world,
+                formatDuration(replay.durationSeconds),
+                replay.participants ? `${replay.participants} on the ground` : null,
+              ]
+                .filter(Boolean)
+                .join(" · ")}
+            />
+          ) : (
+            <ReplayEmbedEmpty portalUrl={billet.base} />
+          )}
+        </div>
+
+        <h2 className="heading-display mt-14 text-2xl text-ink sm:text-3xl">
+          Written reports
+        </h2>
 
         {aars.length > 0 ? (
           <ul className="mt-10 divide-y divide-edge border-y border-edge">
