@@ -7,7 +7,7 @@ import { SectionLabel } from "@/components/ui/section-label";
 
 const title = "Arma 3 Milsim Roles: What Each Billet Actually Does";
 const description =
-  "Rifleman, marksman, corpsman, ACV crew, pilot, and MSO: what each role does during an operation, what gates it, and who it suits.";
+  "Fifteen billets, from rifleman and machine gunner to JTAC, pilot, and Zeus: what each does during an operation, what gates it, and who it suits.";
 
 export const metadata: Metadata = {
   // Absolute: the "· Paramarine Task Force" template would push this past the
@@ -50,10 +50,10 @@ export default function RolesPage() {
           What each billet actually does
         </h1>
         <p className="max-w-2xl mt-5 text-lg leading-relaxed text-ink-muted">
-          Everyone joins as an 0311 Rifleman and stays there until they&apos;ve
-          got a few operations behind them. Everything else on this page is a
-          qualification you earn afterwards, on a course or through selection.
-          Worth reading before you decide what you&apos;re aiming at.
+          Everyone joins as an 0311 Rifleman. Some of what&apos;s below is
+          entry level and yours as soon as a slot is open; the rest you earn
+          afterwards, on a course, at the range, or through selection. Worth
+          reading before you decide what you&apos;re aiming at.
         </p>
 
         <nav

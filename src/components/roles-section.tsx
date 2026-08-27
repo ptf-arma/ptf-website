@@ -31,8 +31,13 @@ function RoleCard({ role }: { role: Role }) {
 /**
  * "Roles" — the available billet types plus the training pipeline hook.
  * Cards are summaries; the full write-up for each billet lives on /roles.
+ * Featured billets get cards; the rest render as a single chip strip so the
+ * section doesn't grow with the roster.
  */
 export function RolesSection() {
+  const featured = roles.filter((role) => role.featured);
+  const rest = roles.filter((role) => !role.featured);
+
   return (
     <section id="roles" className="border-t border-edge">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
@@ -41,14 +46,33 @@ export function RolesSection() {
           What you can be
         </h2>
         <p className="mt-4 max-w-2xl text-ink-muted">
-          Everyone starts as an 0311 Rifleman. The rest are qualifications you
-          earn once you&apos;re in.
+          Everyone starts as an 0311 Rifleman. Some billets are open from your
+          first op; the rest you earn once you&apos;re in.
         </p>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {roles.map((role) => (
+          {featured.map((role) => (
             <RoleCard key={role.name} role={role} />
           ))}
+        </div>
+
+        <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-2 rounded-sm border border-edge bg-surface px-5 py-4">
+          <span className="micro-label text-ink-faint">Also on the books</span>
+          <span className="flex flex-wrap gap-2">
+            {rest.map((role) => (
+              <Link
+                key={role.slug}
+                href={`/roles#${role.slug}`}
+                className="micro-label inline-flex items-center gap-1.5 rounded-sm border border-edge bg-raised px-2.5 py-1 text-ink-muted transition-colors hover:border-edge-bright hover:text-ink"
+              >
+                <span
+                  aria-hidden
+                  className={`h-1.5 w-1.5 rounded-full ${statusDot(role.status)}`}
+                />
+                {role.name}
+              </Link>
+            ))}
+          </span>
         </div>
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
