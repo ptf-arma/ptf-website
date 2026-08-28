@@ -78,9 +78,9 @@ export default async function ProgressionPage() {
             Ranks, schools, and awards
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
-            Promotions have requirements: time in grade, points, courses
-            completed. Everything below is pulled live from the personnel
-            system, so it&apos;s current.
+            Promotions have requirements: time in grade, points, and completed
+            courses. Everything below is pulled live from the personnel system,
+            so it stays current.
           </p>
         </div>
       </section>
@@ -153,7 +153,7 @@ export default async function ProgressionPage() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <div className="flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
             <p className="text-sm text-ink-muted">
-              Every service record starts the same way, with an application.
+              Every service record starts with an application.
             </p>
             <ButtonLink href={billet.applyUrl} variant="primary" size="md">
               Enlist Now

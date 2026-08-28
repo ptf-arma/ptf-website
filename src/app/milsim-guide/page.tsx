@@ -14,14 +14,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "What Is Arma 3 Milsim? A Beginner's Guide",
     description:
-      "What military simulation actually is, what an operation feels like, and how to choose your first Arma 3 milsim unit.",
+      "What military simulation involves, what an operation feels like, and how to choose your first Arma 3 milsim unit.",
     url: `${SITE_URL}/milsim-guide`,
     images: [{ url: "/og.jpg", width: 1200, height: 630 }],
   },
   twitter: {
     title: "What Is Arma 3 Milsim? A Beginner's Guide",
     description:
-      "What military simulation actually is, what an operation feels like, and how to choose your first Arma 3 milsim unit.",
+      "What military simulation involves, what an operation feels like, and how to choose your first Arma 3 milsim unit.",
   },
 };
 
@@ -30,7 +30,7 @@ const articleJsonLd = {
   "@type": "Article",
   headline: "What Is Arma 3 Milsim? A Beginner's Guide",
   description:
-    "What military simulation actually is, what an operation feels like, how squads and radio nets work, the roles you can play, and how to choose your first Arma 3 milsim unit.",
+    "What military simulation involves, what an operation feels like, how squads and radio nets work, the roles you can play, and how to choose your first Arma 3 milsim unit.",
   author: { "@type": "Organization", name: "Paramarine Task Force" },
   publisher: { "@id": `${SITE_URL}/#org` },
   mainEntityOfPage: `${SITE_URL}/milsim-guide`,
@@ -77,8 +77,8 @@ export default function MilsimGuidePage() {
             distinguishable from a public server except the same people tend
             to show up. At the other end are units that run drill nights,
             expect real-world rank courtesies in voice chat, and hold
-            briefings that last as long as the operation itself. Both exist.
-            Both have players who genuinely prefer them.
+            briefings that last as long as the operation itself. Both ends of
+            that range have players who genuinely prefer them.
           </p>
           <p>
             Most units, ours included, sit in the middle: chain of command
@@ -86,9 +86,9 @@ export default function MilsimGuidePage() {
             conversation either side of it. In practice that tends to mean
             nobody stands on ceremony in the general Discord channel, and
             everybody takes direction from their fire team leader once the
-            operation starts. That&apos;s the balance most people are
-            actually after. Enough structure to make the game work, without a
-            second job&apos;s worth of formality bolted onto it.
+            operation starts. That is the balance most people are after, with
+            enough structure to make the game work and without a second
+            job&apos;s worth of formality bolted onto it.
           </p>
           <p>
             Figure out where a unit sits before you apply. Too loose and
@@ -100,11 +100,11 @@ export default function MilsimGuidePage() {
             are. Those words mean something different in every Discord.
           </p>
 
-          <H2>What actually separates milsim from a public server</H2>
+          <H2>What separates milsim from a public server</H2>
           <p>
-            Public Arma 3 servers run the same game, technically. Same
-            weapons, same terrain, same ballistics model. What&apos;s
-            different is everything around the shooting. On a public server
+            Public Arma 3 servers run the same game, with the same weapons,
+            terrain and ballistics model. What&apos;s different is everything
+            around the shooting. On a public server
             you spawn in, grab a loadout, and go fight whoever&apos;s
             nearest. There&apos;s no real plan because there&apos;s no one
             to plan with. Half the server leaves after the first firefight, and
@@ -141,8 +141,8 @@ export default function MilsimGuidePage() {
             <li>
               <span className="text-ink">Warning order.</span> Hours or days
               before the op, leadership puts out a short heads-up: mission
-              type, rough area, what to bring. Enough for squad leaders to
-              start thinking, not a full plan yet.
+              type, rough area, what to bring. It gives squad leaders enough to
+              start thinking about, without being a full plan.
             </li>
             <li>
               <span className="text-ink">Briefing.</span> The unit forms up
@@ -255,7 +255,7 @@ export default function MilsimGuidePage() {
             from the team leader; a corpsman attached to a squad still moves
             and holds cover like everyone else, just with a different job
             once someone goes down. Nobody in a working squad is out there
-            making independent calls. That&apos;s what the chain of command is
+            making independent calls, which is what the chain of command is
             for.
           </p>
 
@@ -294,8 +294,8 @@ export default function MilsimGuidePage() {
           </ul>
           <p>
             In a decent unit these are qualifications you earn on a course,
-            not roles you pick off a list on day one. That matters. A unit
-            that lets brand-new members fly attack helicopters on request has
+            not roles you pick off a list on day one. A unit that lets
+            brand-new members fly attack helicopters on request has
             a training pipeline in name only, and it shows in how the
             operations run.
           </p>
@@ -355,8 +355,10 @@ export default function MilsimGuidePage() {
             Freelancing is the third. Moving to engage something without
             telling anyone, or deciding the plan is wrong and doing your own
             thing, breaks the one thing that separates milsim from a public
-            server. Everyone works off a shared plan. A mediocre plan carried
-            out together beats a good idea carried out alone.
+            server, which is that everyone works off a shared plan. The rest of
+            the squad can only act on what they know about, so a plan they are
+            all following goes further than a better idea you keep to
+            yourself.
           </p>
           <p>
             None of this reflects badly on new players. It&apos;s habits
@@ -385,9 +387,9 @@ export default function MilsimGuidePage() {
           <p>
             Realistically, budget two to three hours for the main operation
             and expect it to run long sometimes. Operations don&apos;t always
-            wrap up on schedule. Time zone matters more than almost
-            anything else here. A great unit whose op runs at an hour you
-            can&apos;t reliably make isn&apos;t a great unit for you.
+            wrap up on schedule. Time zone matters more than almost anything
+            else here, because a unit whose op runs at an hour you can&apos;t
+            reliably make won&apos;t work for you however good it is.
           </p>
 
           <H2>What to expect from training</H2>
@@ -402,9 +404,9 @@ export default function MilsimGuidePage() {
           <p>
             It&apos;s shorter and less intimidating than it sounds. A few
             hours, sometimes split over two sessions, run by existing members
-            rather than a separate instructor cadre. Nobody expects you to
-            arrive knowing formations or brevity codes. That&apos;s the point
-            of the course.
+            rather than a separate instructor cadre. You are not expected to
+            arrive knowing formations or brevity codes, which is what the course
+            is for.
           </p>
           <p>
             After training you go into a real operation in a rifle squad,
@@ -421,7 +423,8 @@ export default function MilsimGuidePage() {
             box.
           </p>
           <p>
-            One thing worth knowing about the hardware. Arma leans harder on
+            There is one thing worth knowing about the hardware. Arma leans
+            harder on
             your CPU than your graphics card. A sixty-player operation with a
             lot of AI is the worst case, not the average. If the game runs
             acceptably in singleplayer, expect a large op to run worse.
@@ -493,7 +496,7 @@ export default function MilsimGuidePage() {
 
         <div className="mt-12 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
           <p className="text-sm text-ink-muted">
-            Ten years in. Come see how we run it.
+            We have been running for ten years. Come and see how we do it.
           </p>
           <div className="flex gap-3">
             <ButtonLink href={links.discord} variant="secondary" size="md">

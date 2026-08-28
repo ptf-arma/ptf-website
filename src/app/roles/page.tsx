@@ -52,7 +52,7 @@ export default function RolesPage() {
         <p className="max-w-2xl mt-5 text-lg leading-relaxed text-ink-muted">
           Everyone joins as an 0311 Rifleman. Some of what&apos;s below is
           entry level and open as soon as a slot is; the rest you earn
-          afterwards through courses, range scores, or selection. Worth
+          afterwards through courses, range scores, or selection. It is worth
           reading before you decide what you&apos;re aiming at.
         </p>
 
@@ -96,7 +96,8 @@ export default function RolesPage() {
 
         <div className="mt-12 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
           <p className="text-sm text-ink-muted">
-            Courses run Saturdays. You pick a direction once you&apos;re in.
+            Courses run on Saturdays, and you pick a direction once
+            you&apos;re in.
           </p>
           <div className="flex gap-3">
             <ButtonLink href={links.discord} variant="secondary" size="md">
