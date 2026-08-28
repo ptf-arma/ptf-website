@@ -3,26 +3,35 @@
  * Referenced by the homepage roles section (summary cards) and /roles (full
  * detail), so the two can't drift.
  *
- * `blurb` is the one-liner shown on the homepage card. `detail` is the
+ * `blurb` is the one-liner shown on the homepage card, so only featured
+ * billets carry one — the rest render as name-only chips. `detail` is the
  * long-form copy shown only on /roles — the homepage deliberately stays a
  * summary so it doesn't turn into a wall of text.
  */
 
-export type Role = {
+type BaseRole = {
   /** URL fragment on /roles. */
   slug: string;
   /** USMC MOS code, where the billet maps to one. */
   designation: string;
   name: string;
-  /** Homepage card one-liner. */
-  blurb: string;
   /** Availability + what gates it. */
   status: string;
   /** Paragraphs for the /roles page. */
   detail: string[];
-  /** Gets a full card on the homepage; the rest render as compact chips. */
-  featured?: boolean;
 };
+
+/** Gets a full card on the homepage, which always shows a blurb. */
+export type FeaturedRole = BaseRole & {
+  featured: true;
+  /** Homepage card one-liner. */
+  blurb: string;
+};
+
+/** Renders as a compact name-only chip, so there's nothing to blurb. */
+export type PlainRole = BaseRole & { featured?: false; blurb?: never };
+
+export type Role = FeaturedRole | PlainRole;
 
 export const roles: Role[] = [
   {
@@ -69,7 +78,6 @@ export const roles: Role[] = [
     slug: "machine-gunner",
     designation: "0331",
     name: "Machine Gunner",
-    blurb: "The squad's belt-fed medium machine gun.",
     status: "When available · Entry level",
     detail: [
       "The belt-fed medium gun, run as the squad's base of fire. A well-sited gun can lock down a road or a treeline, so where you put it matters more than how much you shoot.",
@@ -81,7 +89,6 @@ export const roles: Role[] = [
     slug: "mortarman",
     designation: "0341",
     name: "Mortarman",
-    blurb: "Indirect fire support, on call over the radio.",
     status: "When available · Entry level",
     detail: [
       "Indirect fire support from behind the line. Fire missions come in over the radio as grids and corrections; you plot them, lay the tube, and adjust until the rounds land where the ground element needs them.",
@@ -93,7 +100,6 @@ export const roles: Role[] = [
     slug: "designated-marksman",
     designation: "0311",
     name: "Designated Marksman",
-    blurb: "Longer-range rifle support inside the squad.",
     status: "Available · Requires exceptional range score",
     detail: [
       "A designated marksman walks with the squad. You're not off on a hill by yourself.",
@@ -106,7 +112,6 @@ export const roles: Role[] = [
     slug: "hospital-corpsman",
     designation: "",
     name: "Hospital Corpsman",
-    blurb: "Attached to a squad to keep the wounded in the fight.",
     status: "Waitlist · Requires Combat Life Saver",
     detail: [
       "A corpsman moves like everyone else, in the same formation and spacing, with a sector to watch while nobody is hurt.",
@@ -120,7 +125,6 @@ export const roles: Role[] = [
     slug: "heavy-antitank",
     designation: "0352",
     name: "Heavy Antitank",
-    blurb: "Shoulder-fired launcher for enemy armor.",
     status: "Available · Requires qualification",
     detail: [
       "You carry the launcher that deals with enemy armor, and only a few rounds for it, so each shot has to be worth taking.",
@@ -132,7 +136,6 @@ export const roles: Role[] = [
     slug: "combat-engineer",
     designation: "1371",
     name: "Combat Engineer",
-    blurb: "Demolitions, breaching, and mine clearance.",
     status: "Available · Requires qualification",
     detail: [
       "Engineers handle demolitions, breaching, and clearing mines and IEDs. You get called forward for a locked compound, a wire obstacle, or a road that might be seeded.",
@@ -144,7 +147,6 @@ export const roles: Role[] = [
     slug: "fireteam-leader",
     designation: "0311",
     name: "Fireteam Leader",
-    blurb: "Runs a fire team of three.",
     status: "When available · Requires qualifications",
     detail: [
       "A fireteam leader runs a team of three. The squad leader gives you a task — take that building, watch that flank — and you decide how your team executes it: who moves, who covers, where everyone's looking.",
@@ -156,7 +158,6 @@ export const roles: Role[] = [
     slug: "jtac",
     designation: "",
     name: "JTAC",
-    blurb: "Controls aircraft for the ground force.",
     status: "When available · Requires qualifications",
     detail: [
       "A JTAC controls aircraft for the ground force: talking a pilot's eyes onto a target, keeping them clear of friendlies, and clearing them to engage.",
@@ -212,7 +213,6 @@ export const roles: Role[] = [
     slug: "operations-staff",
     designation: "",
     name: "Operations Staff",
-    blurb: "The Zeus seat, building and running the unit's operations.",
     status: "Highly selective · Skill and availability",
     detail: [
       "Operations staff build and run the operations instead of playing them. Missions get made ahead of time — terrain, enemy composition, objectives — and during the op you're in the Zeus seat, running the enemy and adjusting as the night unfolds.",

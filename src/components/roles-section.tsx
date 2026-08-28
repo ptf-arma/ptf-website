@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { billet } from "@/lib/config";
-import { roles, statusDot, type Role } from "@/lib/roles";
+import { roles, statusDot, type FeaturedRole } from "@/lib/roles";
 import { ButtonLink } from "@/components/ui/button";
 import { SectionLabel } from "@/components/ui/section-label";
 
-function RoleCard({ role }: { role: Role }) {
+function RoleCard({ role }: { role: FeaturedRole }) {
   return (
     <Link
       href={`/roles#${role.slug}`}
@@ -35,7 +35,9 @@ function RoleCard({ role }: { role: Role }) {
  * section doesn't grow with the roster.
  */
 export function RolesSection() {
-  const featured = roles.filter((role) => role.featured);
+  const featured = roles.filter(
+    (role): role is FeaturedRole => role.featured === true,
+  );
   const rest = roles.filter((role) => !role.featured);
 
   return (
