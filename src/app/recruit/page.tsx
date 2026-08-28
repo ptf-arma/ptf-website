@@ -9,7 +9,7 @@ import { LocalTime } from "@/components/local-time";
 export const metadata: Metadata = {
   title: "New Recruit Guide",
   description:
-    "Everything a new Paramarine needs between applying and their first Sunday operation: modpack setup, recruit training, and what op night actually looks like.",
+    "Everything a new Paramarine needs between applying and their first Sunday operation: modpack setup, recruit training, and what op night looks like.",
   alternates: { canonical: "/recruit" },
   openGraph: {
     title: "New Recruit Guide · Paramarine Task Force",
@@ -120,8 +120,8 @@ export default function RecruitGuidePage() {
             New recruit guide
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
-            Everything between your application and your first Sunday op. Most
-            of it is setup.
+            Everything between your application and your first Sunday op, most
+            of which is setup.
           </p>
           <p className="mt-4 max-w-xl text-sm text-ink-muted">
             Haven&apos;t applied yet?{" "}
@@ -162,12 +162,12 @@ export default function RecruitGuidePage() {
         effort="10 minutes"
       >
         <p>
-          We pick applications up by hand, so post in Discord once yours is in.
-          Otherwise it can sit for a week.
+          We pick applications up by hand, so post in Discord once yours is
+          in, or it can sit for a week.
         </p>
         <Checklist>
           <Check title="Apply on the personnel portal">
-            Five minutes. This becomes your service record.
+            It takes about five minutes, and it becomes your service record.
           </Check>
           <Check title="Join the Discord under the same name">
             We match applications to Discord accounts manually.
@@ -177,14 +177,15 @@ export default function RecruitGuidePage() {
           </Check>
           <Check title="Ask questions in #recruit-chat" />
           <Check title="Set your own Discord nickname">
-            Roles get assigned from the portal automatically. Nicknames
-            don&apos;t.
+            Roles are assigned from the portal automatically, but nicknames
+            aren&apos;t.
           </Check>
         </Checklist>
         <p>
-          Accepted recruits go into a squad and a fire team. Your fire team
-          leader and squad leader handle you from there. Take problems to them,
-          including if you&apos;d rather be somewhere else in the unit.
+          Once you&apos;re accepted you go into a squad and a fire team, and
+          your fire team leader and squad leader look after you from there. Take
+          any problems to them, including if you&apos;d rather be somewhere else
+          in the unit.
         </p>
       </Phase>
 
@@ -195,13 +196,13 @@ export default function RecruitGuidePage() {
         effort="An hour, plus the download"
       >
         <p>
-          Start the download the day you apply. It&apos;s large, and people
+          Start the download the day you apply, because it is large and people
           miss their first night waiting on it.
         </p>
         <Checklist>
           <Check title="Arma 3 on PC, updated">
-            No DLC required. Arma is CPU-heavy, so expect a full op to run
-            worse than singleplayer does.
+            You don&apos;t need any DLC. Arma is CPU-heavy, so a full op will
+            run worse than singleplayer does.
           </Check>
           <Check title="Subscribe to Paramarine Milsim Core">
             <a
@@ -210,16 +211,18 @@ export default function RecruitGuidePage() {
             >
               The collection is here
             </a>
-            . Steam pulls the dependencies with it. If you can&apos;t get past
-            the loading screen, one of them didn&apos;t download.
+            . Steam pulls the dependencies down with it, and if you can&apos;t
+            get past the loading screen it usually means one of them didn&apos;t
+            finish.
           </Check>
           <Check title="Load PTF Core in the launcher">
-            Say yes when it asks about dependencies. Nothing else to configure.
+            Say yes when it asks about dependencies. There is nothing else to
+            configure.
           </Check>
           <Check title="Install TFAR, then its TeamSpeak plugin">
             The plugin is separate from the mod and installs on the TeamSpeak
-            side. Without it you can&apos;t hear anyone. It shows under your
-            TeamSpeak profile once it&apos;s in.
+            side, and you won&apos;t be able to hear anyone without it. Once it
+            is installed it shows up under your TeamSpeak profile.
           </Check>
           <Check title="Connect to TeamSpeak">
             <span className="font-mono text-ink">{links.teamspeak}</span>. All
@@ -235,11 +238,13 @@ export default function RecruitGuidePage() {
             . The server then shows up in your launcher.
           </Check>
           <Check title="Get on the server before Sunday">
-            Loading in once is the only way to know your mods work. Server
+            Loading in once is the only way to know your mods work. The server
             details are in #unit-information.
           </Check>
         </Checklist>
-        <p>Post errors in #recruit-chat with a screenshot.</p>
+        <p>
+          If you hit an error, post it in #recruit-chat with a screenshot.
+        </p>
       </Phase>
 
       <Phase
@@ -249,8 +254,8 @@ export default function RecruitGuidePage() {
         effort="About 90 minutes"
       >
         <p>
-          PRT runs Friday nights, recruits only, and an instructor teaches it
-          live. About ninety minutes.
+          PRT runs on Friday nights for recruits only, and an instructor
+          teaches it live. It takes about ninety minutes.
         </p>
         <p className="rounded-sm border border-edge bg-raised px-5 py-4 text-ink">
           You don&apos;t need PRT before your first op, so come out on Sunday
@@ -261,11 +266,12 @@ export default function RecruitGuidePage() {
             The thirty days start when you join.
           </Check>
           <Check title="Have your mods loaded before 8">
-            It starts on time.
+            The session starts on time.
           </Check>
         </Checklist>
         <p>
-          You&apos;re an 0311 Rifleman either side of PRT. Everyone is.{" "}
+          You&apos;re an 0311 Rifleman either side of PRT, the same as everyone
+          else.{" "}
           <Link
             href="/roles"
             className="text-ink underline decoration-edge-bright underline-offset-4 hover:decoration-ink"
@@ -283,13 +289,14 @@ export default function RecruitGuidePage() {
         effort="Two to three hours"
       >
         <p>
-          Ops run 8 until 11, sometimes later. Expect a lot of movement and
-          waiting between contacts.
+          Operations start at 8 and usually finish around 11, though they
+          sometimes run later. Much of that time is spent moving into position
+          or holding somewhere between contacts.
         </p>
         <Checklist>
           <Check title="Sign up on the calendar">
-            In the portal, or from the embed in the attendance channels. Squads
-            are built off that list.
+            You can sign up in the portal or from the embed in the attendance
+            channels, and squads are built from that list.
           </Check>
           <Check title="Take a rifleman loadout until you've passed PRT" />
         </Checklist>
@@ -297,33 +304,35 @@ export default function RecruitGuidePage() {
           <div className="flex gap-4">
             <dt className="w-16 shrink-0 text-ink-faint">T-30</dt>
             <dd className="text-ink-muted">
-              Recruits on early. Game up, mods loaded, sitting in TeamSpeak, so
-              there&apos;s time to sort out a dead plugin.
+              Recruits come on early with the game up, mods loaded and
+              TeamSpeak connected, so there is time to sort out a dead plugin.
             </dd>
           </div>
           <div className="flex gap-4">
             <dt className="w-16 shrink-0 text-ink-faint">T-10</dt>
             <dd className="text-ink-muted">
-              Most of the unit arrives. Get on the server. TFAR moves you into
-              its TeamSpeak channel. Check your radio.
+              Most of the unit arrives around now. Get on the server, and TFAR
+              will move you into its own TeamSpeak channel. Check your radio
+              once it does.
             </dd>
           </div>
           <div className="flex gap-4">
             <dt className="w-16 shrink-0 text-ink-faint">8:00</dt>
             <dd className="text-ink-muted">
-              Briefing. Situation, mission, how it&apos;s being run. Ask
-              questions here.
+              The briefing covers the situation, the mission and how it is
+              being run. Ask your questions here.
             </dd>
           </div>
           <div className="flex gap-4">
             <dt className="w-16 shrink-0 text-ink-faint">After</dt>
             <dd className="text-ink-muted">
-              Insertion, movement, whatever contact comes, then the debrief.
+              You insert, move, deal with whatever contact comes, and finish
+              with the debrief.
             </dd>
           </div>
         </dl>
         <h3 className="mt-8 font-display text-base font-semibold text-ink">
-          Four things to get right on the night
+          What to get right on the night
         </h3>
         <ul className="max-w-2xl list-disc space-y-2 pl-6">
           <li>
@@ -331,13 +340,13 @@ export default function RecruitGuidePage() {
             should never be able to take your whole fire team.
           </li>
           <li>
-            <span className="text-ink">Stay off the net.</span> Listen, and
-            keep it short when you do transmit.
+            <span className="text-ink">Stay off the net.</span> Listen more
+            than you talk, and keep it short when you do transmit.
           </li>
           <li>
-            <span className="text-ink">Follow your team leader.</span>{" "}
-            They&apos;re moving three or four people and answering to a squad
-            leader.
+            <span className="text-ink">Follow your team leader.</span> They are
+            moving three or four people and answering to a squad leader at the
+            same time.
           </li>
           <li>
             <span className="text-ink">Don&apos;t go after something on your
@@ -346,16 +355,16 @@ export default function RecruitGuidePage() {
           </li>
         </ul>
         <p>
-          If you get killed you respawn at base and ride a helicopter back out
+          If you are killed you respawn at base and ride a helicopter back out
           to your squad.
         </p>
       </Phase>
 
       <Phase n="05" when="First month" title="After your first op" effort="Ongoing">
         <p>
-          Sunday is the one to plan your week around. Tuesdays your squad or
-          platoon trains, and the whole unit trains together on the third
-          Tuesday of the month. Thursday recon needs the MSO certification.
+          Sunday is the night to plan your week around. On Tuesdays your squad
+          or platoon trains, and the whole unit trains together on the third
+          Tuesday of the month. Thursday recon requires the MSO certification.
           Saturday is attendee&apos;s choice, so the course that runs is
           whichever one the most people there need.
         </p>
@@ -375,8 +384,8 @@ export default function RecruitGuidePage() {
           </Check>
         </Checklist>
         <p>
-          Passing PRT makes you eligible for Private, which is where you stop
-          being a recruit.
+          Passing PRT makes you eligible for Private, at which point you are no
+          longer a recruit.
         </p>
       </Phase>
 
@@ -399,8 +408,9 @@ export default function RecruitGuidePage() {
             When something breaks
           </h3>
           <p className="mt-2 max-w-2xl text-sm text-ink-muted">
-            Ask your fire team leader or squad leader, or post in #recruit-chat.
-            Don&apos;t leave it until five minutes before an op.
+            Ask your fire team leader or squad leader, or post in
+            #recruit-chat, and try not to leave it until five minutes before an
+            op.
           </p>
 
           <div className="mt-12 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
