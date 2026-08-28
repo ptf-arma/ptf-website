@@ -31,22 +31,22 @@ const steps = [
   {
     n: "01",
     title: "Submit your application",
-    body: "Five minutes on the personnel portal. The profile you create becomes your service record, so rank, courses, and awards all hang off it.",
+    body: "It takes about five minutes on the personnel portal. The profile you create becomes your service record, so your rank, courses and awards all hang off it.",
   },
   {
     n: "02",
     title: "Meet a recruiter on Discord",
-    body: "Post in #find-a-recruiter. Someone will walk you through the unit, answer questions, and get the modpack installed. No appointment needed.",
+    body: "Post in #find-a-recruiter and someone will walk you through the unit, answer your questions and get the modpack installed. You don't need to book a time.",
   },
   {
     n: "03",
     title: "Paramarine Recruit Training",
-    body: "PRT covers movement, comms, and formations. Nobody expects you to arrive knowing this. That's what the course is for.",
+    body: "PRT covers movement, comms and formations. You are not expected to know any of it beforehand, which is what the course is for.",
   },
   {
     n: "04",
     title: "Your first operation",
-    body: "You'll slot into a rifle squad for the Sunday op. After that, Saturday courses open up: marksmanship, armor, aviation, medical, JTAC.",
+    body: "You'll slot into a rifle squad for the Sunday op. After that the Saturday courses open up, covering marksmanship, armor, aviation, medical and JTAC.",
   },
 ];
 
@@ -87,7 +87,7 @@ const faqs = [
   },
   {
     q: "How strict is it?",
-    a: "Chain of command, briefings, and radio discipline during the op. Outside of it, it's a group of people who have been playing games together for ten years.",
+    a: "During the op we keep to the chain of command, run briefings and hold radio discipline. Outside of it, it's a group of people who have been playing games together for ten years.",
   },
   {
     q: "What happens right after I apply?",
@@ -133,8 +133,9 @@ export default async function JoinPage() {
             How to join the task force
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
-            Four steps from application to your first operation. Usually a week
-            or two, depending on when training runs.
+            There are four steps between your application and your first
+            operation, and it usually takes a week or two depending on when
+            training runs.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <ButtonLink href={billet.applyUrl} variant="primary" size="lg">
@@ -224,7 +225,8 @@ export default async function JoinPage() {
             >
               Watch our last operation
             </Link>{" "}
-            play back on the map. Every position, every contact, unedited.
+            play back on the map. It shows every position and every contact,
+            unedited.
           </p>
           <p className="mt-4 max-w-2xl text-sm text-ink-muted">
             Never done milsim before?{" "}
@@ -234,8 +236,8 @@ export default async function JoinPage() {
             >
               Our guide to Arma 3 milsim
             </Link>{" "}
-            covers how an operation actually runs, what recruit training
-            involves, and the mistakes everyone makes in their first few weeks.
+            covers how an operation runs, what recruit training involves, and
+            the mistakes most people make in their first few weeks.
           </p>
 
           <div className="mt-12 flex flex-wrap items-center justify-between gap-4 rounded-sm border border-edge bg-raised px-5 py-4">
