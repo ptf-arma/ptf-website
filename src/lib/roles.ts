@@ -29,7 +29,7 @@ export const roles: Role[] = [
     slug: "rifleman",
     designation: "0311",
     name: "Rifleman",
-    blurb: "The infantry core of every squad. Where new Marines start.",
+    blurb: "The infantry core of every squad, and where new Marines start.",
     status: "Available",
     featured: true,
     detail: [
@@ -43,7 +43,7 @@ export const roles: Role[] = [
     slug: "automatic-rifleman",
     designation: "0311",
     name: "Automatic Rifleman",
-    blurb: "The fire team's automatic weapon. Suppression is the job.",
+    blurb: "The fire team's automatic weapon, used for suppression.",
     status: "Available · Entry level",
     featured: true,
     detail: [
@@ -106,7 +106,7 @@ export const roles: Role[] = [
     slug: "hospital-corpsman",
     designation: "",
     name: "Hospital Corpsman",
-    blurb: "Attached to a squad. Keeps the wounded in the fight.",
+    blurb: "Attached to a squad to keep the wounded in the fight.",
     status: "Waitlist · Requires Combat Life Saver",
     detail: [
       "A corpsman moves like everyone else, in the same formation and spacing, with a sector to watch while nobody is hurt.",
@@ -198,7 +198,7 @@ export const roles: Role[] = [
     designation: "0372",
     name: "Marine Special Operator",
     blurb:
-      "MSO. A second role on top of your billet, with its own recon operations on Thursdays. Anyone in the unit can attend selection.",
+      "MSO is a second role on top of your billet, with its own recon operations on Thursdays, and anyone in the unit can attend selection.",
     status: "Highly selective · Open tryouts",
     featured: true,
     detail: [
@@ -212,7 +212,7 @@ export const roles: Role[] = [
     slug: "operations-staff",
     designation: "",
     name: "Operations Staff",
-    blurb: "Zeus. Builds and runs the unit's operations.",
+    blurb: "The Zeus seat, building and running the unit's operations.",
     status: "Highly selective · Skill and availability",
     detail: [
       "Operations staff build and run the operations instead of playing them. Missions get made ahead of time — terrain, enemy composition, objectives — and during the op you're in the Zeus seat, running the enemy and adjusting as the night unfolds.",
