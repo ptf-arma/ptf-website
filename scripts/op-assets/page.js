@@ -7,8 +7,6 @@ const INK = "#e7e9ed";
 const INK_MUTED = "#9aa3b0";
 const INK_FAINT = "#8b93a0";
 const ACCENT = "#e03127";
-const FRIENDLY = "#4a8fe0";
-const HOSTILE = "#e0502d";
 
 const MONO = '"JetBrains Mono",ui-monospace,monospace';
 const DISPLAY = "Saira,ui-sans-serif,system-ui,sans-serif";
@@ -145,22 +143,12 @@ window.renderCard = (T, segs, enemyHeat, crop, info, size) => {
 
   drawCta(x, W - 54, 581, 20, CTA_LEAD);
 
-  x.letterSpacing = "2px";
-  x.font = "500 17px " + MONO;
-  x.strokeStyle = FRIENDLY;
-  x.lineWidth = 3;
-  x.beginPath();
-  x.moveTo(58, 575);
-  x.lineTo(84, 575);
-  x.stroke();
-  x.fillStyle = INK_FAINT;
-  x.fillText("OUR MOVEMENT", 94, 581);
-  x.fillStyle = HOSTILE;
-  x.beginPath();
-  x.arc(292, 574, 4.5, 0, 7);
-  x.fill();
-  x.fillStyle = INK_FAINT;
-  x.fillText("ENEMY PRESENCE", 306, 581);
+  /*
+   * No legend. Blue lines against red dots does not need decoding, and a card
+   * is a reason to click rather than a diagram to study — the six labelled
+   * elements it took to explain itself were competing with the map they were
+   * explaining. The page the card links to reads the board properly.
+   */
 
   return c.toDataURL("image/png");
 };

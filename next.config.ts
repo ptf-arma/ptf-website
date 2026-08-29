@@ -1,6 +1,44 @@
 import type { NextConfig } from "next";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 
 const LEGACY = "https://legacy.paramarines.net";
+
+/*
+ * Stable addresses for the latest operation's share assets.
+ *
+ * The files themselves live under /operations/<replay-id>/ on purpose: og:image
+ * has to change URL when the operation does, or Reddit and Discord keep serving
+ * the preview they cached weeks ago. But anyone embedding the image somewhere
+ * of their own wants one address that keeps working, so these alias onto
+ * whatever the manifest currently points at.
+ *
+ * Rewrites, not copies — a second set of files would double what an already
+ * heavy binary costs the repo every week. Rewrites resolve at build time, and
+ * new assets arrive as a commit, so a deploy always rebuilds these in step.
+ *
+ * The tradeoff is the mirror of og:image's: a stable URL is a URL that
+ * scrapers cache. Post the page, not this, when the preview matters.
+ */
+function latestOpAliases() {
+  try {
+    const manifest = JSON.parse(
+      readFileSync(
+        join(process.cwd(), "public", "operations", "manifest.json"),
+        "utf8",
+      ),
+    );
+    if (!manifest?.card || !manifest?.gif) return [];
+    return [
+      { source: "/operations/share/embed.png", destination: manifest.card },
+      { source: "/operations/share/embed.gif", destination: manifest.gif },
+    ];
+  } catch {
+    // No operation published yet, or a half-written manifest. The aliases
+    // simply 404 until the renderer runs, which is the honest answer.
+    return [];
+  }
+}
 
 /*
  * The old Invision forum lived on this domain until the 2026-08-25 cutover and
@@ -35,6 +73,9 @@ const ARCHIVE_PATHS = [
 ];
 
 const nextConfig: NextConfig = {
+  async rewrites() {
+    return latestOpAliases();
+  },
   async redirects() {
     return [
       {
