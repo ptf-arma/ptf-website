@@ -1,0 +1,85 @@
+# Keeps the operation share card and animation in step with Billet.
+#
+# Publishing a replay is a human act in Billet and can happen any day after the
+# operation, so this polls rather than trying to guess. The check is one small
+# request: --if-changed compares the published replay id against the committed
+# manifest and stops there when they match, so on most days this job finishes
+# in seconds and commits nothing.
+#
+# When a new replay does appear it renders both assets, commits them to main,
+# and Vercel deploys. Nothing here can invent an operation — if Billet has
+# published nothing new, nothing changes.
+name: Operation share assets
+
+on:
+  schedule:
+    # 13:00 UTC daily (09:00 Eastern). Operations run Sunday night, but they
+    # are released whenever somebody gets round to it, so a daily poll picks it
+    # up the morning after rather than waiting for the next Monday.
+    - cron: "0 13 * * *"
+  # Lets you force a rebuild after changing the renderer, without waiting.
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Rebuild even if the replay hasn't changed"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+# Never let two runs race to commit the same assets.
+concurrency:
+  group: operation-assets
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Locate Chrome
+        run: |
+          if [ -x /usr/bin/google-chrome ]; then
+            echo "CHROME_PATH=/usr/bin/google-chrome" >> "$GITHUB_ENV"
+          else
+            # Runner images normally ship Chrome; fall back to Puppeteer's own
+            # download rather than failing if that ever stops being true.
+            npx --yes @puppeteer/browsers install chrome@stable > chrome-install.log
+            echo "CHROME_PATH=$(awk '{print $NF}' chrome-install.log | tail -1)" >> "$GITHUB_ENV"
+          fi
+
+      - name: Render assets
+        run: |
+          if [ "${{ inputs.force }}" = "true" ]; then
+            npm run op:assets
+          else
+            npm run op:assets -- --if-changed
+          fi
+
+      - name: Commit if anything changed
+        run: |
+          # --porcelain, not `git diff`: a new operation writes into a new
+          # <replay-id>/ directory, and those files are untracked rather than
+          # modified. `git diff --quiet` reports clean and the assets never
+          # ship.
+          if [ -z "$(git status --porcelain -- public/operations)" ]; then
+            echo "No new operation — nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/operations
+          title=$(node -p "require('./public/operations/manifest.json').title")
+          git commit -m "Share assets for ${title}" \
+                     -m "Rendered from Billet by the scheduled job. See scripts/op-assets."
+          git push

@@ -371,6 +371,27 @@ async function main() {
     process.exitCode = 1;
     return;
   }
+
+  /*
+   * --if-changed: stop before the expensive part when the assets on disk
+   * already describe this replay. It is what lets CI poll daily for the price
+   * of one small request, and it keeps the scheduled job from producing an
+   * empty commit every morning.
+   */
+  if (process.argv.includes("--if-changed")) {
+    const manifestPath = join(OUT_DIR, "manifest.json");
+    if (existsSync(manifestPath)) {
+      try {
+        const current = JSON.parse(readFileSync(manifestPath, "utf8"));
+        if (current.id === replay.id) {
+          console.log(`Up to date — assets already built for ${replay.id}.`);
+          return;
+        }
+      } catch {
+        // An unreadable manifest is a reason to rebuild, not to stop.
+      }
+    }
+  }
   const worldSize = replay.worldSize ?? 10240;
   const worldLabel = formatWorld(replay.world);
   const title = operationTitle(replay, worldLabel);
