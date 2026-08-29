@@ -1,0 +1,17 @@
+{
+  "id": "c7b6d962-00dc-41da-847c-35f5e94d3758",
+  "title": "Sunday on Isla Pera",
+  "world": "Isla Pera",
+  "date": "23 August 2026",
+  "startedAt": "2026-08-24T00:00:41.743Z",
+  "durationSeconds": 10776,
+  "participants": 54,
+  "card": "/operations/c7b6d962-00dc-41da-847c-35f5e94d3758/card.png",
+  "gif": "/operations/c7b6d962-00dc-41da-847c-35f5e94d3758/op.gif",
+  "cardBytes": 618742,
+  "gifBytes": 4917183,
+  "gifSeconds": 12,
+  "gifWidth": 640,
+  "gifHeight": 336,
+  "generatedAt": "2026-08-29T19:44:07.997Z"
+}

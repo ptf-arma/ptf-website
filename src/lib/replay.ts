@@ -7,6 +7,14 @@
  */
 
 import { billet } from "@/lib/config";
+import WORLD_LABELS from "@/lib/world-labels.json";
+
+/**
+ * Operations run Sunday 8PM Eastern, which is already Monday in UTC — the
+ * 24 August recording is Sunday the 23rd to everyone who was on it. Dates are
+ * therefore read in the unit's zone, not the server's and not UTC.
+ */
+const UNIT_TZ = "America/New_York";
 
 export type LatestReplay = {
   id: string;
@@ -53,7 +61,7 @@ export function formatDuration(seconds: number): string {
   return m === 0 ? `${h}h` : `${h}h ${m}m`;
 }
 
-/** "24 August 2026" from an ISO timestamp. */
+/** "23 August 2026" from an ISO timestamp, in the unit's timezone. */
 export function formatOperationDate(iso: string): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
@@ -61,38 +69,24 @@ export function formatOperationDate(iso: string): string {
     day: "numeric",
     month: "long",
     year: "numeric",
-    timeZone: "UTC",
+    timeZone: UNIT_TZ,
   });
 }
 
 /*
  * Billet reports the terrain by its Arma class name, lowercase: "islapera",
  * "enoch". Title-casing alone gets "Islapera" and "Enoch", so the terrains the
- * unit actually plays are named here. Anything unlisted falls back to
- * title-case, which is right for single-word maps and no worse than the raw id
- * for the rest.
+ * unit actually plays are named in world-labels.json. Anything unlisted falls
+ * back to title-case, which is right for single-word maps and no worse than
+ * the raw id for the rest. The table is JSON because the asset renderer needs
+ * the same labels and cannot import TypeScript.
  */
-const WORLD_LABELS: Record<string, string> = {
-  islapera: "Isla Pera",
-  altis: "Altis",
-  stratis: "Stratis",
-  tanoa: "Tanoa",
-  malden: "Malden",
-  enoch: "Livonia",
-  chernarus: "Chernarus",
-  chernarus_summer: "Chernarus",
-  cham: "Chernarus 2020",
-  vt7: "Vinjesvingen",
-  kunduz: "Kunduz",
-  takistan: "Takistan",
-  lythium: "Lythium",
-  vr: "Virtual Reality",
-};
+const LABELS: Record<string, string> = WORLD_LABELS;
 
 export function formatWorld(world: string | null): string | null {
   if (!world) return null;
   const key = world.trim().toLowerCase();
-  if (WORLD_LABELS[key]) return WORLD_LABELS[key];
+  if (LABELS[key]) return LABELS[key];
   return key
     .split(/[\s_-]+/)
     .filter(Boolean)

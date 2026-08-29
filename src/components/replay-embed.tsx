@@ -15,10 +15,17 @@ export function ReplayEmbed({
   src,
   title,
   meta,
+  poster,
 }: {
   src: string;
   title: string;
   meta: string;
+  /**
+   * The rendered share card, when one has been generated for this replay. It
+   * already carries the title, the date and the map, so the text overlay is
+   * dropped when it is present rather than printed on top of itself.
+   */
+  poster?: string;
 }) {
   const [playing, setPlaying] = useState(false);
 
@@ -37,25 +44,53 @@ export function ReplayEmbed({
   }
 
   return (
-    <div className="rounded-sm border border-edge bg-surface">
+    <div className="overflow-hidden rounded-sm border border-edge bg-surface">
       <button
         type="button"
         onClick={() => setPlaying(true)}
-        className="group flex aspect-video w-full flex-col items-center justify-center gap-3 px-6 text-center transition-colors hover:bg-raised"
+        className="group relative flex aspect-video w-full flex-col items-center justify-center gap-3 px-6 text-center transition-colors hover:bg-raised"
       >
+        {poster && (
+          <>
+            {/* Not next/image: this is a fixed-size local asset that is already
+                exactly the size it renders at, so optimisation buys nothing. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={poster}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <span
+              aria-hidden
+              className="absolute inset-0 bg-bg/50 transition-colors group-hover:bg-bg/35"
+            />
+            <span className="sr-only">
+              {title}. {meta}.
+            </span>
+            <span className="absolute right-3 top-3 rounded-sm bg-bg/70 px-2 py-1 text-xs text-ink-faint">
+              Loads on click
+            </span>
+          </>
+        )}
+
         <span
           aria-hidden
-          className="grid h-14 w-14 place-items-center rounded-full border border-edge-bright bg-bg/80 pl-1 font-display text-xl font-semibold text-ink"
+          className="relative grid h-14 w-14 place-items-center rounded-full border border-edge-bright bg-bg/80 pl-1 font-display text-xl font-semibold text-ink"
         >
           ▶
         </span>
-        <span className="font-display text-lg font-semibold text-ink">
-          {title}
-        </span>
-        <span className="micro-label text-ink-muted">{meta}</span>
-        <span className="text-sm text-ink-faint">
-          Loads on click. It&apos;s a large recording.
-        </span>
+
+        {!poster && (
+          <>
+            <span className="font-display text-lg font-semibold text-ink">
+              {title}
+            </span>
+            <span className="micro-label text-ink-muted">{meta}</span>
+            <span className="text-sm text-ink-faint">
+              Loads on click. It&apos;s a large recording.
+            </span>
+          </>
+        )}
       </button>
     </div>
   );

@@ -11,28 +11,60 @@ import {
 import { ReplayEmbed, ReplayEmbedEmpty } from "@/components/replay-embed";
 import { ButtonLink } from "@/components/ui/button";
 import { SectionLabel } from "@/components/ui/section-label";
+import { getOpAssets } from "@/lib/op-assets";
 
 const title = "Watch an Arma 3 Milsim Operation";
 const description =
   "The Paramarine Task Force's most recent operation, played back on the map: every position, every contact, as it happened.";
 
-export const metadata: Metadata = {
-  // Absolute: the "· Paramarine Task Force" template would push this past the
-  // ~60 characters Google renders.
-  title: { absolute: title },
-  description,
-  alternates: { canonical: "/operations" },
-  // No images here on purpose. opengraph-image.tsx generates this page's card
-  // from the replay's own metadata, and an explicit images array in the
-  // metadata object overrides the file convention, which would silently put
-  // the generic site image back.
-  openGraph: {
-    title,
+/*
+ * The card is the page, on Reddit and in Discord — a link is a preview before
+ * it is a visit. Two sources feed it:
+ *
+ *   - When scripts/op-assets has been run for the live replay, the rendered
+ *     map card. An images array overrides the opengraph-image.tsx file
+ *     convention, which is exactly what we want here.
+ *   - Otherwise nothing is set, the file convention applies, and the
+ *     typographic fallback carries the operation's facts instead.
+ *
+ * `card` must be spelled out. The root layout sets summary_large_image, but a
+ * twitter object on a child route replaces it wholesale rather than merging,
+ * so omitting it here silently downgraded this page to a small square preview.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const replay = await getLatestReplay();
+  const assets = getOpAssets(replay?.id);
+  const images = assets
+    ? [
+        {
+          url: assets.card,
+          width: 1200,
+          height: 630,
+          alt: `${assets.title} — every position and contact, played back on the map`,
+        },
+      ]
+    : undefined;
+
+  return {
+    // Absolute: the "· Paramarine Task Force" template would push this past the
+    // ~60 characters Google renders.
+    title: { absolute: title },
     description,
-    url: `${SITE_URL}/operations`,
-  },
-  twitter: { title, description },
-};
+    alternates: { canonical: "/operations" },
+    openGraph: {
+      title,
+      description,
+      url: `${SITE_URL}/operations`,
+      ...(images ? { images } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(images ? { images: images.map((i) => i.url) } : {}),
+    },
+  };
+}
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -45,6 +77,7 @@ const jsonLd = {
 
 export default async function OperationsPage() {
   const replay = await getLatestReplay();
+  const assets = getOpAssets(replay?.id);
 
   return (
     <>
@@ -67,12 +100,15 @@ export default async function OperationsPage() {
           {replay ? (
             <ReplayEmbed
               src={replayEmbedUrl()}
-              title={replay.title}
+              poster={assets?.card}
+              // Billet titles most recordings "Unit Operation". The asset
+              // renderer builds something that names the night; prefer it.
+              title={assets?.title ?? replay.title}
               meta={[
                 formatOperationDate(replay.startedAt),
                 formatWorld(replay.world),
                 formatDuration(replay.durationSeconds),
-                replay.participants ? `${replay.participants} on the ground` : null,
+                replay.participants ? `${replay.participants} players` : null,
               ]
                 .filter(Boolean)
                 .join(" · ")}
@@ -148,14 +184,20 @@ export default async function OperationsPage() {
             </ButtonLink>
           </div>
         </div>
-        <p className="mt-6 text-sm">
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-sm">
           <Link
             href="/join"
             className="text-ink-muted underline decoration-edge-bright underline-offset-4 hover:text-ink"
           >
             ← How joining works
           </Link>
-        </p>
+          <Link
+            href="/operations/share"
+            className="text-ink-muted underline decoration-edge-bright underline-offset-4 hover:text-ink"
+          >
+            Share this operation →
+          </Link>
+        </div>
       </article>
     </>
   );

@@ -3,6 +3,22 @@
 Plan, not a spec. Spans two repos. Written 2026-08-25 against the billet repo
 at the same date.
 
+> **Status, 2026-08-29.** Phases 1–5 have shipped. Billet serves the public
+> `replays/latest`, `/frames` and `/terrain` endpoints, and `/operations`
+> embeds the player click-to-load.
+>
+> One assumption below turned out to be wrong and is worth correcting where you
+> read it: "the facts are what make somebody click, so the share card should be
+> typographic rather than a map render." Because `/terrain` is public, the board
+> *can* be drawn outside Billet — `scripts/op-assets/render.mjs` renders both a
+> map share card and an animated playback from the same data, and the card is
+> now the poster, the social preview and the pre-click state that phase 4 asked
+> for. The typographic card survives as the fallback for when those assets
+> haven't been regenerated yet.
+>
+> Player names are stripped as this document recommends. The SteamID64 is not —
+> see item 7 of `billet-api-wishlist.md`.
+
 ## Start with the latest operation only
 
 Showing just the most recent operation is a much smaller build than a library,

@@ -11,9 +11,15 @@ import { getLatestReplay, formatDuration, formatOperationDate,
  * rank ladder. This one carries the operation itself: what it was called,
  * where it ran, how long, how many turned out.
  *
- * Deliberately typographic rather than a map render. Drawing the board would
- * mean running the replay's SVG pipeline server-side; the facts are what make
- * somebody click, and they are already in the metadata.
+ * This is now the FALLBACK card. When scripts/op-assets has been run for the
+ * live replay, page.tsx points the metadata at a rendered map instead and this
+ * route is not used. It still matters: it needs no build step, so it is always
+ * current, and it covers the window between an operation being published in
+ * Billet and somebody regenerating the assets.
+ *
+ * Typographic on purpose, for the same reason. Drawing the board needs 50MB of
+ * frame data and a real canvas, neither of which belongs in a route a crawler
+ * can hit; the facts are what make somebody click and they are already here.
  */
 
 export const alt = "The Paramarine Task Force's most recent Arma 3 operation";
@@ -28,7 +34,7 @@ export default async function Image() {
         formatOperationDate(replay.startedAt),
         formatWorld(replay.world),
         formatDuration(replay.durationSeconds),
-        replay.participants ? `${replay.participants} on the ground` : null,
+        replay.participants ? `${replay.participants} players` : null,
       ]
         .filter(Boolean)
         .join("   ·   ")

@@ -13,6 +13,13 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    // These are concatenated into one <script> context in a headless browser
+    // rather than imported, so each file's helpers look unused from here even
+    // though the next one calls them. render.mjs itself stays fully linted.
+    files: ["scripts/op-assets/map.js", "scripts/op-assets/draw.js"],
+    rules: { "@typescript-eslint/no-unused-vars": "off" },
+  },
 ]);
 
 export default eslintConfig;
