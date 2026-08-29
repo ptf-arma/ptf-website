@@ -48,6 +48,9 @@ const GIF = { W: 640, FRAMES: 156, FPS: 13, COLORS: 128 };
 /** Speeds above this are aircraft or fast vehicles, drawn separately. */
 const AIR_SPEED_MS = 18;
 
+/** The reversed horizontal lockup — these images are always on a dark map. */
+const BRAND_FILE = "ptf-logo-horizontal-reversed-800w.png";
+
 /*
  * Operations run Sunday 8PM Eastern, which is already Monday in UTC. Reading
  * the date or the weekday in UTC therefore names the wrong night — the 24
@@ -468,6 +471,15 @@ async function main() {
     if (!fonts.includes("Saira")) {
       console.warn("  ! Saira did not load; the card will use a fallback face.");
     }
+
+    // The lockup travels as a data URI rather than a path: the render page
+    // lives in public/operations, and a relative reference would break the
+    // moment either moves.
+    const logo = readFileSync(join(ROOT, "public", "brand", BRAND_FILE));
+    await page.evaluate(
+      (uri) => window.loadBrand(uri),
+      `data:image/png;base64,${logo.toString("base64")}`,
+    );
 
     console.log("Card…");
     card = await page.evaluate(

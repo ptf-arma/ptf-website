@@ -13,6 +13,65 @@ const HOSTILE = "#e0502d";
 const MONO = '"JetBrains Mono",ui-monospace,monospace';
 const DISPLAY = "Saira,ui-sans-serif,system-ui,sans-serif";
 
+/*
+ * The card has room for the instruction; the GIF's bottom strip has to share
+ * with the clock and the Discord address, so it carries the URL alone.
+ */
+const CTA_LEAD = "Watch the full op at ";
+const CTA_URL = "paramarines.net/operations";
+const DISCORD = "discord.gg/paramarines";
+
+/** Right-aligned two-tone line ending at `right`. Returns its total width. */
+function drawCta(ctx, right, y, px, lead) {
+  ctx.letterSpacing = "0.5px";
+  ctx.font = "500 " + px + "px " + MONO;
+  const wLead = lead ? ctx.measureText(lead).width : 0;
+  const wUrl = ctx.measureText(CTA_URL).width;
+  const startX = right - (wLead + wUrl);
+  if (lead) {
+    ctx.fillStyle = INK_MUTED;
+    ctx.fillText(lead, startX, y);
+  }
+  ctx.fillStyle = ACCENT;
+  ctx.fillText(CTA_URL, startX + wLead, y);
+  return wLead + wUrl;
+}
+
+/**
+ * The horizontal lockup, handed in as a data URI by render.mjs.
+ *
+ * These images get saved and reposted somewhere we are not, so the mark and
+ * both addresses are burned into the pixels rather than left to the post
+ * around them.
+ */
+let BRAND = null;
+
+window.loadBrand = async (dataUri) => {
+  const img = new Image();
+  img.src = dataUri;
+  await img.decode();
+  BRAND = img;
+  return img.naturalWidth + "x" + img.naturalHeight;
+};
+
+/**
+ * Draw the lockup at a given width, returning the height it occupied. Falls
+ * back to the wordmark as text so a missing asset costs the mark, not the
+ * whole render.
+ */
+function drawBrand(ctx, x, y, width) {
+  if (!BRAND) {
+    ctx.letterSpacing = width > 200 ? "4px" : "2.5px";
+    ctx.font = "500 " + (width > 200 ? 19 : 10) + "px " + MONO;
+    ctx.fillStyle = INK_MUTED;
+    ctx.fillText("PARAMARINE TASK FORCE", x, y + (width > 200 ? 22 : 12));
+    return width > 200 ? 30 : 16;
+  }
+  const h = (BRAND.naturalHeight / BRAND.naturalWidth) * width;
+  ctx.drawImage(BRAND, x, y, width, h);
+  return h;
+}
+
 /**
  * Canvas text does not trigger a webfont fetch the way laid-out text does, so
  * every face has to be asked for explicitly before the first fillText.
@@ -57,10 +116,7 @@ window.renderCard = (T, segs, enemyHeat, crop, info, size) => {
   drawTracks(x, V, segs);
   drawScrims(x, W, H, 140, 344);
 
-  x.letterSpacing = "4px";
-  x.font = "500 19px " + MONO;
-  x.fillStyle = INK_MUTED;
-  x.fillText("PARAMARINE TASK FORCE", 56, 60);
+  drawBrand(x, 54, 38, 300);
 
   x.letterSpacing = "0px";
   x.font = "700 76px " + DISPLAY;
@@ -75,11 +131,19 @@ window.renderCard = (T, segs, enemyHeat, crop, info, size) => {
   x.fillStyle = INK_MUTED;
   x.fillText(meta, 57, 533);
 
-  x.letterSpacing = "3px";
-  x.font = "500 21px " + MONO;
-  x.fillStyle = ACCENT;
-  const domain = "PARAMARINES.NET";
-  x.fillText(domain, W - 54 - x.measureText(domain).width, 533);
+  /*
+   * The instruction goes on the lower line and the Discord address opposite
+   * the meta, not the other way round. Measured at 1200px: the full
+   * "Watch the full op at …" is 588px, which overruns the date/duration/count
+   * line by 114px but clears the legend by 82px. Shortening the title's meta
+   * would be the wrong fix — that line grows with the map name.
+   */
+  x.letterSpacing = "0.5px";
+  x.font = "500 17px " + MONO;
+  x.fillStyle = INK_FAINT;
+  x.fillText(DISCORD, W - 54 - x.measureText(DISCORD).width, 533);
+
+  drawCta(x, W - 54, 581, 20, CTA_LEAD);
 
   x.letterSpacing = "2px";
   x.font = "500 17px " + MONO;
@@ -199,16 +263,15 @@ window.renderGif = (T, tracks, perFrame, crop, info, cfg) => {
       ox.fill();
     }
 
-    drawScrims(ox, W, H, 54, 70);
+    // Taller top scrim than the card's proportionally: the lockup and the
+    // title stack here rather than sitting on one line.
+    drawScrims(ox, W, H, 96, 70);
 
-    ox.letterSpacing = "2.5px";
-    ox.font = "500 10px " + MONO;
-    ox.fillStyle = INK_FAINT;
-    ox.fillText("PARAMARINE TASK FORCE", 16, 22);
+    const brandH = drawBrand(ox, 15, 10, 150);
     ox.letterSpacing = "0px";
     ox.font = "700 25px " + DISPLAY;
     ox.fillStyle = INK;
-    ox.fillText(info.title, 15, 45);
+    ox.fillText(info.title, 15, 10 + brandH + 26);
 
     const bx0 = 15;
     const bx1 = W - 15;
@@ -229,10 +292,10 @@ window.renderGif = (T, tracks, perFrame, crop, info, cfg) => {
     ox.font = "500 11px " + MONO;
     ox.fillStyle = INK_MUTED;
     ox.fillText(clock(tNow), 15, H - 12);
-    ox.letterSpacing = "2px";
-    ox.fillStyle = ACCENT;
-    const domain = "PARAMARINES.NET";
-    ox.fillText(domain, W - 15 - ox.measureText(domain).width, H - 12);
+    ox.letterSpacing = "0.5px";
+    ox.fillStyle = INK_FAINT;
+    ox.fillText(DISCORD, (W - ox.measureText(DISCORD).width) / 2, H - 12);
+    drawCta(ox, W - 15, H - 12, 11, null);
 
     const data = ox.getImageData(0, 0, W, H).data;
     // One palette for the whole loop: the terrain never changes, and a global
