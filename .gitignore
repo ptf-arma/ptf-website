@@ -40,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# banner drafts — regenerable scratch (scripts/banner/render.mjs).
+# The published banner is public/brand/ptf-banner.gif and IS committed.
+/public/brand/banners/
