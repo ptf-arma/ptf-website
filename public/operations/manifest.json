@@ -1,17 +1,17 @@
 {
   "id": "12be1b5e-3c26-4f5f-83c6-9168c637d17f",
-  "title": "Sunday on Umb Colombia",
-  "world": "Umb Colombia",
+  "title": "Sunday on Colombia",
+  "world": "Colombia",
   "date": "27 September 2026",
   "startedAt": "2026-09-28T00:00:19.690Z",
   "durationSeconds": 11418,
   "participants": 56,
   "card": "/operations/12be1b5e-3c26-4f5f-83c6-9168c637d17f/card.png",
   "gif": "/operations/12be1b5e-3c26-4f5f-83c6-9168c637d17f/op.gif",
-  "cardBytes": 866599,
-  "gifBytes": 7018587,
+  "cardBytes": 869159,
+  "gifBytes": 6991163,
   "gifSeconds": 12,
   "gifWidth": 640,
   "gifHeight": 336,
-  "generatedAt": "2026-09-28T04:34:50.168Z"
+  "generatedAt": "2026-09-28T04:44:02.176Z"
 }
