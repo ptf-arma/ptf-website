@@ -83,3 +83,24 @@ jobs:
           git commit -m "Share assets for ${title}" \
                      -m "Rendered from Billet by the scheduled job. See scripts/op-assets."
           git push
+
+      # A green run used to mean only "nothing broke", which is also what six
+      # weeks of Billet publishing nothing looks like. Operations are weekly,
+      # so a newest replay older than this means publishing has stopped
+      # somewhere upstream (in practice: the Sunday series in Billet doesn't
+      # have "Publish replay publicly" ticked). Failing the run is what makes
+      # GitHub send an email about it.
+      - name: Check the replay is recent
+        env:
+          MAX_AGE_DAYS: 10
+        run: |
+          node -e '
+            const m = require("./public/operations/manifest.json");
+            const days = (Date.now() - Date.parse(m.startedAt)) / 86400000;
+            const max = Number(process.env.MAX_AGE_DAYS);
+            console.log(`Newest replay: ${m.title}, ${m.date} (${days.toFixed(1)} days old)`);
+            if (days > max) {
+              console.log(`::error title=Operation replay is stale::Billet has not published a replay in ${Math.floor(days)} days. Check that the Sunday operation series in Billet has "Publish replay publicly" ticked (edit it with "This and all future occurrences"), then publish the missed recording from the AAR library.`);
+              process.exit(1);
+            }
+          '
